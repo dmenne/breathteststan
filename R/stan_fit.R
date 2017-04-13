@@ -52,7 +52,10 @@
 #'   select(patient_id, m_in = m.y, m_out = m.x,
 #'          beta_in = beta.y, beta_out = beta.x,
 #'          k_in = k.y, k_out = k.x)
-#'
+#' \dontrun{
+#' library(shinystan)
+#' launch_shinystan(fit$stan_fit)
+#' }
 #' @import rstan
 #' @import methods
 #' @import dplyr
@@ -63,7 +66,6 @@
 #' @importFrom stringr str_extract
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map_df
-#' @importFrom tidyr spread
 #' @useDynLib breathteststan, .registration = TRUE
 #'
 #' @export

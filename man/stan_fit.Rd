@@ -67,7 +67,10 @@ cf \%>\%
   select(patient_id, m_in = m.y, m_out = m.x,
          beta_in = beta.y, beta_out = beta.x,
          k_in = k.y, k_out = k.x)
-
+\dontrun{
+library(shinystan)
+launch_shinystan(fit$stan_fit)
+}
 }
 \seealso{
 Base methods \code{coef, plot, print}; methods from package
