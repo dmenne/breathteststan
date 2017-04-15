@@ -15,7 +15,6 @@ Depends:
    methods
 Imports:
   rstan (>= 2.14.2), 
-  rstantools (>= 1.2.0),
   stringr,
   tibble,
   purrr,
