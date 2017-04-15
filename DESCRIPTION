@@ -29,6 +29,8 @@ LinkingTo:
   BH (>= 1.62.0.1), 
   Rcpp (>= 0.12.10), 
   RcppEigen (>= 0.3.2.9.1)
+Remotes:
+  dmenne/breathtestcore
 URL: 
   https://github.com/dmenne/breathtestshiny
 NeedsCompilation: yes
