@@ -88,16 +88,17 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
     minute = data$minute,
     pdr = data$pdr)
 
+  # Note: as.array is required to handle the case of n_record = 1
   init = rep(list(list(
-    m_raw = rnorm(n_record,0,.1),
+    m_raw = as.array(rnorm(n_record,0,.1)),
     mu_m = rnorm(1,40,2),
     sigma_m = abs(rnorm(1,2,.1)),
 
-    k_raw = rnorm(n_record, 0,.1),
+    k_raw = as.array(rnorm(n_record, 0,.1)),
     mu_k = rlnorm(1, -6,.1),
     sigma_k = abs(rnorm(1,0,.001)),
 
-    beta_raw = rnorm(n_record, 0, .1),
+    beta_raw = as.array(rnorm(n_record, 0, .1)),
     mu_beta = rnorm(1, 2, 0.1),
     sigma_beta = abs(rnorm(1,.1,.1)),
     sigma = abs(rnorm(1,1,.1))
@@ -119,7 +120,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
   use_chain = ifelse(chains == 1, 1, chains + 1)
   cf = rstan::get_posterior_mean(fit, pars = c( "beta", "k", "m"))[,use_chain]
   cf = do.call(cbind, split(cf,  str_extract(names(cf),"[a-z]*")))
-  cf = as.data.frame(sapply(as.data.frame(cf), signif, 3))
+  cf = purrr::map_df(as.data.frame(cf), signif, 3)
   cf$pat_group_i = 1:n_record
   cf = cf  %>%
     left_join(unique(data[,c("pat_group_i", "pat_group", "patient_id", "group")]),
@@ -143,7 +144,6 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
           cf1$m,
           cf1$k,
           cf1$beta,
-          cf1$deviance,
           t50_bluck_coward(cf1),
           t50_maes_ghoos(cf1),
           t50_maes_ghoos_scintigraphy(cf1),

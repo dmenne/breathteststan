@@ -1,7 +1,7 @@
 Package: breathteststan
 Type: Package
 Title: Stan-based fit to gastric emptying curves
-Version: 0.1.93
+Version: 0.1.94
 Date: 2017-04-13
 Author: Dieter Menne
 Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
