@@ -63,9 +63,10 @@
 #' @importFrom stats rnorm rlnorm
 #' @importFrom Rcpp loadModule
 #' @importFrom utils capture.output
-#' @importFrom stringr str_extract
+#' @importFrom stringr str_extract str_match
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map_df
+#' @importFrom stats na.omit quantile
 #' @useDynLib breathteststan, .registration = TRUE
 #'
 #' @export
@@ -75,6 +76,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
 
   # Avoid notes on CRAN
   value = pat_group = pat_group_i = NULL
+  stat = estimate = . = k = key =  m = q_975 = NULL
   data = breathtestcore::subsample_data(data, sample_minutes)
   # Integer index of records
   data$pat_group_i =  as.integer(as.factor(data$pat_group))
@@ -106,59 +108,53 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
 
   if (!exists("stanmodels"))
     stop("stanmodels not found")
-#  mod = breathteststan:::stanmodels[["breath_test_1"]]
+ # mod = breathteststan:::stanmodels[["breath_test_1"]]
   mod = stanmodels$breath_test_1
   if (is.null(mod))
     stop("stanmodels$breath_test_1 not found")
   options(mc.cores = max(parallel::detectCores()/2, 1))
   capture.output({fit = suppressWarnings(
     rstan::sampling(mod, data = data_list, init = init,
-                                    iter =  iter, chains = chains))
-  })
+                                    iter =  iter, chains = chains)
+  )})
 
-  # get posterior means
-  use_chain = ifelse(chains == 1, 1, chains + 1)
-  cf = rstan::get_posterior_mean(fit, pars = c( "beta", "k", "m"))[,use_chain]
-  cf = do.call(cbind, split(cf,  str_extract(names(cf),"[a-z]*")))
-  cf = purrr::map_df(as.data.frame(cf), signif, 3)
-  cf$pat_group_i = 1:n_record
-  cf = cf  %>%
+  # Extract required parameters
+  cf = data.frame(pat_group_i = rep(1:n_record, each = iter),
+        m = as.vector(rstan::extract(fit, permuted = FALSE, pars = c( "m"))[,1,]),
+        beta = as.vector(rstan::extract(fit, permuted = FALSE, pars = c( "beta"))[,1,]),
+        k = as.vector(rstan::extract(fit, permuted = FALSE, pars = c( "k"))[,1,]))
+  # Compute derived quantities
+  cf = cf %>%
+    mutate(
+      t50_maes_ghoos = t50_maes_ghoos(.),
+      t50_maes_ghoos = t50_maes_ghoos(.),
+      tlag_maes_ghoos = tlag_maes_ghoos(.),
+      t50_maes_ghoos_scintigraphy = t50_maes_ghoos_scintigraphy(.),
+      t50_bluck_coward = t50_bluck_coward(.),
+      tlag_bluck_coward = tlag_bluck_coward(.)
+    ) %>%
+    rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
+    tidyr::gather(key, value, -pat_group_i) %>%
+    na.omit() %>%
+    group_by(pat_group_i, key) %>%
+    summarize(
+      estimate = mean(value),
+      q_0275 = quantile(value, 0.0275),
+      q_25 = quantile(value, 0.25),
+      q_75 = quantile(value, 0.75),
+      q_975 = quantile(value, 0.975)
+    ) %>%
+    ungroup() %>%
     left_join(unique(data[,c("pat_group_i", "pat_group", "patient_id", "group")]),
-              by = "pat_group_i")
-  methods = c(
-    "exp_beta","exp_beta","exp_beta","bluck_coward","maes_ghoos",
-    "maes_ghoos_scint", "bluck_coward","maes_ghoos"
-  )
-  parameters = c("m", "k", "beta", "t50", "t50","t50","tlag","tlag")
-  # TODO: replace the for-loop by purring (for elegance, speed is secondars)
-  pars = list()
-  for (i in 1:nrow(cf))  {
-    cf1 = cf[i, , drop = FALSE]
-    pars[[i]] = data_frame(
-      patient_id = cf1$patient_id,
-      group = cf1$group,
-      parameter = parameters,
-      method = methods,
-      value = unlist(
-        c(
-          cf1$m,
-          cf1$k,
-          cf1$beta,
-          t50_bluck_coward(cf1),
-          t50_maes_ghoos(cf1),
-          t50_maes_ghoos_scintigraphy(cf1),
-          tlag_bluck_coward(cf1),
-          tlag_maes_ghoos(cf1)
-        )
-      )
-    )
-  }
-  cf = purrr::map_df(pars, rbind )  %>%
-    filter(value != 0) %>%
-    tibble::as_tibble(cf)
+                by = "pat_group_i") %>%
+    mutate(
+      parameter = str_match(key, "k|m|beta|t50|tlag")[,1],
+      method = str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
+    ) %>%
+   select(-pat_group_i, -pat_group, -key)
+   cf = cf %>%
+     tidyr::gather(stat, value, estimate:q_975)
 
-
-  data = data %>% select(-pat_group, -pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit)
   class(ret) = c("breathtestfit", "breathteststanfit")
   ret
