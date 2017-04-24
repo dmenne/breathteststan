@@ -87,7 +87,7 @@ test_that("Non-gaussian residuals with student_t_df work with outliers", {
   iter = 100
   sample_minutes = 15
   data = cleanup_data(simulate_breathtest_data(n_records = 1, seed = 100,
-                                         student_t_df = student_t_df))
+                                         student_t_df = student_t_df)$data)
   fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
                  chains = chains, iter = iter  )
   fit_nlme = nlme_fit(data, dose = dose)
@@ -99,6 +99,6 @@ test_that("Non-gaussian residuals with student_t_df work with outliers", {
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.03)
+  expect_lt(cf$rel_diff, 0.05)
 })
 

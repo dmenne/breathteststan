@@ -108,8 +108,8 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
 
   if (!exists("stanmodels"))
     stop("stanmodels not found")
-  mod = breathteststan:::stanmodels[["breath_test_1"]]
-#  mod = stanmodels$breath_test_1
+#  mod = breathteststan:::stanmodels[["breath_test_1"]]
+  mod = stanmodels$breath_test_1
   if (is.null(mod))
     stop("stanmodels$breath_test_1 not found")
   options(mc.cores = max(parallel::detectCores()/2, 1))
