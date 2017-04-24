@@ -14,9 +14,9 @@
 #' for all records is supported.
 #' @param sample_minutes If mean sampling interval is < sampleMinutes, data are subsampled
 #' using a spline algorithm
-#' @param student_df When student_df < 10, the student distribution is used to
+#' @param student_t_df When student_t_df < 10, the student distribution is used to
 #' model the residuals. Recommended values to model typical outliers are from 3 to 6.
-#' When student_df >= 10, the normal distribution is used
+#' When student_t_df >= 10, the normal distribution is used
 #' @param chains Number of chains for Stan
 #' @param iter Number of iterations for each Stan chain
 #' @param model Name of model; use \code{names(stanmodels)} for other models.
@@ -71,7 +71,7 @@
 #'
 #' @export
 #'
-stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
+stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
                     chains = 2, iter = 1000, model = "breath_test_1") {
 
   # Avoid notes on CRAN
@@ -85,7 +85,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
     n = nrow(data),
     n_record = n_record,
     dose = 100,
-    student_df = student_df,
+    student_t_df = student_t_df,
     pat_group_i = data$pat_group_i,
     minute = data$minute,
     pdr = data$pdr)
@@ -108,8 +108,8 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
 
   if (!exists("stanmodels"))
     stop("stanmodels not found")
- # mod = breathteststan:::stanmodels[["breath_test_1"]]
-  mod = stanmodels$breath_test_1
+  mod = breathteststan:::stanmodels[["breath_test_1"]]
+#  mod = stanmodels$breath_test_1
   if (is.null(mod))
     stop("stanmodels$breath_test_1 not found")
   options(mc.cores = max(parallel::detectCores()/2, 1))
@@ -119,10 +119,10 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
   )})
 
   # Extract required parameters
-  cf = data.frame(pat_group_i = rep(1:n_record, each = iter),
-        m = as.vector(rstan::extract(fit, permuted = FALSE, pars = c( "m"))[,1,]),
-        beta = as.vector(rstan::extract(fit, permuted = FALSE, pars = c( "beta"))[,1,]),
-        k = as.vector(rstan::extract(fit, permuted = FALSE, pars = c( "k"))[,1,]))
+  cf = data.frame(pat_group_i = rep(1:n_record, each = iter/2),
+        m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m),
+        beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "beta"))$beta),
+        k = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "k"))$k))
   # Compute derived quantities
   cf = cf %>%
     mutate(
@@ -151,9 +151,8 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_df = 10,
       parameter = str_match(key, "k|m|beta|t50|tlag")[,1],
       method = str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
     ) %>%
-   select(-pat_group_i, -pat_group, -key)
-   cf = cf %>%
-     tidyr::gather(stat, value, estimate:q_975)
+   select(-pat_group_i, -pat_group, -key) %>%
+   tidyr::gather(stat, value, estimate:q_975)
 
   ret = list(coef = cf, data = data, stan_fit = fit)
   class(ret) = c("breathtestfit", "breathteststanfit")

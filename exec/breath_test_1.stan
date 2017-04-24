@@ -3,9 +3,9 @@
 data{
   int<lower=0> n; # Number of data
   int<lower=0> n_record; # Number of records
-  int<lower=1> student_df; # using Gaussian for student_df >= 10
+  int<lower=1> student_t_df; # using Gaussian for student_t_df >= 10
   real<lower=0> dose;
-  int<lower=0> pat_group_i[n]; 
+  int<lower=0> pat_group_i[n];
   vector<lower=0>[n] minute;
   vector<lower=-30>[n] pdr;
 }
@@ -68,8 +68,8 @@ model {
       betan = beta[rec];
       pdr1[i] = dose*mn*kn*betan*exp_ktn * pow(1 - exp_ktn,(betan -1));
     }
-    if (student_df <= 10 )
-      pdr ~ student_t(student_df, pdr1, sigma);
+    if (student_t_df <= 10 )
+      pdr ~ student_t(student_t_df, pdr1, sigma);
     else
       pdr ~ normal(pdr1, sigma);
   }

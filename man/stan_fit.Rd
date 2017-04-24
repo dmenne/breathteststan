@@ -4,7 +4,7 @@
 \alias{stan_fit}
 \title{Bayesian Stan fit to 13C Breath Data}
 \usage{
-stan_fit(data, dose = 100, sample_minutes = 15, student_df = 10,
+stan_fit(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   chains = 2, iter = 1000, model = "breath_test_1")
 }
 \arguments{
@@ -21,9 +21,9 @@ for all records is supported.}
 \item{sample_minutes}{If mean sampling interval is < sampleMinutes, data are subsampled
 using a spline algorithm}
 
-\item{student_df}{When student_df < 10, the student distribution is used to
+\item{student_t_df}{When student_t_df < 10, the student distribution is used to
 model the residuals. Recommended values to model typical outliers are from 3 to 6.
-When student_df >= 10, the normal distribution is used}
+When student_t_df >= 10, the normal distribution is used}
 
 \item{chains}{Number of chains for Stan}
 
