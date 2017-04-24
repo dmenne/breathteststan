@@ -119,7 +119,10 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   )})
 
   # Extract required parameters
-  cf = data.frame(pat_group_i = rep(1:n_record, each = iter/2),
+
+  m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m)
+
+  cf = data.frame(pat_group_i = rep(1:n_record, each = chains*iter/2),
         m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m),
         beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "beta"))$beta),
         k = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "k"))$k))
@@ -154,6 +157,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
    select(-pat_group_i, -pat_group, -key) %>%
    tidyr::gather(stat, value, estimate:q_975)
 
+  data = data %>% select(-pat_group, -pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit)
   class(ret) = c("breathtestfit", "breathteststanfit")
   ret

@@ -26,6 +26,8 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   expect_is(fit, "breathtestfit")
   expect_is(fit, "breathteststanfit")
   expect_is(fit$stan_fit, "stanfit" )
+  expect_equal(names(fit$data), names(data))
+
   cf = fit$coef
   expect_identical(unique(cf$group), "A")
   expect_identical(unique(cf$parameter), c("beta", "k", "m", "t50", "tlag"))
@@ -62,19 +64,19 @@ test_that("Multiple chains return valid results similar to nlme", {
   dose = 100
   iter = 500
   sample_minutes = 15
-  data = cleanup_data(simulate_breathtest_data(n_records = 1, seed = 100)$data)
+  data = cleanup_data(simulate_breathtest_data(n_records = 3, seed = 100)$data)
   fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
                  chains = chains, iter = iter  )
   fit_nlme = nlme_fit(data, dose = dose)
   cf = coef(fit) %>%
-    left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method")) %>%
+    left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method", "group")) %>%
     filter(method == "exp_beta") %>%
     mutate(rel_diff = 2*abs(value.x - value.y)/(value.x + value.y)) %>%
     select(parameter, rel_diff) %>%
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.001)
+  expect_lt(cf$rel_diff, 0.005)
 })
 
 test_that("Non-gaussian residuals with student_t_df <10 gives result close to nlme", {
@@ -91,7 +93,7 @@ test_that("Non-gaussian residuals with student_t_df <10 gives result close to nl
                  chains = chains, iter = iter  )
   fit_nlme = nlme_fit(data, dose = dose)
   cf = coef(fit) %>%
-    left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method")) %>%
+    left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method","group")) %>%
     filter(method == "exp_beta") %>%
     mutate(rel_diff = 2*abs(value.x - value.y)/(value.x + value.y)) %>%
     select(parameter, rel_diff) %>%
@@ -100,4 +102,42 @@ test_that("Non-gaussian residuals with student_t_df <10 gives result close to nl
     )
   expect_lt(cf$rel_diff, 0.04)
 })
+
+
+test_that("Multiple records per patients return multiple groups", {
+  skip_on_cran()
+  library(breathtestcore)
+  library(breathteststan)
+#    library(rstan)
+#    library(dplyr)
+#    library(rstan)
+#    library(stringr)
+#    library(testthat)
+  chains = 2
+  student_t_df = 10
+  dose = 100
+  iter = 500
+  sample_minutes = 15
+  data("usz_13c")
+  data = usz_13c %>%
+    dplyr::filter( patient_id %in%
+      c("norm_001", "norm_002", "norm_003")) %>%
+    cleanup_data()
+  fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
+                 chains = chains, iter = iter  )
+  fit_nlme = nlme_fit(data, dose = dose)
+  cf = coef(fit)
+  expect_equal(unique(cf$group), c("liquid_normal", "solid_normal"))
+
+  cf = coef(fit) %>%
+    left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method", "group")) %>%
+    filter(method == "exp_beta") %>%
+    mutate(rel_diff = 2*abs(value.x - value.y)/(value.x + value.y))   %>%
+    select(parameter, rel_diff) %>%
+    summarize(
+      rel_diff = mean(rel_diff)
+    )
+  expect_lt(cf$rel_diff, 0.03)
+})
+
 
