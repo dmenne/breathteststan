@@ -107,7 +107,7 @@ test_that("Non-gaussian residuals with student_t_df <10 gives result close to nl
 test_that("Multiple records per patients return multiple groups", {
   skip_on_cran()
   library(breathtestcore)
-  library(breathteststan)
+#  library(breathteststan)
 #    library(rstan)
 #    library(dplyr)
 #    library(rstan)
