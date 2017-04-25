@@ -9,5 +9,4 @@ r-github-packages:
 
 after_success:
   - tar -C .. -xf $PKG_TARBALL
-  - Rscript -e 'covr::coveralls(function_exclusions= c("/src/include/models.hpp", "src/*.cpp", "R/zzz.R")'
-
+  - Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/*.cpp", "R/zzz.R"))'
