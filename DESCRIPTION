@@ -1,8 +1,12 @@
 Package: breathteststan
 Type: Package
 Title: Stan-based fit to gastric emptying curves
-Version: 0.2.0
-Date: 2017-04-27
+Version: 0.3.0
+Date: 2017-05-04
+Authors@R: c(
+    person("Dieter", "Menne", , "dieter.menne@menne-biomed.de", role = c("aut", "cre")),
+    person("Menne Biomed Consulting Tuebingen", role = c("cph"))
+    )
 Author: Dieter Menne
 Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
 Description: This package contains the Stan-based fitting function
@@ -22,8 +26,10 @@ Imports:
   tidyr,
   breathtestcore
 Suggests:
+  rstan,
   testthat,
-  covr
+  covr,
+  knitr
 LinkingTo:
   StanHeaders (>= 2.14.0.1), 
   rstan (>= 2.14.2), 
@@ -36,4 +42,6 @@ URL:
   https://github.com/dmenne/breathtestshiny
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
+
+
 

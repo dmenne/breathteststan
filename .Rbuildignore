@@ -2,3 +2,9 @@ cleanup*
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^docs$
+^_pkgdown\.yml$
+^README\.Rmd$
+^README-.*\.png$
+
+

@@ -16,7 +16,7 @@
 #' using a spline algorithm
 #' @param student_t_df When student_t_df < 10, the student distribution is used to
 #' model the residuals. Recommended values to model typical outliers are from 3 to 6.
-#' When student_t_df >= 10, the normal distribution is used
+#' When student_t_df >= 10, the normal distribution is used.
 #' @param chains Number of chains for Stan
 #' @param iter Number of iterations for each Stan chain
 #' @param model Name of model; use \code{names(stanmodels)} for other models.
@@ -36,12 +36,16 @@
 #'  \code{broom: tidy, augment}.
 #' @examples
 #' library(breathtestcore)
-#' library(dplyr)
+#' suppressPackageStartupMessages(library(dplyr))
 #' d = simulate_breathtest_data(n_records = 3) # default 3 records
 #' data = cleanup_data(d$data)
-#' # Use more than 100 iterations for serious fits
+#' # Use more than 100 iterations and 4 chains for serious fits
+#' # For execution on a local, multicore CPU with excess RAM we recommend
+#' # calling \code{rstan_options(auto_write = TRUE)}.
 #' fit = stan_fit(data, chains = 1, iter = 100)
 #' plot(fit) # calls plot.breathtestfit
+#' # Extract coefficients and compare these with those
+#' # used to generate the data
 #' options(digits = 2)
 #' cf = coef(fit)
 #' cf %>%
@@ -52,10 +56,18 @@
 #'   select(patient_id, m_in = m.y, m_out = m.x,
 #'          beta_in = beta.y, beta_out = beta.x,
 #'          k_in = k.y, k_out = k.x)
+#' # For a detailed analysis of the fit, use the shinystan library
 #' \dontrun{
 #' library(shinystan)
 #' launch_shinystan(fit$stan_fit)
 #' }
+#' # The following plot are somewhat degenerate because
+#' # of the few iterations
+#' suppressPackageStartupMessages(library(gridExtra))
+#' stan_plot(fit$stan_fit, pars = c("beta[1]","beta[2]","beta[3]"))
+#' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
+#' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
+#'
 #' @import rstan
 #' @import methods
 #' @import dplyr
