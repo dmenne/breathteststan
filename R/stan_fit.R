@@ -61,9 +61,9 @@
 #' library(shinystan)
 #' launch_shinystan(fit$stan_fit)
 #' }
-#' # The following plot are somewhat degenerate because
-#' # of the few iterations
-#' suppressPackageStartupMessages(library(gridExtra))
+#' # The following plots are somewhat degenerate because
+#' # of the few iterations in stan_fit
+#' suppressPackageStartupMessages(library(rstan))
 #' stan_plot(fit$stan_fit, pars = c("beta[1]","beta[2]","beta[3]"))
 #' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
 #' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))

@@ -14,11 +14,11 @@ Description: This package contains the Stan-based fitting function
   Stan function are refactored here for easier testing.
 License: GPL-3
 Depends:
-   R (>= 3.0.2), 
+   R (>= 3.3.0), 
    Rcpp (>= 0.12.10), 
    methods
 Imports:
-  rstan (>= 2.14.2), 
+  rstan (>= 2.15.1), 
   tibble,
   purrr,
   dplyr,
@@ -26,16 +26,15 @@ Imports:
   tidyr,
   breathtestcore
 Suggests:
-  rstan,
   testthat,
   covr,
   knitr
 LinkingTo:
-  StanHeaders (>= 2.14.0.1), 
-  rstan (>= 2.14.2), 
+  StanHeaders (>= 2.15.0.1), 
+  rstan (>= 2.15.1), 
   BH (>= 1.62.0.1), 
   Rcpp (>= 0.12.10), 
-  RcppEigen (>= 0.3.2.9.1)
+  RcppEigen (>= 0.3.3.3.0)
 Remotes:
   dmenne/breathtestcore
 URL: 
