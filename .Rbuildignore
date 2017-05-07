@@ -6,3 +6,4 @@ cleanup*
 ^_pkgdown\.yml$
 ^README\.Rmd$
 ^templates$
+^cran-comments\.md$
