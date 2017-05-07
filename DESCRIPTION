@@ -1,14 +1,12 @@
 Package: breathteststan
 Type: Package
-Title: Stan-based fit to gastric emptying curves
+Title: Stan-based Fit to Gastric Emptying Curves
 Version: 0.3.0
 Date: 2017-05-04
 Authors@R: c(
     person("Dieter", "Menne", , "dieter.menne@menne-biomed.de", role = c("aut", "cre")),
     person("Menne Biomed Consulting Tuebingen", role = c("cph"))
     )
-Author: Dieter Menne
-Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
 Description: This package contains the Stan-based fitting function
   for use with the package breathtestcore by the same author.
   Stan function are refactored here for easier testing.
