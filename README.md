@@ -14,6 +14,6 @@ Fit 13C time series data with Bayesian methods using [Stan](http://mc-stan.org/)
 This is an add-on to package [breathtestcore](https://github.com/dmenne/breathtestcore). The Stan 
 functions have been moved here to avoid long compile and test times.
 
-![](README-01.png)
+![](tools/readme/README-01.png)
 
 

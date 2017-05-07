@@ -1,18 +1,18 @@
 Package: breathteststan
 Type: Package
-Title: Stan-based Fit to Gastric Emptying Curves
+Title: Stan-Based Fit to Gastric Emptying Curves
 Version: 0.3.0
 Date: 2017-05-04
 Authors@R: c(
     person("Dieter", "Menne", , "dieter.menne@menne-biomed.de", role = c("aut", "cre")),
     person("Menne Biomed Consulting Tuebingen", role = c("cph"))
     )
-Description: This package contains the Stan-based fitting function
-  for use with the package breathtestcore by the same author.
-  Stan function are refactored here for easier testing.
+Description: Stan-based curve-fitting function
+  for use with package breathtestcore by the same author.
+  Stan functions are refactored here for easier testing.
 License: GPL-3
 Depends:
-   R (>= 3.3.0), 
+   R (>= 3.4.0), 
    Rcpp (>= 0.12.10), 
    methods
 Imports:
