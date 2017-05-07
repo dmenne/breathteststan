@@ -171,7 +171,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
 
   data = data %>% select(-pat_group, -pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit)
-  class(ret) = c("breathtestfit", "breathteststanfit")
+  class(ret) = c("breathteststanfit", "breathtestfit")
   ret
 }
 
