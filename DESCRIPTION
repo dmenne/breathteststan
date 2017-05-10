@@ -8,7 +8,7 @@ Authors@R: c(
     person("Menne Biomed Consulting Tuebingen", role = c("cph"))
     )
 Description: Stan-based curve-fitting function
-  for use with package breathtestcore by the same author.
+  for use with package 'breathtestcore' by the same author.
   Stan functions are refactored here for easier testing.
 License: GPL-3
 Depends:
