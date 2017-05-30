@@ -18,7 +18,7 @@ test_that("Result with default parameters is tbl_df with required columns",{
   expect_identical(ncol(cf), 7L)
   expect_equal(names(cf), c("parameter", "method", "group", "estimate", "conf.low",
                  "conf.high", "diff_group"))
-  expect_identical(nrow(cf), 27L)
+  expect_identical(nrow(cf), 24L)
   expect_identical(unique(cf$diff_group), c("a", "b", "ab", "c"))
   expect_equal(unique(cf$group),
      c("liquid_normal", "patient", "solid_normal"))

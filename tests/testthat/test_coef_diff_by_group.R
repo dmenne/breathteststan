@@ -7,6 +7,7 @@ context("Coeffient differences by group")
 test_that("Result with default parameters is tbl_df with required columns",{
   skip_on_cran() # Slow
   library(dplyr)
+  library(breathtestcore)
   data("usz_13c")
   data = usz_13c %>%
     dplyr::filter( patient_id %in%
