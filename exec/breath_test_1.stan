@@ -1,9 +1,9 @@
-# Simple non-hierarchial ungrouped fit of Breath Test Curves to Exponential beta
+// Simple non-hierarchial ungrouped fit of Breath Test Curves to Exponential beta
 
 data{
-  int<lower=0> n; # Number of data
-  int<lower=0> n_record; # Number of records
-  int<lower=1> student_t_df; # using Gaussian for student_t_df >= 10
+  int<lower=0> n; // Number of data
+  int<lower=0> n_record; // Number of records
+  int<lower=1> student_t_df; // using Gaussian for student_t_df >= 10
   real<lower=0> dose;
   int<lower=0> pat_group_i[n];
   vector<lower=0>[n] minute;
@@ -32,14 +32,14 @@ transformed parameters{
   vector<lower=0>[n_record] k;
   vector<lower=0>[n_record] beta;
 
-  # Re-parametrization
+  // Re-parametrization
   m    = mu_m + sigma_m * m_raw;
   k    = mu_k + sigma_k * k_raw;
   beta = mu_beta + sigma_beta * beta_raw;
 }
 
 model {
-  # Note: the x_raw parameters all have normal(0,1) here
+  // Note: the x_raw parameters all have normal(0,1) here
   m_raw ~ normal(0, 1);
   mu_m ~ normal(40,20);
   sigma_m ~ normal(6,2);
@@ -53,7 +53,7 @@ model {
   sigma_beta ~ cauchy(0,2);
 
   sigma ~ cauchy(0,5);
-  { # Dummy block to hide pdr1[n]
+  { // Dummy block to hide pdr1[n]
     vector[n] pdr1;
     for (i in 1:n){
       int rec;

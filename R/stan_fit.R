@@ -131,9 +131,6 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   )})
 
   # Extract required parameters
-
-  m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m)
-
   cf = data.frame(pat_group_i = rep(1:n_record, each = chains*iter/2),
         m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m),
         beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "beta"))$beta),
