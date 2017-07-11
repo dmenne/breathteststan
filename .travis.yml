@@ -1,11 +1,7 @@
-env:
-- CXX=clang++ USE_CXX11=1
-
 language: r
 sudo: false
 cache: packages
 dist: trusty
-group: edge
 latex: false
 
 
