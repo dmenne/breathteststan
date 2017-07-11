@@ -3,6 +3,10 @@ sudo: false
 cache: packages
 latex: false
 
+CXX=clang++
+USE_CXX11=1
+
+
 r-github-packages:
   - jimhester/covr
   - dmenne/breathtestcore
