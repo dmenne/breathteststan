@@ -1,10 +1,11 @@
+env:
+  - CXX=clang++
+  - USE_CXX11=1
+
 language: r
 sudo: false
 cache: packages
 latex: false
-
-CXX=clang++
-USE_CXX11=1
 
 
 r-github-packages:
