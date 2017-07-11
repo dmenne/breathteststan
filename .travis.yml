@@ -1,6 +1,5 @@
 env:
-- CXX=clang++
-- USE_CXX11=1
+- CXX=clang++ USE_CXX11=1
 
 language: r
 sudo: false
