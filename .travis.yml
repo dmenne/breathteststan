@@ -4,6 +4,8 @@ env:
 language: r
 sudo: false
 cache: packages
+dist: trusty
+group: edge
 latex: false
 
 
