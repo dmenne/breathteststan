@@ -14,7 +14,7 @@ test_that("Result with default parameters is tbl_df with required columns",{
      c("norm_001", "norm_002", "norm_003", "norm_004", "pat_001", "pat_002","pat_003")) %>%
     cleanup_data()
   fit = stan_fit(data)
-  cf = coef_diff_by_group(fit)
+  cf = breathtestcore::coef_diff_by_group(fit)
   expect_is(cf, "tbl_df")
   expect_identical(ncol(cf), 7L)
   expect_identical(nrow(cf), 24L)

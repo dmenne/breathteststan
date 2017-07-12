@@ -15,10 +15,10 @@ Description: Stan-based curve-fitting function
   Stan functions are refactored here for easier testing.
 License: GPL-3
 Depends:
-   R (>= 3.4.0), 
-   Rcpp, 
-   methods
+   R (>= 3.4.0) 
 Imports:
+  Rcpp, 
+  methods, 
   rstan (>= 2.16.0), 
   tibble,
   purrr,
