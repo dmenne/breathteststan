@@ -25,11 +25,12 @@ Imports:
   dplyr,
   stringr,
   tidyr,
-  breathtestcore
+  breathtestcore (>=0.3.0.9000)
 Suggests:
   testthat,
   covr,
   knitr
+Remotes: dmenne/breathtestcore
 LinkingTo:
   StanHeaders (>= 2.16.0.0), 
   rstan (>= 2.16.0), 
@@ -40,6 +41,6 @@ URL:
   https://github.com/dmenne/breathteststan
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
-
-
+SystemRequirements: pandoc    
+VignetteBuilder: knitr
 
