@@ -12,11 +12,10 @@ warnings_are_errors: false
 r_check_args: "--as-cran"
 
 r-github-packages:
-  - jimhester/covr
   - dmenne/breathtestcore
 
 r:
- - devel
+ - release
 
 matrix:
   include:
@@ -30,7 +29,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
-  exclude:
+  include:
     - os: linux
       addons:
         apt:
