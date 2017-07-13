@@ -4,11 +4,46 @@ cache: packages
 dist: trusty
 latex: false
 
+warnings_are_errors: false
+
+# https://github.com/helske/walker
+# http://dirk.eddelbuettel.com/blog/2017/06/13/
+
+r_check_args: "--as-cran"
 
 r-github-packages:
   - jimhester/covr
   - dmenne/breathtestcore
 
+r:
+ - devel
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+
+  exclude:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty
+          packages:
+            - clang-5.0
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+
+before_install:
+    - eval "${MATRIX_EVAL}"
+
 after_success:
-  - tar -C .. -xf $PKG_TARBALL
-  - Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/*.cpp", "R/zzz.R"))'
+  - travis_wait 20 tar -C .. -xf $PKG_TARBALL
+  - travis_wait 40 Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/*.cpp", "R/zzz.R"))'
