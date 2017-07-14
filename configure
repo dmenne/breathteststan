@@ -6,6 +6,7 @@
 ## will fail as the version we use there was built in too old an environment,
 ## namely Ubuntu "trusty" 14.04.
 ##
+##
 ## So we install g++-6 from another repo and rely on the fact that is
 ## defaults to C++14.  Sadly, we need R to not fail and hence, just on
 ## Travis, remove the C++14 instruction
