@@ -1,4 +1,4 @@
-#' @title Bayesian Stan fit to 13C Breath Data
+#' @title Bayesian Stan fit to 13C Breath Data in Multiple Groups
 #' @description Fits exponential beta curves to 13C breath test series data using
 #' Bayesian Stan methods. See
 #' \url{https://menne-biomed.de/blog/breath-test-stan} for a comparision between
@@ -22,7 +22,8 @@
 #' @param model Name of model; use \code{names(stanmodels)} for other models.
 #'
 #'
-#' @return A list of classes "breathtestfit" and "breathteststanfit" with elements
+#' @return A list of classes "breathteststangroupfit", "breathteststanfit" and "breathtestfit"
+#' with elements
 #' \itemize{
 #'   \item {\code{coef} Estimated parameters as data frame in a key-value format with
 #'    columns \code{patient_id, group, parameter, method} and \code{value}.
@@ -40,31 +41,6 @@
 #' d = simulate_breathtest_data(n_records = 3) # default 3 records
 #' data = cleanup_data(d$data)
 #' # Use more than 100 iterations and 4 chains for serious fits
-#' fit = stan_fit(data, chains = 1, iter = 100)
-#' plot(fit) # calls plot.breathtestfit
-#' # Extract coefficients and compare these with those
-#' # used to generate the data
-#' options(digits = 2)
-#' cf = coef(fit)
-#' cf %>%
-#'   filter(grepl("m|k|beta", parameter )) %>%
-#'   select(-method, -group) %>%
-#'   tidyr::spread(parameter, value) %>%
-#'   inner_join(d$record, by = "patient_id") %>%
-#'   select(patient_id, m_in = m.y, m_out = m.x,
-#'          beta_in = beta.y, beta_out = beta.x,
-#'          k_in = k.y, k_out = k.x)
-#' # For a detailed analysis of the fit, use the shinystan library
-#' \dontrun{
-#' library(shinystan)
-#' launch_shinystan(fit$stan_fit)
-#' }
-#' # The following plots are somewhat degenerate because
-#' # of the few iterations in stan_fit
-#' suppressPackageStartupMessages(library(rstan))
-#' stan_plot(fit$stan_fit, pars = c("beta[1]","beta[2]","beta[3]"))
-#' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
-#' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
 #'
 #' @import rstan
 #' @import methods
@@ -77,76 +53,103 @@
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map_df
 #' @importFrom stats na.omit quantile
-#' @useDynLib breathteststan, .registration = TRUE
 #'
 #' @export
 #'
-stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
-                    chains = 2, iter = 1000, model = "breath_test_1") {
+stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
+                    chains = 2, iter = 1000, model = "breath_test_group_1") {
 
+  if (length(unique(data$group)) < 2)
+    stop("Use stan_fit if there is only one group")
   # Avoid notes on CRAN
   value = pat_group = pat_group_i = NULL
   stat = estimate = . = k = key =  m = q_975 = NULL
-  data = breathtestcore::subsample_data(data, sample_minutes)
-  # Integer index of records
-  data$pat_group_i =  as.integer(as.factor(data$pat_group))
-  n_record = max(data$pat_group_i)
+  data = breathtestcore::subsample_data(data, sample_minutes) %>%
+    mutate(
+      pat_i =  as.integer(as.factor(patient_id)),
+      group_i =  as.integer(as.factor(group))
+    )
+  n_pat = max(data$pat_i)
+  n_group = max(data$group_i)
   data_list = list(
     n = nrow(data),
-    n_record = n_record,
+    n_pat = n_pat,
+    n_group = n_group,
+    student_t_df = 5,
     dose = 100,
-    student_t_df = student_t_df,
-    pat_group_i = data$pat_group_i,
+    pat_i = data$pat_i,
+    group_i = data$group_i,
     minute = data$minute,
     pdr = data$pdr)
 
-  # Note: as.array is required to handle the case of n_record = 1
+  # Note: as.array is required to handle the case of n_pat = 1
   init = rep(list(list(
-    m_raw = as.array(rnorm(n_record,0,.1)),
-    mu_m = rnorm(1,40,2),
-    sigma_m = abs(rnorm(1,2,.1)),
+    m_pat_raw = as.array(rnorm(n_pat,0,2)),
+    m_group = rnorm(n_group,0,.1),
+    sigma_m_pat = abs(rnorm(1, 10,1)),
+    mu_m = rnorm(1, 40, 2),
 
-    k_raw = as.array(rnorm(n_record, 0,.1)),
-    mu_k = rlnorm(1, -6,.1),
-    sigma_k = abs(rnorm(1,0,.001)),
+    k_pat_raw = as.array(rnorm(n_pat,0,.0001)),
+    k_group = rnorm(n_group,0,.0001),
+    sigma_k_pat = abs(rnorm(1, 0,.0001)),
+    mu_k = rnorm(1, 40, 3),
 
-    beta_raw = as.array(rnorm(n_record, 0, .1)),
-    mu_beta = rnorm(1, 2, 0.1),
-    sigma_beta = abs(rnorm(1,.1,.1)),
-    sigma = abs(rnorm(1,1,.1))
+    beta_pat_raw = as.array(rnorm(n_pat,0,.1)),
+    beta_group = rnorm(n_group,0,.1),
+    sigma_beta_pat = abs(rnorm(1, 0, .1)),
+    mu_beta = rnorm(1, 2,0.1),
+
+    sigma = abs(rnorm(1, 10, 1))
+
   )),chains)
+
 
   if (!exists("stanmodels"))
     stop("stanmodels not found")
-#  mod = breathteststan:::stanmodels[["breath_test_1"]]
-  mod = stanmodels$breath_test_1
+  mod = stanmodels[[model]]
   if (is.null(mod))
-    stop("stanmodels$breath_test_1 not found")
+    stop("stanmodels ", model, " not found")
   options(mc.cores = max(parallel::detectCores()/2, 1))
-  capture.output({fit = suppressWarnings(
-    rstan::sampling(mod, data = data_list, init = init,
-                                    iter =  iter, chains = chains)
-  )})
 
-  # Extract required parameters
-  cf = data.frame(pat_group_i = rep(1:n_record, each = chains*iter/2),
-        m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m),
-        beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "beta"))$beta),
-        k = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "k"))$k))
-  # Compute derived quantities
-  cf = cf %>%
+  fit = rstan::stan(mod, data = data_list, init = init,
+                    control = list(adapt_delta = 0.95),
+                    iter =  iter, chains = chains)
+  # Local extractor function
+  ex = function(par, i = NA) {
+    if (is.na(i)) {
+      as.vector(rstan::extract(fit, permuted = TRUE, pars = par)[[par]])
+    } else
+    {
+      rstan::extract(fit, permuted = TRUE, pars = par)[[par]][,i]
+    }
+  }
+
+  cf = data %>%
+    select(-minute, -pdr) %>%
+    distinct() %>%
+    rowwise() %>%
+    do (
+      {
+        data_frame(
+          patient_id = .$patient_id,
+          group = .$group,
+          m = ex("mu_m") + ex("m_group",.$group_i) + ex("m_pat", .$pat_i),
+          k = ex("mu_k") + ex("k_group",.$group_i) + ex("k_pat", .$pat_i),
+          beta = ex("mu_beta") + ex("beta_group",.$group_i) + ex("beta_pat", .$pat_i)
+        )
+      }
+    ) %>%
+    ungroup() %>%
     mutate(
-      t50_maes_ghoos = t50_maes_ghoos(.),
       t50_maes_ghoos = t50_maes_ghoos(.),
       tlag_maes_ghoos = tlag_maes_ghoos(.),
       t50_maes_ghoos_scintigraphy = t50_maes_ghoos_scintigraphy(.),
       t50_bluck_coward = t50_bluck_coward(.),
       tlag_bluck_coward = tlag_bluck_coward(.)
     ) %>%
-    rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
-    tidyr::gather(key, value, -pat_group_i) %>%
+    tidyr::gather(key, value, -patient_id, -group) %>%
     na.omit() %>%
-    group_by(pat_group_i, key) %>%
+    group_by(patient_id, group, key) %>%
     summarize(
       estimate = mean(value),
       q_0275 = quantile(value, 0.0275),
@@ -155,18 +158,14 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
       q_975 = quantile(value, 0.975)
     ) %>%
     ungroup() %>%
-    left_join(unique(data[,c("pat_group_i", "pat_group", "patient_id", "group")]),
-                by = "pat_group_i") %>%
     mutate(
-      parameter = str_match(key, "k|m|beta|t50|tlag")[,1],
-      method = str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
+      parameter = stringr::str_match(key, "k|m|beta|t50|tlag")[,1],
+      method = stringr::str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
     ) %>%
-   select(-pat_group_i, -pat_group, -key) %>%
-   tidyr::gather(stat, value, estimate:q_975)
+    select(-key)
 
-  data = data %>% select(-pat_group, -pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit)
-  class(ret) = c("breathteststanfit", "breathtestfit")
+  class(ret) = c("breathteststangroupfit", "breathteststanfit", "breathtestfit")
   ret
 }
 

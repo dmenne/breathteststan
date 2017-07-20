@@ -7,3 +7,4 @@ src/*.so
 src/*.dll
 src-i386
 check_rhub.cmd
+src/*.cc

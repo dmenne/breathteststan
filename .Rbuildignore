@@ -7,3 +7,4 @@ cleanup*
 ^README\.Rmd$
 ^templates$
 ^cran-comments\.md$
+configure

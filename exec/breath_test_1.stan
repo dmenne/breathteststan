@@ -68,7 +68,7 @@ model {
       betan = beta[rec];
       pdr1[i] = dose*mn*kn*betan*exp_ktn * pow(1 - exp_ktn,(betan -1));
     }
-    if (student_t_df <= 10 )
+    if (student_t_df < 10 )
       pdr ~ student_t(student_t_df, pdr1, sigma);
     else
       pdr ~ normal(pdr1, sigma);
