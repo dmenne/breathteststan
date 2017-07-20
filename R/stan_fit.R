@@ -118,14 +118,14 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
 
   if (!exists("stanmodels"))
     stop("stanmodels not found")
-#  mod = breathteststan:::stanmodels[["breath_test_1"]]
-  mod = stanmodels$breath_test_1
+  mod = breathteststan:::stanmodels[[model]]
   if (is.null(mod))
-    stop("stanmodels$breath_test_1 not found")
+    stop("Stan model", model,  "not found")
   options(mc.cores = max(parallel::detectCores()/2, 1))
   capture.output({fit = suppressWarnings(
     rstan::sampling(mod, data = data_list, init = init,
-                                    iter =  iter, chains = chains)
+                    control = list(adapt_delta = 0.9),
+                    iter =  iter, chains = chains)
   )})
 
   # Extract required parameters

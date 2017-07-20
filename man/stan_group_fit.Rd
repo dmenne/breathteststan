@@ -32,7 +32,8 @@ When student_t_df >= 10, the normal distribution is used.}
 \item{model}{Name of model; use \code{names(stanmodels)} for other models.}
 }
 \value{
-A list of classes "breathtestfit" and "breathteststanfit" with elements
+A list of classes "breathteststangroupfit", "breathteststanfit" and "breathtestfit"
+with elements
 \itemize{
   \item {\code{coef} Estimated parameters as data frame in a key-value format with
    columns \code{patient_id, group, parameter, method} and \code{value}.
@@ -55,8 +56,6 @@ suppressPackageStartupMessages(library(dplyr))
 d = simulate_breathtest_data(n_records = 3) # default 3 records
 data = cleanup_data(d$data)
 # Use more than 100 iterations and 4 chains for serious fits
-# For execution on a local, multicore CPU with excess RAM we recommend
-# calling \\code{rstan_options(auto_write = TRUE)}.
 
 }
 \seealso{

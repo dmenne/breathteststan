@@ -109,11 +109,13 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
   mod = stanmodels[[model]]
   if (is.null(mod))
     stop("stanmodels ", model, " not found")
-  options(mc.cores = max(parallel::detectCores()/2, 1))
-
-  fit = rstan::stan(mod, data = data_list, init = init,
-                    control = list(adapt_delta = 0.95),
+  capture.output({fit = suppressWarnings(
+    rstan::sampling(mod, data = data_list, init = init,
+                    control = list(adapt_delta = 0.9),
                     iter =  iter, chains = chains)
+  )})
+
+
   # Local extractor function
   ex = function(par, i = NA) {
     if (is.na(i)) {
@@ -147,6 +149,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
       t50_bluck_coward = t50_bluck_coward(.),
       tlag_bluck_coward = tlag_bluck_coward(.)
     ) %>%
+    rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
     tidyr::gather(key, value, -patient_id, -group) %>%
     na.omit() %>%
     group_by(patient_id, group, key) %>%
@@ -162,7 +165,8 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
       parameter = stringr::str_match(key, "k|m|beta|t50|tlag")[,1],
       method = stringr::str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
     ) %>%
-    select(-key)
+    select(-key) %>%
+    tidyr::gather(stat, value, estimate:q_975)
 
   ret = list(coef = cf, data = data, stan_fit = fit)
   class(ret) = c("breathteststangroupfit", "breathteststanfit", "breathtestfit")

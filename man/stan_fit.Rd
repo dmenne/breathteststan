@@ -55,8 +55,6 @@ suppressPackageStartupMessages(library(dplyr))
 d = simulate_breathtest_data(n_records = 3) # default 3 records
 data = cleanup_data(d$data)
 # Use more than 100 iterations and 4 chains for serious fits
-# For execution on a local, multicore CPU with excess RAM we recommend
-# calling \\code{rstan_options(auto_write = TRUE)}.
 fit = stan_fit(data, chains = 1, iter = 100)
 plot(fit) # calls plot.breathtestfit
 # Extract coefficients and compare these with those
