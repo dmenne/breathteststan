@@ -15,6 +15,8 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
 #  library(rstan)
 #  library(stringr)
 #  library(testthat)
+#  library(breathteststan)
+
   chains = 1
   student_t_df = 10
   dose = 100
@@ -27,6 +29,7 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   expect_is(fit, "breathteststanfit")
   expect_is(fit$stan_fit, "stanfit" )
   expect_equal(names(fit$data), names(data))
+  expect_gt(sigma_fit(fit), 0.9)
 
   cf = fit$coef
   expect_identical(unique(cf$group), "A")

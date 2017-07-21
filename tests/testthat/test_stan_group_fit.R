@@ -36,12 +36,12 @@ test_that("Multiple records per patients return multiple groups (long version)",
                        "pat_001", "pat_003", "pat_016")) %>%
     breathtestcore::cleanup_data()
   fit_nlme = breathtestcore::nlme_fit(data)
-
   fit = stan_group_fit(data, dose = dose, student_t_df = student_t_df,
                        chains = chains, iter = iter, model = model  )
 
   cf = coef(fit)
   expect_equal(unique(cf$group), c("liquid_normal", "solid_normal", "patient"))
+  expect_gt(sigma_fit(fit), 0.9)
 
   cf = coef(fit) %>%
     left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method", "group"))  %>%
