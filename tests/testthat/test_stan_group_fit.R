@@ -41,7 +41,7 @@ test_that("Multiple records per patients return multiple groups (long version)",
 
   cf = coef(fit)
   expect_equal(unique(cf$group), c("liquid_normal", "solid_normal", "patient"))
-  expect_gt(sigma(fit), 0.9)
+  expect_gt(sigma(fit), 0.5)
 
   cf = coef(fit) %>%
     left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method", "group"))  %>%

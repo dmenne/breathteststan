@@ -9,3 +9,4 @@ cleanup*
 ^cran-comments\.md$
 configure
 check_rhub.cmd
+src/*.o

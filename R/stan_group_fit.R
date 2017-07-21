@@ -56,7 +56,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
   if (length(unique(data$group)) < 2)
     stop("Use stan_fit if there is only one group")
   # Avoid notes on CRAN
-  value = patient_id = group = minute = pdf = NULL
+  value = patient_id = group = minute = pdr = NULL
   stat = estimate = . = k = key =  m = q_975 = NULL
   data = breathtestcore::subsample_data(data, sample_minutes) %>%
     mutate(
