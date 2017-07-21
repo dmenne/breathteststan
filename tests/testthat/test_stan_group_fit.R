@@ -35,7 +35,9 @@ test_that("Multiple records per patients return multiple groups (long version)",
                      c("norm_001", "norm_002", "norm_003",
                        "pat_001", "pat_003", "pat_016")) %>%
     breathtestcore::cleanup_data()
+  # fit nlme for comparison
   fit_nlme = breathtestcore::nlme_fit(data)
+  # fit stan_group
   fit = stan_group_fit(data, dose = dose, student_t_df = student_t_df,
                        chains = chains, iter = iter, model = model  )
 
