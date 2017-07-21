@@ -51,11 +51,17 @@ Bayesian Stan methods. See
 single curve, mixed-model population and Bayesian methods.
 }
 \examples{
+\dontrun{
 library(breathtestcore)
-suppressPackageStartupMessages(library(dplyr))
-d = simulate_breathtest_data(n_records = 3) # default 3 records
-data = cleanup_data(d$data)
-# Use more than 100 iterations and 4 chains for serious fits
+# Passing a named list to cleanup_data creates
+# a data frame/tibble with group names a and b
+data =  cleanup_data(list(
+  a = cleanup_data(simulate_breathtest_data(n_records = 10)),
+  b = cleanup_data(simulate_breathtest_data(n_records = 10))))
+fit = stan_group_fit(data)
+plot(fit) # calls plot.breathtestfit
+coef(fit)
+}
 
 }
 \seealso{

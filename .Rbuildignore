@@ -8,3 +8,4 @@ cleanup*
 ^templates$
 ^cran-comments\.md$
 configure
+check_rhub.cmd

@@ -81,6 +81,7 @@ stan_plot(fit$stan_fit, pars = c("beta[1]","beta[2]","beta[3]"))
 stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
 stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
 
+
 }
 \seealso{
 Base methods \code{coef, plot, print}; methods from package

@@ -36,23 +36,17 @@
 #' @seealso Base methods \code{coef, plot, print}; methods from package
 #'  \code{broom: tidy, augment}.
 #' @examples
+#' \dontrun{
 #' library(breathtestcore)
-#' suppressPackageStartupMessages(library(dplyr))
-#' d = simulate_breathtest_data(n_records = 3) # default 3 records
-#' data = cleanup_data(d$data)
-#' # Use more than 100 iterations and 4 chains for serious fits
-#'
-#' @import rstan
-#' @import methods
-#' @import dplyr
-#' @import breathtestcore
-#' @importFrom stats rnorm rlnorm
-#' @importFrom Rcpp loadModule
-#' @importFrom utils capture.output
-#' @importFrom stringr str_extract str_match
-#' @importFrom tibble as_tibble
-#' @importFrom purrr map_df
-#' @importFrom stats na.omit quantile
+#' # Passing a named list to cleanup_data creates
+#' # a data frame/tibble with group names a and b
+#' data =  cleanup_data(list(
+#'   a = cleanup_data(simulate_breathtest_data(n_records = 10)),
+#'   b = cleanup_data(simulate_breathtest_data(n_records = 10))))
+#' fit = stan_group_fit(data)
+#' plot(fit) # calls plot.breathtestfit
+#' coef(fit)
+#' }
 #'
 #' @export
 #'
@@ -62,7 +56,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
   if (length(unique(data$group)) < 2)
     stop("Use stan_fit if there is only one group")
   # Avoid notes on CRAN
-  value = pat_group = pat_group_i = NULL
+  value = patient_id = group = minute = pdf = NULL
   stat = estimate = . = k = key =  m = q_975 = NULL
   data = breathtestcore::subsample_data(data, sample_minutes) %>%
     mutate(

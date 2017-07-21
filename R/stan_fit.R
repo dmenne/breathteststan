@@ -66,18 +66,6 @@
 #' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
 #' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
 #'
-#' @import rstan
-#' @import methods
-#' @import dplyr
-#' @import breathtestcore
-#' @importFrom stats rnorm rlnorm
-#' @importFrom Rcpp loadModule
-#' @importFrom utils capture.output
-#' @importFrom stringr str_extract str_match
-#' @importFrom tibble as_tibble
-#' @importFrom purrr map_df
-#' @importFrom stats na.omit quantile
-#' @useDynLib breathteststan, .registration = TRUE
 #'
 #' @export
 #'
@@ -118,7 +106,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
 
   if (!exists("stanmodels"))
     stop("stanmodels not found")
-  mod = breathteststan:::stanmodels[[model]]
+  mod = stanmodels[[model]]
   if (is.null(mod))
     stop("Stan model", model,  "not found")
   options(mc.cores = max(parallel::detectCores()/2, 1))
