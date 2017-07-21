@@ -66,6 +66,19 @@
 #' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
 #' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
 #'
+#' @import rstan
+#' @import methods
+#' @import dplyr
+#' @import breathtestcore
+#' @importFrom stats rnorm rlnorm
+#' @importFrom Rcpp loadModule
+#' @importFrom utils capture.output
+#' @importFrom stringr str_extract str_match
+#' @importFrom tibble as_tibble
+#' @importFrom purrr map_df
+#' @importFrom stats na.omit quantile
+#' @import rstan
+#' @useDynLib breathteststan, .registration = TRUE
 #'
 #' @export
 #'
