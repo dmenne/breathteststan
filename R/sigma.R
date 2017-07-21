@@ -5,6 +5,7 @@
 #' @param ... Not used
 #' @return A numeric value giving the sigma (= average residual standard deviation) term
 #' from the Stan fit.
+#' @importFrom stats sigma
 #' @export
 sigma.breathteststanfit = function(object, ...){
   mean(rstan::extract(object$stan_fit, permuted = TRUE, pars = c( "sigma"))$sigma)
