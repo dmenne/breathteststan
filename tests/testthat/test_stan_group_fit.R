@@ -7,24 +7,28 @@ test_that("Exception when there is only one group", {
 })
 
 
-test_that("Multiple records per patients return multiple groups (CRAN version)", {
+test_that("Multiple records per patient return multiple groups (CRAN version)", {
   data("usz_13c", package = "breathtestcore")
   set.seed(4711)
   data = usz_13c %>%
     dplyr::filter( patient_id %in%
                      c("norm_001", "norm_002", "norm_003")) %>%
     breathtestcore::cleanup_data()
-  fit = stan_group_fit(data)
+  fit = stan_group_fit(data, iter = 300)
   expect_is(fit, "breathteststangroupfit")
   expect_identical(length(fit), 3L)
   expect_identical(names(fit), c("coef", "data", "stan_fit"))
 })
 
-test_that("Multiple records per patients return multiple groups (long version)", {
+test_that("Multiple records per patient return multiple groups (long version)", {
   skip_on_cran() # long
 
+#  library(breathtestcore)
+#  library(breathteststan)
+  library(dplyr)
+
   chains = 2
-  student_t_df = 5
+  student_t_df = 3  # Rough student distribution
   dose = 100
   iter = 500
   model = "breath_test_group_1"
