@@ -23,6 +23,7 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   iter = 100
   sample_minutes = 15
   data = cleanup_data(simulate_breathtest_data(seed = 100)$data)
+  comment(data) = "comment"
   fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
                  chains = chains, iter = iter  )
   expect_is(fit, "breathtestfit")
@@ -30,6 +31,7 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   expect_is(fit$stan_fit, "stanfit" )
   expect_equal(names(fit$data), names(data))
   expect_gt(sigma(fit), 0.9)
+  expect_identical(comment(fit), "comment")
 
   cf = fit$coef
   expect_identical(unique(cf$group), "A")

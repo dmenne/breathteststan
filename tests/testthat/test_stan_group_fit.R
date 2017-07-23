@@ -14,9 +14,10 @@ test_that("Multiple records per patient return multiple groups (CRAN version)", 
     dplyr::filter( patient_id %in%
                      c("norm_001", "norm_002", "norm_003")) %>%
     breathtestcore::cleanup_data()
+  comment(data) = "comment"
   fit = stan_group_fit(data, iter = 300)
+  expect_identical(comment(fit), "comment")
   expect_is(fit, "breathteststangroupfit")
-  expect_identical(length(fit), 3L)
   expect_identical(names(fit), c("coef", "data", "stan_fit"))
 })
 

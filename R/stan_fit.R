@@ -88,10 +88,12 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   # Avoid notes on CRAN
   value = pat_group = pat_group_i = NULL
   stat = estimate = . = k = key =  m = q_975 = NULL
+  cm = comment(data)
   data = breathtestcore::subsample_data(data, sample_minutes)
   # Integer index of records
   data$pat_group_i =  as.integer(as.factor(data$pat_group))
   n_record = max(data$pat_group_i)
+
   data_list = list(
     n = nrow(data),
     n_record = n_record,
@@ -167,6 +169,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
 
   data = data %>% select(-pat_group, -pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit)
+  comment(ret) = cm
   class(ret) = c("breathteststanfit", "breathtestfit")
   ret
 }
