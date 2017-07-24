@@ -36,7 +36,7 @@ computes point estimated and Bayesian credible intervals for all group pair
 differences, for examples of the half emptying time \code{t50}.
 }
 \examples{
-\dontrun{
+\donttest{
 library(dplyr)
 library(breathtestcore)
 data("usz_13c", package = "breathtestcore")
