@@ -1,7 +1,6 @@
 context("Coeffient differences by group")
 
-test_that("Credible intervals are returned as stan_group_fit coefficients",{
-  skip_on_cran() # Slow
+test_that("Credible intervals are returned as coef_diff_by_group coefficients",{
   library(dplyr)
   library(breathtestcore)
   data("usz_13c", package = "breathtestcore")
@@ -10,8 +9,17 @@ test_that("Credible intervals are returned as stan_group_fit coefficients",{
      c("norm_001", "norm_002", "norm_003", "norm_004", "pat_001", "pat_002","pat_003")) %>%
     cleanup_data()
   comment(data) = "comment"
-  fit = stan_group_fit(data, iter = 300)
+  set.seed(4711)
+  fit = stan_group_fit(data, iter = 300, chains = 1)
   expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
-
+  cf_diff = coef_diff_by_group(fit)
+  expect_identical(nrow(cf_diff), 24L)
+  expect_identical(names(cf_diff), c("parameter", "method", "groups",
+                                     "estimate", "cred.low", "cred.high"))
+  chain = attr(cf_diff, "chain")
+  expect_is(chain, "data.frame")
+  expect_identical(nrow(chain), 7200L)
+  expect_identical(names(chain),
+          c("key","value1","value2","group1","group2","value"))
 })
 

@@ -17,6 +17,19 @@
 
 \item{...}{Not used}
 }
+\value{
+A \code{tibble} with columns
+\describe{
+  \item{parameter}{Parameter of fit, e.g. \code{beta, k, m, t50}}
+  \item{method}{Method used to compute parameter. \code{exp_beta} refers to primary
+  fit parameters \code{beta, k, m}.}
+  \item{groups}{Which pairwise difference, e.g \code{solid - liquid}}
+  \item{estimate}{Point estimate (chain mean) of the difference}
+  \item{cred.low, cred.high}{Lower and upper 95 percent credible interval of difference.}
+}
+The chains of pairwise differences  are returned as a attribute \code{chain}
+for use in plotting. See example below how to used these to show histograms.
+}
 \description{
 Given a Stan fit with grouping to 13C breath test curves,
 computes point estimated and Bayesian credible intervals for all group pair
@@ -24,14 +37,24 @@ differences, for examples of the half emptying time \code{t50}.
 }
 \examples{
 library(dplyr)
-data("usz_13c")
+library(breathtestcore)
+data("usz_13c", package = "breathtestcore")
 data = usz_13c \%>\%
   dplyr::filter( patient_id \%in\%
     c("norm_001", "norm_002", "norm_003", "norm_004", "pat_001", "pat_002","pat_003")) \%>\%
   cleanup_data()
 fit = stan_group_fit(data)
 coef_diff_by_group(fit)
+cc = attr(fit, "chain") \%>\%
+   filter(key == "t50_maes_ghoos", abs(value) <200) \%>\%
+   mutate(
+     groups = paste(group2, group1, sep = " - ")
+   )
+cc
+library(ggplot2)
+ggplot(cc, aes(x = value)) + geom_histogram() + facet_wrap(~groups)
 \dontrun{
+# For comparison
 fit = nlme_fit(data)
 coef_diff_by_group(fit)
 }
