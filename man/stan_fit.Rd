@@ -32,7 +32,7 @@ When student_t_df >= 10, the normal distribution is used.}
 \item{model}{Name of model; use \code{names(stanmodels)} for other models.}
 }
 \value{
-A list of classes "breathtestfit" and "breathteststanfit" with elements
+A list of classes "breathteststanfit" and "breathtestfit" with elements
 \itemize{
   \item {\code{coef} Estimated parameters as data frame in a key-value format with
    columns \code{patient_id, group, parameter, method} and \code{value}.

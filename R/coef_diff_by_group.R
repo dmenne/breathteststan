@@ -52,8 +52,8 @@ coef_diff_by_group.breathteststangroupfit =
     return(NULL)
   }
   sig = as.integer(options("digits"))
-
-
+  ch = fit$coef_chain
+  diffs = t(combn(unique(ch$group),2))
 
   #comment(cf) = cm
   NULL

@@ -1,10 +1,6 @@
 context("Coeffient differences by group")
 
-# TODO: this calls coef_diff_by_group.breathtestfit, which include a post-hoc classic test
-# for contrasts. Should be replaced by a full Bayesian estimate using the posterior
-
-
-test_that("Result with default parameters is tbl_df with required columns",{
+test_that("Credible intervals are returned as stan_group_fit coefficients",{
   skip_on_cran() # Slow
   library(dplyr)
   library(breathtestcore)
@@ -15,8 +11,7 @@ test_that("Result with default parameters is tbl_df with required columns",{
     cleanup_data()
   comment(data) = "comment"
   fit = stan_group_fit(data, iter = 300)
-  cf = breathtestcore::coef_diff_by_group(fit)
-#  expect_equal(comment(data), "comment")
+  expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
 
 })
 

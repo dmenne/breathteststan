@@ -29,6 +29,7 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   expect_is(fit, "breathtestfit")
   expect_is(fit, "breathteststanfit")
   expect_is(fit$stan_fit, "stanfit" )
+  expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
   expect_equal(names(fit$data), names(data))
   expect_gt(sigma(fit), 0.9)
   expect_identical(comment(fit), "comment")

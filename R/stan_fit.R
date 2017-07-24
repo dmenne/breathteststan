@@ -22,7 +22,7 @@
 #' @param model Name of model; use \code{names(stanmodels)} for other models.
 #'
 #'
-#' @return A list of classes "breathtestfit" and "breathteststanfit" with elements
+#' @return A list of classes "breathteststanfit" and "breathtestfit" with elements
 #' \itemize{
 #'   \item {\code{coef} Estimated parameters as data frame in a key-value format with
 #'    columns \code{patient_id, group, parameter, method} and \code{value}.
@@ -137,7 +137,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
         beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "beta"))$beta),
         k = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "k"))$k))
   # Compute derived quantities
-  cf = cf %>%
+  coef_chain = cf %>%
     mutate(
       t50_maes_ghoos = t50_maes_ghoos(.),
       t50_maes_ghoos = t50_maes_ghoos(.),
@@ -149,6 +149,9 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
     rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
     tidyr::gather(key, value, -pat_group_i) %>%
     na.omit() %>%
+    ungroup()
+
+  cf = coef_chain %>%
     group_by(pat_group_i, key) %>%
     summarize(
       estimate = mean(value),
@@ -168,7 +171,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
    tidyr::gather(stat, value, estimate:q_975)
 
   data = data %>% select(-pat_group, -pat_group_i) # only used locally
-  ret = list(coef = cf, data = data, stan_fit = fit)
+  ret = list(coef = cf, data = data, stan_fit = fit, coef_chain = coef_chain)
   comment(ret) = cm
   class(ret) = c("breathteststanfit", "breathtestfit")
   ret

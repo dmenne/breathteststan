@@ -58,6 +58,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
   # Avoid notes on CRAN
   value = patient_id = group = minute = pdr = NULL
   stat = estimate = . = k = key =  m = q_975 = NULL
+  cm  = comment(data)
   data = breathtestcore::subsample_data(data, sample_minutes) %>%
     mutate(
       pat_i =  as.integer(as.factor(patient_id)),
@@ -120,7 +121,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
     }
   }
 
-  cf = data %>%
+  coef_chain = data %>%
     select(-minute, -pdr) %>%
     distinct() %>%
     rowwise() %>%
@@ -146,6 +147,9 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
     rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
     tidyr::gather(key, value, -patient_id, -group) %>%
     na.omit() %>%
+    ungroup()
+
+  cf = coef_chain %>%
     group_by(patient_id, group, key) %>%
     summarize(
       estimate = mean(value),
@@ -162,8 +166,9 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
     select(-key) %>%
     tidyr::gather(stat, value, estimate:q_975)
 
-  ret = list(coef = cf, data = data, stan_fit = fit)
+  ret = list(coef = cf, data = data, stan_fit = fit, coef_chain = coef_chain)
   class(ret) = c("breathteststangroupfit", "breathteststanfit", "breathtestfit")
+  comment(ret) = cm # Recover comment
   ret
 }
 

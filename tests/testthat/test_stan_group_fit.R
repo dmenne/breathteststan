@@ -16,9 +16,9 @@ test_that("Multiple records per patient return multiple groups (CRAN version)", 
     breathtestcore::cleanup_data()
   comment(data) = "comment"
   fit = stan_group_fit(data, iter = 300)
+  expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
   expect_identical(comment(fit), "comment")
   expect_is(fit, "breathteststangroupfit")
-  expect_identical(names(fit), c("coef", "data", "stan_fit"))
 })
 
 test_that("Multiple records per patient return multiple groups (long version)", {
