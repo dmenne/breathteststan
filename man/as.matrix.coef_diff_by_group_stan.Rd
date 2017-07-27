@@ -23,18 +23,20 @@ package \link{\code{bayesplot}}.
 \examples{
 \donttest{
 library(dplyr)
+library(breathtestcore)
+library(ggplot2)
 data("usz_13c", package = "breathtestcore")
 data = usz_13c \%>\%
   dplyr::filter( patient_id \%in\%  c("norm_001", "norm_002", "norm_003",
                         "norm_004", "pat_001", "pat_002","pat_003")) \%>\%
-breathtestcore::cleanup_data()
+  cleanup_data()
 fit = stan_group_fit(data, iter = 300, chains = 1)
 cf = coef_diff_by_group(fit)
 str(cf)
 # Calling without parameters gives Maes/Ghoos t50
-mcmc_hist(as.matrix(cf))
+bayesplot::mcmc_hist(as.matrix(cf))
 # Use a function from the bayesplot universe
-dens = mcmc_dens(as.matrix(cf, parameter = "m"))
+dens = bayesplot::mcmc_dens(as.matrix(cf, parameter = "m"))
 # use suppressMessages to avoid a message "another scale"
 suppressMessages(
   dens + geom_vline(xintercept = 0) + scale_x_continuous(limits= c(-20,10)))
