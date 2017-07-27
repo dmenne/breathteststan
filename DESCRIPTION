@@ -29,6 +29,7 @@ Imports:
 Suggests:
   ggplot2,
   shinystan,
+  bayesplot,
   testthat,
   covr,
   knitr

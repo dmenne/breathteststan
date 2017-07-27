@@ -4,7 +4,7 @@
 #' differences, for examples of the half emptying time \code{t50}.
 #'
 #' @name coef_diff_by_group
-#' @aliases coef_diff_by_group.breathteststangroupfit
+#' @aliases coef_diff_by_group
 #' @param fit Object of class \code{breathteststangroupfit} from \code{\link[breathteststan]{stan_fit}}
 #' @param mcp_group Not used, always all pairs are compared
 #' @param reference_group Not used
