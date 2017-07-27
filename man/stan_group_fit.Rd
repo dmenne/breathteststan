@@ -51,7 +51,7 @@ Bayesian Stan methods. See
 single curve, mixed-model population and Bayesian methods.
 }
 \examples{
-\dontrun{
+\donttest{
 library(breathtestcore)
 # Passing a named list to cleanup_data creates
 # a data frame/tibble with group names a and b

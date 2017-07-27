@@ -3,13 +3,14 @@
 #' computes point estimated and Bayesian credible intervals for all group pair
 #' differences, for examples of the half emptying time \code{t50}.
 #'
-#' @param fit Object of class \code{breathtestfit}, for example from
-#' \code{\link{nlme_fit}}, \code{\link{nls_fit}} or \code{\link[breathteststan]{stan_fit}}
+#' @name coef_diff_by_group
+#' @aliases coef_diff_by_group.breathteststangroupfit
+#' @param fit Object of class \code{breathteststangroupfit} from \code{\link[breathteststan]{stan_fit}}
 #' @param mcp_group Not used, always all pairs are compared
 #' @param reference_group Not used
 #' @param ... Not used
 #'
-#' @return A \code{tibble} with columns
+#' @return A \code{tibble} of class \code{coef_diff_by_group_stan} with columns
 #' \describe{
 #'   \item{parameter}{Parameter of fit, e.g. \code{beta, k, m, t50}}
 #'   \item{method}{Method used to compute parameter. \code{exp_beta} refers to primary
@@ -119,6 +120,7 @@ coef_diff_by_group.breathteststangroupfit =
   }
   attr(cf, "chain") = cf_chain
   comment(cf) = cm
+  class(cf) = c("coef_diff_by_group_stan", class(cf))
   cf
   }
 
@@ -136,15 +138,15 @@ do_coef_by_group = function(group_chain, group1, group2){
     mutate(
       group1 = group1,
       group2 = group2,
-      value = value2-value1
+      diff = value2-value1
     )
 
   d_summary = d_chain %>%
     group_by(group1, group2, key) %>%
     summarize(
-      estimate = mean(value, na.rm = TRUE),
-      cred.low = quantile(value, 0.0275, na.rm= TRUE),
-      cred.high = quantile(value, 0.975, na.rm = TRUE)
+      estimate = mean(diff, na.rm = TRUE),
+      cred.low = quantile(diff, 0.0275, na.rm= TRUE),
+      cred.high = quantile(diff, 0.975, na.rm = TRUE)
     ) %>%
     ungroup() %>%
     mutate(

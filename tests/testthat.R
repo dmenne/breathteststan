@@ -1,5 +1,5 @@
 library(testthat)
 library(breathteststan)
-
-#test_check("breathteststan", filter = "coef_diff_by_group")
-test_check("breathteststan")
+options(warn = 2)
+test_check("breathteststan", filter = "as_matrix_coef_diff_by_group")
+#test_check("breathteststan")

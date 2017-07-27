@@ -15,6 +15,7 @@ test_that("Credible intervals are returned as coef_diff_by_group coefficients",{
   fit = stan_group_fit(data, iter = iter, chains = chains)
   expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
   cf_diff = coef_diff_by_group(fit)
+  expect_is(cf_diff, "coef_diff_by_group_stan")
   expect_identical(nrow(cf_diff), 24L)
   expect_identical(names(cf_diff), c("parameter", "method", "groups",
                                      "estimate", "cred.low", "cred.high"))
@@ -22,6 +23,6 @@ test_that("Credible intervals are returned as coef_diff_by_group coefficients",{
   expect_is(chain, "data.frame")
   expect_equal(nrow(chain), iter*chains*12)
   expect_identical(names(chain),
-          c("key","value1","value2","group1","group2","value"))
+          c("key","value1","value2","group1","group2","diff"))
 })
 

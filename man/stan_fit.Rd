@@ -70,7 +70,7 @@ cf \%>\%
          beta_in = beta.y, beta_out = beta.x,
          k_in = k.y, k_out = k.x)
 # For a detailed analysis of the fit, use the shinystan library
-\dontrun{
+\donttest{
 library(shinystan)
 launch_shinystan(fit$stan_fit)
 }

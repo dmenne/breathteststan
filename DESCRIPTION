@@ -27,6 +27,8 @@ Imports:
   tidyr,
   breathtestcore(>= 0.3.0.9000)
 Suggests:
+  ggplot2,
+  shinystan,
   testthat,
   covr,
   knitr

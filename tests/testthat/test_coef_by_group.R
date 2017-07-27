@@ -18,6 +18,7 @@ test_that("Result with default parameters is tbl_df with required columns",{
   class(fit) = class(fit)[-1] # Remove class breathteststanfit
   cf = coef_by_group(fit) # S3 method
   expect_is(cf, "tbl_df")
+  expect_is(cf, "coef_by_group")
   expect_identical(ncol(cf), 7L)
   expect_equal(names(cf), c("parameter", "method", "group", "estimate", "conf.low",
                  "conf.high", "diff_group"))
