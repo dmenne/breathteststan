@@ -22,7 +22,7 @@
 #' The chains of pairwise differences  are returned as a attribute \code{chain}
 #' for use in plotting. See example below how to use these to display difference histograms.
 #' @examples
-#' \donttest{
+#' #\donttest{
 #' library(dplyr)
 #' library(breathtestcore)
 #' data("usz_13c", package = "breathtestcore")
@@ -33,14 +33,14 @@
 #' fit = stan_group_fit(data, iter = 300, chains = 1) # Use more iterations!
 #' cf = coef_diff_by_group(fit)
 #' cc = attr(cf, "chain") %>%
-#'    filter(key == "t50_maes_ghoos", abs(value) < 200) %>%
+#'    filter(key == "t50_maes_ghoos", abs(diff) < 200) %>%
 #'    mutate(
 #'      groups = paste(group2, group1, sep = " - ")
 #'    )
 #' str(cc)
 #' if (require(ggplot2)) {
-#'   ggplot(cc, aes(x = value)) + geom_histogram() + facet_wrap(~groups)
-#' }
+#'   ggplot(cc, aes(x = diff)) + geom_histogram() + facet_wrap(~groups)
+#' #}
 #' # For comparison
 #' fit = nlme_fit(data)
 #' coef_diff_by_group(fit)

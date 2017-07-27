@@ -1,6 +1,6 @@
 #' @title S3 as.matrix for result of coef_diff_by_group
 #' @description Generates a matrix that can be used with plotting functions from
-#' package \link{\code{bayesplot}}.
+#' package \code{\link[bayesplot]{mcmc_hist}}.
 #'
 #' @param x Result of a call to \code{coef_diff_by_group(fit)}
 #' @param ... parameter name as string, e.g. \code{"m", "k", "beta", "t50_bluck_coward"}.
