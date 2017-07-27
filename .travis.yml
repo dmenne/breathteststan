@@ -4,7 +4,7 @@ cache: packages
 dist: trusty
 latex: false
 
-warnings_are_errors: false
+warnings_are_errors: true
 
 # https://github.com/helske/walker
 # http://dirk.eddelbuettel.com/blog/2017/06/13/
@@ -45,4 +45,4 @@ before_install:
 
 after_success:
   - travis_wait 20 tar -C .. -xf $PKG_TARBALL
-  - travis_wait 40 Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/*.cpp", "R/zzz.R"))'
+  - travis_wait 40 Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/init.cpp", "R/zzz.R"))'

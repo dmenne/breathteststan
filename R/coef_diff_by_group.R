@@ -22,7 +22,7 @@
 #' The chains of pairwise differences  are returned as a attribute \code{chain}
 #' for use in plotting. See example below how to use these to display difference histograms.
 #' @examples
-#' #\donttest{
+#' donttest{
 #' library(dplyr)
 #' library(breathtestcore)
 #' data("usz_13c", package = "breathtestcore")

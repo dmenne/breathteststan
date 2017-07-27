@@ -9,7 +9,7 @@
 #' @return mcmc array with columns of differences for use with functions from packages
 #' bayesplot or coda
 #' @examples
-#' # \donttest{
+#' \donttest{
 #' library(dplyr)
 #' library(breathtestcore)
 #' library(ggplot2)
@@ -28,7 +28,7 @@
 #' # use suppressMessages to avoid a message "another scale"
 #' suppressMessages(
 #'   dens + geom_vline(xintercept = 0) + scale_x_continuous(limits= c(-20,10)))
-#' # }
+#' }
 #' @importFrom tidyr spread
 #' @export
 as.matrix.coef_diff_by_group_stan = function(x, ...){
