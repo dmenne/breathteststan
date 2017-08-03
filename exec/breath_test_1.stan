@@ -41,7 +41,7 @@ transformed parameters{
 model {
   // Note: the x_raw parameters all have normal(0,1) here
   m_raw ~ normal(0, 1);
-  mu_m ~ normal(40,20);
+  mu_m ~ normal(40,40);
   sigma_m ~ normal(6,2);
 
   k_raw ~ normal(0, 1);
@@ -49,7 +49,7 @@ model {
   sigma_k ~ lognormal(-7, 2);
 
   beta_raw ~ normal(0, 1);
-  mu_beta ~ normal(2,0.1);
+  mu_beta ~ normal(2,0.5);
   sigma_beta ~ cauchy(0,2);
 
   sigma ~ cauchy(0,5);

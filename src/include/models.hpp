@@ -492,7 +492,7 @@ public:
             current_statement_begin__ = 43;
             lp_accum__.add(normal_log<propto__>(m_raw, 0, 1));
             current_statement_begin__ = 44;
-            lp_accum__.add(normal_log<propto__>(mu_m, 40, 20));
+            lp_accum__.add(normal_log<propto__>(mu_m, 40, 40));
             current_statement_begin__ = 45;
             lp_accum__.add(normal_log<propto__>(sigma_m, 6, 2));
             current_statement_begin__ = 47;
@@ -504,7 +504,7 @@ public:
             current_statement_begin__ = 51;
             lp_accum__.add(normal_log<propto__>(beta_raw, 0, 1));
             current_statement_begin__ = 52;
-            lp_accum__.add(normal_log<propto__>(mu_beta, 2, 0.10000000000000001));
+            lp_accum__.add(normal_log<propto__>(mu_beta, 2, 0.5));
             current_statement_begin__ = 53;
             lp_accum__.add(cauchy_log<propto__>(sigma_beta, 0, 2));
             current_statement_begin__ = 55;

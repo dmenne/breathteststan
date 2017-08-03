@@ -21,7 +21,7 @@ Generates a matrix that can be used with plotting functions from
 package \code{\link[bayesplot]{mcmc_hist}}.
 }
 \examples{
-# \donttest{
+\donttest{
 library(dplyr)
 library(breathtestcore)
 library(ggplot2)
@@ -40,5 +40,5 @@ dens = bayesplot::mcmc_dens(as.matrix(cf, parameter = "m"))
 # use suppressMessages to avoid a message "another scale"
 suppressMessages(
   dens + geom_vline(xintercept = 0) + scale_x_continuous(limits= c(-20,10)))
-# }
+}
 }

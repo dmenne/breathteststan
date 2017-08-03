@@ -1,8 +1,9 @@
 #' @title Bayesian Stan fit to 13C Breath Data in Multiple Groups
-#' @description Fits exponential beta curves to 13C breath test series data using
-#' Bayesian Stan methods. See
-#' \url{https://menne-biomed.de/blog/breath-test-stan} for a comparision between
-#' single curve, mixed-model population and Bayesian methods.
+#' @description Fits exponential beta curves to 13C breath test series
+#' data using Bayesian Stan methods, by assuming fixed between group effects.
+#' This model is overly parsiomonious. Do not use it
+#' unless you check the results carefully and understand why
+#' fits can be very bad.
 #'
 #' @param data Data frame or tibble as created by \code{\link{cleanup_data}},
 #' with mandatory columns \code{patient_id, group, minute} and \code{pdr}.
