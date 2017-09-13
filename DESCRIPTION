@@ -1,8 +1,7 @@
 Package: breathteststan
 Type: Package
 Title: Stan-Based Fit to Gastric Emptying Curves
-Version: 0.3.0.9100
-Date: 2017-07-10
+Version: 0.4.0
 Authors@R: c(
     person("Dieter", "Menne", , "dieter.menne@menne-biomed.de", role = c("aut", "cre")),
     person("Menne Biomed Consulting Tuebingen", role = c("cph")),
@@ -25,7 +24,7 @@ Imports:
   dplyr,
   stringr,
   tidyr,
-  breathtestcore(>= 0.3.0.9000)
+  breathtestcore(>= 0.4.0)
 Suggests:
   ggplot2,
   shinystan,

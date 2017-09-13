@@ -41,8 +41,8 @@ transformed parameters{
 model {
   // Note: the x_raw parameters all have normal(0,1) here
   m_raw ~ normal(0, 1);
-  mu_m ~ normal(40,40);
-  sigma_m ~ normal(6,2);
+  mu_m ~ normal(40,30);
+  sigma_m ~ cauchy(0,10);
 
   k_raw ~ normal(0, 1);
   mu_k ~ lognormal(-5, 2);
