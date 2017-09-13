@@ -492,9 +492,9 @@ public:
             current_statement_begin__ = 43;
             lp_accum__.add(normal_log<propto__>(m_raw, 0, 1));
             current_statement_begin__ = 44;
-            lp_accum__.add(normal_log<propto__>(mu_m, 40, 40));
+            lp_accum__.add(normal_log<propto__>(mu_m, 40, 30));
             current_statement_begin__ = 45;
-            lp_accum__.add(normal_log<propto__>(sigma_m, 6, 2));
+            lp_accum__.add(cauchy_log<propto__>(sigma_m, 0, 10));
             current_statement_begin__ = 47;
             lp_accum__.add(normal_log<propto__>(k_raw, 0, 1));
             current_statement_begin__ = 48;
@@ -1577,11 +1577,11 @@ public:
             current_statement_begin__ = 61;
             lp_accum__.add(normal_log<propto__>(m_pat_raw, 0, 1));
             current_statement_begin__ = 62;
-            lp_accum__.add(normal_log<propto__>(sigma_m_pat, 0, 10));
+            lp_accum__.add(cauchy_log<propto__>(sigma_m_pat, 0, 5));
             current_statement_begin__ = 63;
             lp_accum__.add(normal_log<propto__>(m_group, 0, 10));
             current_statement_begin__ = 64;
-            lp_accum__.add(normal_log<propto__>(mu_m, 40, 20));
+            lp_accum__.add(normal_log<propto__>(mu_m, 40, 30));
             current_statement_begin__ = 66;
             lp_accum__.add(normal_log<propto__>(k_pat_raw, 0, 1));
             current_statement_begin__ = 67;
