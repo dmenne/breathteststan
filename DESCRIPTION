@@ -31,7 +31,8 @@ Suggests:
   bayesplot,
   testthat,
   covr,
-  knitr
+  knitr,
+    rmarkdown
 Remotes: dmenne/breathtestcore,
   stan-dev/rstan/rstan/rstan@develop   
 LinkingTo:
@@ -40,10 +41,9 @@ LinkingTo:
   BH(>= 1.62.0.1), 
   Rcpp(>= 0.12.0), 
   RcppEigen(>= 0.3.3.0.0)
-URL: 
+URL:
   https://github.com/dmenne/breathteststan
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
 SystemRequirements: pandoc    
 VignetteBuilder: knitr
-
