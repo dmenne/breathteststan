@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stan-based fit to gastric emptying curves • breathteststan</title>
+<title>Stan-Based Fit to Gastric Emptying Curves • breathteststan</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -29,12 +29,18 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="/index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/dmenne/breathtestshiny">
+  <a href="https://github.com/dmenne/breathteststan">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -52,19 +58,25 @@
   <div class="contents col-md-9">
     
 
+<div id="breathteststan-bayesian-fits-to-13c-breath-test-times" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#breathteststan-bayesian-fits-to-13c-breath-test-times" class="anchor"></a>breathteststan: Bayesian fits to 13C Breath Test Times</h1></div>
 <p>Dieter Menne<br>
 Menne Biomed Consulting Tübingen, Germany<br><a href="http://www.menne-biomed.de" class="uri">http://www.menne-biomed.de</a></p>
 <p><a href="mailto:dieter.menne@menne-biomed.de">dieter.menne@menne-biomed.de</a></p>
-<p>Fit 13C time series data with Bayesian methods using <a href="http://mc-stan.org/">Stan</a>. This is an add-on to package <a href="https://github.com/dmenne/breathtestcore">breathtestcore</a>. The Stan functions have been moved here to avoid long compile and test times.</p>
-<p><img src="README-01.png"></p>
+<p>Fit 13C time series data with Bayesian methods using <a href="http://mc-stan.org/">Stan</a>. This is an add-on to package <a href="https://github.com/dmenne/breathtestcore">breathtestcore</a>. The Stan functions have been moved to this package to avoid long compile and test times. To test some of the functions with sample data or your own data, try the <a href="https://apps.menne-biomed.de/breathtestshiny">online demo</a>.</p>
+<p><img src="tools/readme/README-01.png"></p>
+</div>
 
   </div>
 
   <div class="col-md-3" id="sidebar">
     <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/dmenne/breathtestshiny">
-  https://​github.com/​dmenne/​breathtestshiny</a>
+<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=breathteststan">https://​cran.r-project.org/​package=breathteststan</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/dmenne/breathteststan">
+  https://​github.com/​dmenne/​breathteststan</a>
 </li>
 </ul>
 <h2>License</h2>
@@ -72,12 +84,16 @@ Menne Biomed Consulting Tübingen, Germany<br><a href="http://www.menne-biomed.d
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Dieter Menne <br><small class="roles"> Author, maintainer </small> </li>
+<li>Benjamin Misselwitz <br><small class="roles"> Funder </small> </li>
+<li>Mark Fox <br><small class="roles"> Funder </small> </li>
+<li>University Hospital of Zurich, Dep. Gastroenterology <br><small class="roles"> Funder, data contributor </small> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/dmenne/breathteststan"><img src="https://travis-ci.org/dmenne/breathteststan.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://coveralls.io/github/dmenne/breathteststan?branch=master"><img src="https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master" alt="Coverage Status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=breathteststan"><img src="https://cranlogs.r-pkg.org/badges/grand-total/breathteststan" alt="CRAN"></a></li>
 </ul>
 </div>
 </div>
