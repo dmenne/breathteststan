@@ -1,17 +1,7 @@
-## Test environments
-https://travis-ci.org/dmenne/breathteststan
+breathteststan 0.4.0 requires breathtestcore 0.4.0; 
+both are submitted together.
 
+The current CRAN version of breathteststan 0.3.0 could fail with breathtestcore 0.4.0
 
-## R CMD check results
-
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
-
-## Reverse dependencies
-
-This will be required by the later to be uploaded breathtestcore
-
----
-
+Please advise how to proceed when a different procedure is required.
 
