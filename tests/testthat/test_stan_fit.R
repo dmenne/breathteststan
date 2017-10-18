@@ -89,7 +89,7 @@ test_that("Non-gaussian residuals with student_t_df <10 gives result close to nl
   skip_on_cran()
   library(breathtestcore)
   chains = 1
-  student_t_df = 3
+  student_t_df = 5
   dose = 100
   iter = 500
   sample_minutes = 15

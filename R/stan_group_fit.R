@@ -39,11 +39,11 @@
 #' @examples
 #' \donttest{
 #' library(breathtestcore)
-#' # Passing a named list to cleanup_data creates
-#' # a data frame/tibble with group names a and b
-#' data =  cleanup_data(list(
-#'   a = cleanup_data(simulate_breathtest_data(n_records = 10)),
-#'   b = cleanup_data(simulate_breathtest_data(n_records = 10))))
+#' data("usz_13c", package = "breathtestcore")
+#' data = usz_13c %>%
+#'   dplyr::filter( patient_id %in%
+#'                    c("norm_001", "norm_002", "norm_003", "norm_004", "pat_001", "pat_002","pat_003")) %>%
+#'   cleanup_data()
 #' fit = stan_group_fit(data)
 #' plot(fit) # calls plot.breathtestfit
 #' coef(fit)
