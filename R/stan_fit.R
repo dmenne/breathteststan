@@ -57,7 +57,7 @@
 #' # For a detailed analysis of the fit, use the shinystan library
 #' \donttest{
 #' library(shinystan)
-#' launch_shinystan(fit$stan_fit)
+#' # launch_shinystan(fit$stan_fit)
 #' }
 #' # The following plots are somewhat degenerate because
 #' # of the few iterations in stan_fit

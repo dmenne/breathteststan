@@ -13,7 +13,7 @@ static const R_CallMethodDef CallEntries[] = {
 };
 
 
-void attribute_visible R_init_breathteststan(DllInfo *dll) {
+void attribute_visible R_init_anRpackage(DllInfo *dll) {
   // next line is necessary to avoid a NOTE from R CMD check
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, TRUE); // necessary for .onLoad() to work
