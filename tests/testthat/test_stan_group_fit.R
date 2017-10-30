@@ -1,4 +1,6 @@
 context("Bayesian fit of multiple groups")
+library(dplyr)
+
 
 test_that("Exception when there is only one group", {
   data = breathtestcore::cleanup_data(simulate_breathtest_data(seed = 100)$data)
@@ -8,6 +10,7 @@ test_that("Exception when there is only one group", {
 
 
 test_that("Multiple records per patient return multiple groups (CRAN version)", {
+  skip_on_32bit()
   data("usz_13c", package = "breathtestcore")
   set.seed(4711)
   data = usz_13c %>%
@@ -26,7 +29,6 @@ test_that("Multiple records per patient return multiple groups (long version)", 
 
 #  library(breathtestcore)
 #  library(breathteststan)
-  library(dplyr)
 
   chains = 2
   student_t_df = 3  # Rough student distribution

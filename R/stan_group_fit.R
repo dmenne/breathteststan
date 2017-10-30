@@ -39,6 +39,7 @@
 #' @examples
 #' \donttest{
 #' library(breathtestcore)
+#' library(dplyr)
 #' data("usz_13c", package = "breathtestcore")
 #' data = usz_13c %>%
 #'   dplyr::filter( patient_id %in%

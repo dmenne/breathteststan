@@ -1,6 +1,7 @@
 context("Coeffient differences by group")
 
 test_that("Credible intervals are returned as coef_diff_by_group coefficients",{
+  skip_on_cran()
   library(dplyr)
   library(breathtestcore)
   data("usz_13c", package = "breathtestcore")

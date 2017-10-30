@@ -2,10 +2,9 @@ context("S3 method to cast coef_diff by_group_stan class to array for mcmc plott
 
 
 test_that("Result with default parameters is tbl_df with required columns",{
-
+  skip_on_32bit()
   library(breathtestcore)
   library(dplyr)
-  library(testthat)
   data("usz_13c", package = "breathtestcore")
 
   data = usz_13c %>%
