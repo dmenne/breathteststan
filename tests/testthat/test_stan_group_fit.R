@@ -10,7 +10,6 @@ test_that("Exception when there is only one group", {
 
 
 test_that("Multiple records per patient return multiple groups (CRAN version)", {
-  skip_on_32bit()
   data("usz_13c", package = "breathtestcore")
   set.seed(4711)
   data = usz_13c %>%
@@ -26,7 +25,7 @@ test_that("Multiple records per patient return multiple groups (CRAN version)", 
 
 test_that("Multiple records per patient return multiple groups (long version)", {
   skip_on_cran() # long
-
+  skip_on_32bit()
 #  library(breathtestcore)
 #  library(breathteststan)
 
@@ -44,6 +43,7 @@ test_that("Multiple records per patient return multiple groups (long version)", 
     breathtestcore::cleanup_data()
   # fit nlme for comparison
   fit_nlme = breathtestcore::nlme_fit(data)
+  ## The above fails on 32 bit
   # fit stan_group
   fit = stan_group_fit(data, dose = dose, student_t_df = student_t_df,
                        chains = chains, iter = iter, model = model  )
