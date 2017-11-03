@@ -1,31 +1,8 @@
 context("Bayesian fit of multiple groups")
-library(dplyr)
-
-
-test_that("Exception when there is only one group", {
-  data = breathtestcore::cleanup_data(simulate_breathtest_data(seed = 100)$data)
-  expect_error(stan_group_fit(data), "only one group")
-
-})
-
-
-test_that("Multiple records per patient return multiple groups (CRAN version)", {
-  data("usz_13c", package = "breathtestcore")
-  set.seed(4711)
-  data = usz_13c %>%
-    dplyr::filter( patient_id %in%
-                     c("norm_001", "norm_002", "norm_003")) %>%
-    breathtestcore::cleanup_data()
-  comment(data) = "comment"
-  fit = stan_group_fit(data, iter = 300)
-  expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
-  expect_identical(comment(fit), "comment")
-  expect_is(fit, "breathteststangroupfit")
-})
 
 test_that("Multiple records per patient return multiple groups (long version)", {
   skip_on_cran() # long
-  skip_on_32bit()
+  skip_on_32bit() # nlme fit fails
 #  library(breathtestcore)
 #  library(breathteststan)
 
@@ -43,6 +20,7 @@ test_that("Multiple records per patient return multiple groups (long version)", 
     breathtestcore::cleanup_data()
   # fit nlme for comparison
   fit_nlme = breathtestcore::nlme_fit(data)
+  expect_false(is.null(coef(fit_nlme)))
   ## The above fails on 32 bit
   # fit stan_group
   fit = stan_group_fit(data, dose = dose, student_t_df = student_t_df,
