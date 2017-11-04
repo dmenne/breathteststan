@@ -1,6 +1,7 @@
 context("Bayesian fit of multiple groups")
 
 test_that("Multiple records per patient return multiple groups (CRAN version)", {
+  skip_on_32bit()
   data("usz_13c", package = "breathtestcore")
   library(dplyr)
 
