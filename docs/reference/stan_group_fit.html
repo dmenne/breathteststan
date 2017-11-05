@@ -157,13 +157,21 @@ with elements</p><ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
-<span class='co'># Passing a named list to cleanup_data creates</span>
-<span class='co'># a data frame/tibble with group names a and b</span>
-<span class='no'>data</span> <span class='kw'>=</span>  <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>(<span class='fu'>list</span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/simulate_breathtest_data'>simulate_breathtest_data</a></span>(<span class='kw'>n_records</span> <span class='kw'>=</span> <span class='fl'>10</span>)),
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/simulate_breathtest_data'>simulate_breathtest_data</a></span>(<span class='kw'>n_records</span> <span class='kw'>=</span> <span class='fl'>10</span>))))</div><div class='output co'>#&gt; <span class='warning'>Warning: Multiple data for one patient, minute and group. Included the same patient's data twice?</span></div><div class='input'><span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'>stan_group_fit</span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; <span class='error'>Error in stan_group_fit(data): Use stan_fit if there is only one group</span></div><div class='input'><span class='fu'>plot</span>(<span class='no'>fit</span>) <span class='co'># calls plot.breathtestfit</span></div><div class='output co'>#&gt; <span class='error'>Error in plot(fit): object 'fit' not found</span></div><div class='input'><span class='fu'>coef</span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in coef(fit): object 'fit' not found</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
+<span class='fu'>data</span>(<span class='st'>"usz_13c"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"breathtestcore"</span>)
+<span class='no'>data</span> <span class='kw'>=</span> <span class='no'>usz_13c</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>( <span class='no'>patient_id</span> <span class='kw'>%in%</span>
+       <span class='fu'>c</span>(<span class='st'>"norm_001"</span>, <span class='st'>"norm_002"</span>, <span class='st'>"norm_003"</span>, <span class='st'>"norm_004"</span>,
+         <span class='st'>"pat_001"</span>, <span class='st'>"pat_002"</span>,<span class='st'>"pat_003"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>()
+<span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'>stan_group_fit</span>(<span class='no'>data</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='fu'>plot</span>(<span class='no'>fit</span>) <span class='co'># calls plot.breathtestfit</span>
+<span class='fu'>coef</span>(<span class='no'>fit</span>)
+<span class='co'># }</span># NOT RUN {
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

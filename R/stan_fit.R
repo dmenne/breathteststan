@@ -39,8 +39,8 @@
 #' suppressPackageStartupMessages(library(dplyr))
 #' d = simulate_breathtest_data(n_records = 3) # default 3 records
 #' data = cleanup_data(d$data)
-#' # Use more than 100 iterations and 4 chains for serious fits
-#' fit = stan_fit(data, chains = 1, iter = 100)
+#' # Use more than 80 iterations and 4 chains for serious fits
+#' fit = stan_fit(data, chains = 1, iter = 80)
 #' plot(fit) # calls plot.breathtestfit
 #' # Extract coefficients and compare these with those
 #' # used to generate the data

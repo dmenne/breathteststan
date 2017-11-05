@@ -98,7 +98,7 @@ differences, for examples of the half emptying time <code>t50</code>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td><p>Object of class <code>breathteststangroupfit</code> from <code>stan_fit</code></p></td>
+      <td><p>Object of class <code>breathteststangroupfit</code> from <code><a href='stan_fit.html'>stan_fit</a></code></p></td>
     </tr>
     <tr>
       <th>mcp_group</th>
@@ -128,46 +128,29 @@ for use in plotting. See example below how to use these to display difference hi
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
 <span class='fu'>data</span>(<span class='st'>"usz_13c"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"breathtestcore"</span>)
 <span class='no'>data</span> <span class='kw'>=</span> <span class='no'>usz_13c</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>( <span class='no'>patient_id</span> <span class='kw'>%in%</span>
     <span class='fu'>c</span>(<span class='st'>"norm_001"</span>, <span class='st'>"norm_002"</span>, <span class='st'>"norm_003"</span>, <span class='st'>"norm_004"</span>, <span class='st'>"pat_001"</span>, <span class='st'>"pat_002"</span>,<span class='st'>"pat_003"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>()
-<span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'>stan_group_fit</span>(<span class='no'>data</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># Use more iterations!</span>
-<span class='no'>cf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/coef_diff_by_group'>coef_diff_by_group</a></span>(<span class='no'>fit</span>)
+<span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'><a href='stan_group_fit.html'>stan_group_fit</a></span>(<span class='no'>data</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># Use more iterations!</span>
+<span class='no'>cf</span> <span class='kw'>=</span> <span class='fu'>coef_diff_by_group</span>(<span class='no'>fit</span>)
 <span class='no'>cc</span> <span class='kw'>=</span> <span class='fu'>attr</span>(<span class='no'>cf</span>, <span class='st'>"chain"</span>) <span class='kw'>%&gt;%</span>
    <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>key</span> <span class='kw'>==</span> <span class='st'>"t50_maes_ghoos"</span>, <span class='fu'>abs</span>(<span class='no'>diff</span>) <span class='kw'>&lt;</span> <span class='fl'>200</span>) <span class='kw'>%&gt;%</span>
    <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
      <span class='kw'>groups</span> <span class='kw'>=</span> <span class='fu'>paste</span>(<span class='no'>group2</span>, <span class='no'>group1</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" - "</span>)
    )
-<span class='fu'>str</span>(<span class='no'>cc</span>)</div><div class='output co'>#&gt; 'data.frame':	450 obs. of  7 variables:
-#&gt;  $ key   : chr  "t50_maes_ghoos" "t50_maes_ghoos" "t50_maes_ghoos" "t50_maes_ghoos" ...
-#&gt;  $ value1: num  129.3 119.5 107.7 91.3 101.9 ...
-#&gt;  $ value2: num  130 159 172 260 220 ...
-#&gt;  $ group1: chr  "liquid_normal" "liquid_normal" "liquid_normal" "liquid_normal" ...
-#&gt;  $ group2: chr  "patient" "patient" "patient" "patient" ...
-#&gt;  $ diff  : num  1.17 40 64.36 168.37 118.47 ...
-#&gt;  $ groups: chr  "patient - liquid_normal" "patient - liquid_normal" "patient - liquid_normal" "patient - liquid_normal" ...</div><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>ggplot2</span>)) {
+<span class='fu'>str</span>(<span class='no'>cc</span>)
+<span class='kw'>if</span> (<span class='fu'>require</span>(<span class='no'>ggplot2</span>)) {
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>cc</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>diff</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_histogram'>geom_histogram</a></span>() + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~<span class='no'>groups</span>)
-}</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='coef_diff_by_group-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='co'># For comparison</span>
+}
+<span class='co'># For comparison</span>
 <span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/nlme_fit'>nlme_fit</a></span>(<span class='no'>data</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/coef_diff_by_group'>coef_diff_by_group</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 24 x 7
-#&gt;    parameter       method                       groups     estimate
-#&gt;        &lt;chr&gt;        &lt;chr&gt;                        &lt;chr&gt;        &lt;dbl&gt;
-#&gt;  1      beta     exp_beta      patient - liquid_normal  0.403563900
-#&gt;  2      beta     exp_beta solid_normal - liquid_normal  0.142918700
-#&gt;  3      beta     exp_beta       solid_normal - patient -0.260645200
-#&gt;  4         k     exp_beta      patient - liquid_normal -0.003343340
-#&gt;  5         k     exp_beta solid_normal - liquid_normal -0.001123536
-#&gt;  6         k     exp_beta       solid_normal - patient  0.002219803
-#&gt;  7         m     exp_beta      patient - liquid_normal -2.572420000
-#&gt;  8         m     exp_beta solid_normal - liquid_normal -9.073774000
-#&gt;  9         m     exp_beta       solid_normal - patient -6.501354000
-#&gt; 10       t50 bluck_coward      patient - liquid_normal 31.939580000
-#&gt; # ... with 14 more rows, and 3 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
-#&gt; #   p.value &lt;dbl&gt;</div></pre>
+<span class='fu'>coef_diff_by_group</span>(<span class='no'>fit</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
