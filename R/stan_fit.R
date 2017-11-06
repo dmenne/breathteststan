@@ -124,7 +124,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   mod = stanmodels[[model]]
   if (is.null(mod))
     stop("Stan model", model,  "not found")
-  options(mc.cores = max(parallel::detectCores()/2, 1))
+  options(mc.cores = min(chains, max(parallel::detectCores()/2, 1)))
   capture.output({fit = suppressWarnings(
     rstan::sampling(mod, data = data_list, init = init,
                     control = list(adapt_delta = 0.9),
@@ -133,9 +133,9 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
 
   # Extract required parameters
   cf = data.frame(pat_group_i = rep(1:n_record, each = chains*iter/2),
-        m = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "m"))$m),
-        beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "beta"))$beta),
-        k = as.vector(rstan::extract(fit, permuted = TRUE, pars = c( "k"))$k))
+        m = as.vector(rstan::extract(fit, permuted = TRUE, pars = "m")$m),
+        beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = "beta")$beta),
+        k = as.vector(rstan::extract(fit, permuted = TRUE, pars = "k")$k))
   # Compute derived quantities
   coef_chain = cf %>%
     mutate(
