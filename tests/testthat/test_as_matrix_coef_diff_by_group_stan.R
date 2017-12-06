@@ -2,6 +2,7 @@ context("S3 method to cast coef_diff by_group_stan class to array for mcmc plott
 
 
 test_that("Result with default parameters is tbl_df with required columns",{
+  skip_on_cran()
   library(breathtestcore)
   library(dplyr)
   data("usz_13c", package = "breathtestcore")
@@ -13,5 +14,5 @@ test_that("Result with default parameters is tbl_df with required columns",{
    fit = stan_group_fit(data, iter = 300, chains = 1)
    cf = coef_diff_by_group(fit)
    mt = as.matrix(cf)
-
+   expect_equal(dim(mt), c(150, 3))
 })

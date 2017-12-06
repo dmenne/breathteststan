@@ -100,11 +100,11 @@ coef_diff_by_group.breathteststangroupfit =
     )   %>%
     ungroup() %>%
     mutate(
-      t50_maes_ghoos = t50_maes_ghoos(.),
-      tlag_maes_ghoos = tlag_maes_ghoos(.),
-      t50_maes_ghoos_scintigraphy = t50_maes_ghoos_scintigraphy(.),
-      t50_bluck_coward = t50_bluck_coward(.),
-      tlag_bluck_coward = tlag_bluck_coward(.)
+      t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.),
+      tlag_maes_ghoos = breathtestcore::tlag_maes_ghoos(.),
+      t50_maes_ghoos_scintigraphy = breathtestcore::t50_maes_ghoos_scintigraphy(.),
+      t50_bluck_coward = breathtestcore::t50_bluck_coward(.),
+      tlag_bluck_coward = breathtestcore::tlag_bluck_coward(.)
     ) %>%
     tidyr::gather(key, value, -group) %>%
     ungroup()

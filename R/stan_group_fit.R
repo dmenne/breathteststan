@@ -142,11 +142,11 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
     ) %>%
     ungroup() %>%
     mutate(
-      t50_maes_ghoos = t50_maes_ghoos(.),
-      tlag_maes_ghoos = tlag_maes_ghoos(.),
-      t50_maes_ghoos_scintigraphy = t50_maes_ghoos_scintigraphy(.),
-      t50_bluck_coward = t50_bluck_coward(.),
-      tlag_bluck_coward = tlag_bluck_coward(.)
+      t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.),
+      tlag_maes_ghoos = breathtestcore::tlag_maes_ghoos(.),
+      t50_maes_ghoos_scintigraphy = breathtestcore::t50_maes_ghoos_scintigraphy(.),
+      t50_bluck_coward = breathtestcore::t50_bluck_coward(.),
+      tlag_bluck_coward = breathtestcore::tlag_bluck_coward(.)
     ) %>%
     rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
     tidyr::gather(key, value, -patient_id, -group) %>%

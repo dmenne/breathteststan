@@ -3,7 +3,7 @@ context("Bayesian fit of multiple groups")
 test_that("Multiple records per patient return multiple groups (long version)", {
   skip_on_cran() # long
   skip_on_32bit() # nlme fit fails
-#  library(breathtestcore)
+  library(breathtestcore)
 #  library(breathteststan)
 
   chains = 2
@@ -16,7 +16,7 @@ test_that("Multiple records per patient return multiple groups (long version)", 
   data = usz_13c %>%
     dplyr::filter( patient_id %in%
                      c("norm_001", "norm_002", "norm_003",
-                       "pat_001", "pat_003", "pat_016")) %>%
+                       "pat_001", "pat_002", "pat_003")) %>%
     breathtestcore::cleanup_data()
   # fit nlme for comparison
   fit_nlme = breathtestcore::nlme_fit(data)
@@ -38,7 +38,7 @@ test_that("Multiple records per patient return multiple groups (long version)", 
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.06)
+  expect_lt(cf$rel_diff, 0.04)
 })
 
 
