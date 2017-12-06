@@ -5,9 +5,9 @@
 #' unless you check the results carefully and understand why
 #' fits can be very bad.
 #'
-#' @param data Data frame or tibble as created by \code{\link{cleanup_data}},
+#' @param data Data frame or tibble as created by \code{\link[breathtestcore]{cleanup_data}},
 #' with mandatory columns \code{patient_id, group, minute} and \code{pdr}.
-#' It is recommended to run all data through \code{\link{cleanup_data}} which
+#' It is recommended to run all data through \code{\link[breathtestcore]{cleanup_data}} which
 #' will insert dummy columns for \code{patient_id} and \code{minute} if the
 #' data are distinct, and report an error if not. Since the Bayesian method
 #' is stabilized by priors, it is possible to fit single curves.
@@ -45,7 +45,7 @@
 #'   dplyr::filter( patient_id %in%
 #'        c("norm_001", "norm_002", "norm_003", "norm_004",
 #'          "pat_001", "pat_002","pat_003")) %>%
-#'   cleanup_data()
+#'   breathtestcore::cleanup_data()
 #' fit = stan_group_fit(data, chains = 1, iter = 100)
 #' plot(fit) # calls plot.breathtestfit
 #' coef(fit)
