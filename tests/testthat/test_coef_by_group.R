@@ -24,7 +24,9 @@ test_that("Result with default parameters is tbl_df with required columns",{
                  "conf.high", "diff_group"))
   expect_equal(comment(data), "comment")
   expect_identical(nrow(cf), 24L)
+  print(cf$diff_group)
   expect_identical(unique(cf$diff_group), c("a", "b", "ab"))
+  print(unique(cf$group))
   expect_equal(unique(cf$group),
      c("liquid_normal", "solid_normal", "solid_patient"))
 })
