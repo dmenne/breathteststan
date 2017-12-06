@@ -27,7 +27,7 @@ test_that("Multiple records per patient return multiple groups (long version)", 
                        chains = chains, iter = iter, model = model  )
 
   cf = coef(fit)
-  expect_equal(unique(cf$group), c("liquid_normal", "solid_normal", "patient"))
+  expect_equal(unique(cf$group), c("liquid_normal", "solid_normal", "solid_patient"))
   expect_gt(sigma(fit), 0.5)
 
   cf = coef(fit) %>%

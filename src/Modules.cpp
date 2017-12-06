@@ -7,7 +7,7 @@ RCPP_MODULE(stan_fit4breath_test_1_mod) {
 
     class_<rstan::stan_fit<model_breath_test_1_namespace::model_breath_test_1, boost::random::ecuyer1988> >("model_breath_test_1")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_breath_test_1_namespace::model_breath_test_1, boost::random::ecuyer1988> ::call_sampler)
@@ -36,7 +36,7 @@ RCPP_MODULE(stan_fit4breath_test_group_1_mod) {
 
     class_<rstan::stan_fit<model_breath_test_group_1_namespace::model_breath_test_group_1, boost::random::ecuyer1988> >("model_breath_test_group_1")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_breath_test_group_1_namespace::model_breath_test_group_1, boost::random::ecuyer1988> ::call_sampler)
