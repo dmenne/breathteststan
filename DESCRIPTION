@@ -23,8 +23,7 @@ Imports:
   dplyr,
   rstan(>= 2.16),
   stringr,
-  tidyr,
-  breathtestcore(>= 0.4.0)
+  tidyr
 Suggests:
   ggplot2,
   shinystan,
@@ -33,6 +32,8 @@ Suggests:
   covr,
   knitr,
   rmarkdown
+Remotes: 
+  dmenne/breathtestcore
 LinkingTo:
   StanHeaders(>= 2.16.0.0), 
   rstan(>= 2.16.0), 
