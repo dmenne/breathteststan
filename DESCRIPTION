@@ -31,7 +31,8 @@ Suggests:
   testthat,
   covr,
   knitr,
-  rmarkdown
+  rmarkdown,
+  breathtestcore
 Remotes: 
   dmenne/breathtestcore
 LinkingTo:
