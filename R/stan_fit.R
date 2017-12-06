@@ -69,7 +69,6 @@
 #' @import rstan
 #' @import methods
 #' @import dplyr
-#' @import breathtestcore
 #' @importFrom stats rnorm rlnorm
 #' @importFrom Rcpp loadModule
 #' @importFrom utils capture.output
