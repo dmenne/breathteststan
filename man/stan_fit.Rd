@@ -52,7 +52,7 @@ single curve, mixed-model population and Bayesian methods.
 \examples{
 library(breathtestcore)
 suppressPackageStartupMessages(library(dplyr))
-d = breathtestcore::imulate_breathtest_data(n_records = 3) # default 3 records
+d = breathtestcore::simulate_breathtest_data(n_records = 3) # default 3 records
 data = breathtestcore::cleanup_data(d$data)
 # Use more than 80 iterations and 4 chains for serious fits
 fit = stan_fit(data, chains = 1, iter = 80)
