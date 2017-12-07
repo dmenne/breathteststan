@@ -8,9 +8,9 @@ stan_fit(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   chains = 2, iter = 1000, model = "breath_test_1")
 }
 \arguments{
-\item{data}{Data frame or tibble as created by \code{\link{cleanup_data}},
+\item{data}{Data frame or tibble as created by \code{\link[breathtestcore]{cleanup_data}},
 with mandatory columns \code{patient_id, group, minute} and \code{pdr}.
-It is recommended to run all data through \code{\link{cleanup_data}} which
+It is recommended to run all data through \code{\link[breathtestcore]{cleanup_data}} which
 will insert dummy columns for \code{patient_id} and \code{minute} if the
 data are distinct, and report an error if not. Since the Bayesian method
 is stabilized by priors, it is possible to fit single curves.}
@@ -52,8 +52,8 @@ single curve, mixed-model population and Bayesian methods.
 \examples{
 library(breathtestcore)
 suppressPackageStartupMessages(library(dplyr))
-d = simulate_breathtest_data(n_records = 3) # default 3 records
-data = cleanup_data(d$data)
+d = sbreathtestcore::imulate_breathtest_data(n_records = 3) # default 3 records
+data = breathtestcore::cleanup_data(d$data)
 # Use more than 80 iterations and 4 chains for serious fits
 fit = stan_fit(data, chains = 1, iter = 80)
 plot(fit) # calls plot.breathtestfit
