@@ -18,7 +18,7 @@ bayesplot or coda
 }
 \description{
 Generates a matrix that can be used with plotting functions from
-package \code{\link[bayesplot]{mcmc_hist}}.
+package \code{\link[bayesplot]{MCMC-distributions}}.
 }
 \examples{
 \donttest{
