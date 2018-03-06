@@ -6,9 +6,9 @@
 breathteststan: Bayesian fits to 13C Breath Test Times 
 ===========================================
 
-Dieter Menne   
-Menne Biomed Consulting Tübingen, Germany    
-http://www.menne-biomed.de   
+Dieter Menne
+Menne Biomed Consulting Tübingen, Germany
+http://www.menne-biomed.de
 
 dieter.menne@menne-biomed.de 
 
