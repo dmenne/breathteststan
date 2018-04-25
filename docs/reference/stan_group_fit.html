@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bayesian Stan fit to 13C Breath Data in Multiple Groups � stan_group_fit • breathteststan</title>
+<title>Bayesian Stan fit to 13C Breath Data in Multiple Groups — stan_group_fit • breathteststan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Bayesian Stan fit to 13C Breath Data in Multiple Groups — stan_group_fit" />
+
+<meta property="og:description" content="Fits exponential beta curves to 13C breath test series
+data using Bayesian Stan methods, by assuming fixed between group effects.
+This model is overly parsiomonious. Do not use it
+unless you check the results carefully and understand why
+fits can be very bad." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,12 +60,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">breathteststan</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">breathteststan</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -70,6 +87,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -77,12 +95,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bayesian Stan fit to 13C Breath Data in Multiple Groups</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dmenne/breathteststan/blob/master/R/stan_group_fit.R'><code>R/stan_group_fit.R</code></a></small>
+    <div class="hidden name"><code>stan_group_fit.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Fits exponential beta curves to 13C breath test series
 data using Bayesian Stan methods, by assuming fixed between group effects.
@@ -90,18 +111,19 @@ This model is overly parsiomonious. Do not use it
 unless you check the results carefully and understand why
 fits can be very bad.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>stan_group_fit</span>(<span class='no'>data</span>, <span class='kw'>dose</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>sample_minutes</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>student_t_df</span> <span class='kw'>=</span> <span class='fl'>10</span>,
   <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"breath_test_group_1"</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>Data frame or tibble as created by <code>cleanup_data</code>,
+      <td><p>Data frame or tibble as created by <code><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></code>,
 with mandatory columns <code>patient_id, group, minute</code> and <code>pdr</code>.
-It is recommended to run all data through <code>cleanup_data</code> which
+It is recommended to run all data through <code><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></code> which
 will insert dummy columns for <code>patient_id</code> and <code>minute</code> if the
 data are distinct, and report an error if not. Since the Bayesian method
 is stabilized by priors, it is possible to fit single curves.</p></td>
@@ -152,26 +174,35 @@ with elements</p><ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Base methods <code>coef, plot, print</code>; methods from package
- <code>broom: tidy, augment</code>.</p>
+    <div class='dont-index'><p>Base methods <code>coef, plot, print</code>; methods from package
+ <code>broom: tidy, augment</code>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
 <span class='fu'>library</span>(<span class='no'>dplyr</span>)
 <span class='fu'>data</span>(<span class='st'>"usz_13c"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"breathtestcore"</span>)
 <span class='no'>data</span> <span class='kw'>=</span> <span class='no'>usz_13c</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>( <span class='no'>patient_id</span> <span class='kw'>%in%</span>
        <span class='fu'>c</span>(<span class='st'>"norm_001"</span>, <span class='st'>"norm_002"</span>, <span class='st'>"norm_003"</span>, <span class='st'>"norm_004"</span>,
          <span class='st'>"pat_001"</span>, <span class='st'>"pat_002"</span>,<span class='st'>"pat_003"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>()
+  <span class='kw pkg'>breathtestcore</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>()
 <span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'>stan_group_fit</span>(<span class='no'>data</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>)
-<span class='fu'>plot</span>(<span class='no'>fit</span>) <span class='co'># calls plot.breathtestfit</span>
-<span class='fu'>coef</span>(<span class='no'>fit</span>)
-<span class='co'># }</span># NOT RUN {
-# }
-</pre>
+<span class='fu'>plot</span>(<span class='no'>fit</span>) <span class='co'># calls plot.breathtestfit</span></div><div class='img'><img src='stan_group_fit-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>coef</span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 80 x 5
+#&gt;    patient_id group         parameter method                       value
+#&gt;    &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
+#&gt;  1 norm_001   liquid_normal beta      exp_beta                   1.50   
+#&gt;  2 norm_001   liquid_normal k         exp_beta                   0.00600
+#&gt;  3 norm_001   liquid_normal m         exp_beta                  49.7    
+#&gt;  4 norm_001   liquid_normal t50       bluck_coward              21.6    
+#&gt;  5 norm_001   liquid_normal t50       maes_ghoos               166.     
+#&gt;  6 norm_001   liquid_normal t50       maes_ghoos_scintigraphy   89.1    
+#&gt;  7 norm_001   liquid_normal tlag      bluck_coward             -47.8    
+#&gt;  8 norm_001   liquid_normal tlag      maes_ghoos                67.8    
+#&gt;  9 norm_001   solid_normal  beta      exp_beta                   1.50   
+#&gt; 10 norm_001   solid_normal  k         exp_beta                   0.00260
+#&gt; # ... with 70 more rows</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -200,5 +231,8 @@ with elements</p><ul>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

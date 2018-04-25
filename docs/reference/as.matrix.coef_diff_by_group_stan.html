@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>S3 as.matrix for result of coef_diff_by_group � as.matrix.coef_diff_by_group_stan • breathteststan</title>
+<title>S3 as.matrix for result of coef_diff_by_group — as.matrix.coef_diff_by_group_stan • breathteststan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,23 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="S3 as.matrix for result of coef_diff_by_group — as.matrix.coef_diff_by_group_stan" />
+
+<meta property="og:description" content="Generates a matrix that can be used with plotting functions from
+package MCMC-distributions." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,12 +57,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">breathteststan</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">breathteststan</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -70,6 +84,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -77,21 +92,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>S3 as.matrix for result of coef_diff_by_group</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dmenne/breathteststan/blob/master/R/as_matrix_coef_diff_by_group_stan.R'><code>R/as_matrix_coef_diff_by_group_stan.R</code></a></small>
+    <div class="hidden name"><code>as.matrix.coef_diff_by_group_stan.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Generates a matrix that can be used with plotting functions from
-package <code><a href='http://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions'>mcmc_hist</a></code>.</p>
+package <code><a href='http://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions'>MCMC-distributions</a></code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for coef_diff_by_group_stan</span>
 <span class='fu'>as.matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -112,26 +131,40 @@ bayesplot or coda</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
-<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='fu'>data</span>(<span class='st'>"usz_13c"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"breathtestcore"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'>library</span>(<span class='no'>breathtestcore</span>)
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)</div><div class='output co'>#&gt; <span class='message'>Want to understand how all the pieces fit together? Buy the ggplot2</span>
+#&gt; <span class='message'>book: http://ggplot2.org/book/</span></div><div class='input'><span class='fu'>data</span>(<span class='st'>"usz_13c"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"breathtestcore"</span>)
 <span class='no'>data</span> <span class='kw'>=</span> <span class='no'>usz_13c</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>( <span class='no'>patient_id</span> <span class='kw'>%in%</span>  <span class='fu'>c</span>(<span class='st'>"norm_001"</span>, <span class='st'>"norm_002"</span>, <span class='st'>"norm_003"</span>,
                         <span class='st'>"norm_004"</span>, <span class='st'>"pat_001"</span>, <span class='st'>"pat_002"</span>,<span class='st'>"pat_003"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://www.rdocumentation.org/packages/breathtestcore/topics/cleanup_data'>cleanup_data</a></span>()
 <span class='no'>fit</span> <span class='kw'>=</span> <span class='fu'><a href='stan_group_fit.html'>stan_group_fit</a></span>(<span class='no'>data</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='no'>cf</span> <span class='kw'>=</span> <span class='fu'><a href='coef_diff_by_group.html'>coef_diff_by_group</a></span>(<span class='no'>fit</span>)
-<span class='fu'>str</span>(<span class='no'>cf</span>)
-<span class='co'># Calling without parameters gives Maes/Ghoos t50</span>
-<span class='kw pkg'>bayesplot</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions'>mcmc_hist</a></span>(<span class='fu'>as.matrix</span>(<span class='no'>cf</span>))
-<span class='co'># Use a function from the bayesplot universe</span>
+<span class='fu'>str</span>(<span class='no'>cf</span>)</div><div class='output co'>#&gt; Classes ‘coef_diff_by_group_stan’, ‘tbl_df’, ‘tbl’ and 'data.frame':	24 obs. of  6 variables:
+#&gt;  $ parameter: chr  "beta" "k" "m" "t50" ...
+#&gt;  $ method   : chr  "exp_beta" "exp_beta" "exp_beta" "bluck_coward" ...
+#&gt;  $ groups   : chr  "solid_normal - liquid_normal" "solid_normal - liquid_normal" "solid_normal - liquid_normal" "solid_normal - liquid_normal" ...
+#&gt;  $ estimate : num  0.09188 -0.00407 -14.94749 18.59673 51.74905 ...
+#&gt;  $ cred.low : num  -0.10913 -0.00525 -17.40273 10.79566 33.27277 ...
+#&gt;  $ cred.high: num  0.36847 -0.00257 -13.08339 30.9735 81.59126 ...
+#&gt;  - attr(*, "chain")='data.frame':	3600 obs. of  6 variables:
+#&gt;   ..$ key   : chr  "m" "m" "m" "m" ...
+#&gt;   ..$ value1: num  40 34.6 37.4 42.8 40.8 ...
+#&gt;   ..$ value2: num  26.9 17.1 22.9 28 27.5 ...
+#&gt;   ..$ group1: chr  "liquid_normal" "liquid_normal" "liquid_normal" "liquid_normal" ...
+#&gt;   ..$ group2: chr  "solid_normal" "solid_normal" "solid_normal" "solid_normal" ...
+#&gt;   ..$ diff  : num  -13 -17.4 -14.5 -14.8 -13.3 ...
+#&gt;  - attr(*, "comment")= chr "Breath test data from healthy volunteers and patients, courtesy Gastroenterology and Hepatology, University Hospital Zurich"</div><div class='input'><span class='co'># Calling without parameters gives Maes/Ghoos t50</span>
+<span class='kw pkg'>bayesplot</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions'>mcmc_hist</a></span>(<span class='fu'>as.matrix</span>(<span class='no'>cf</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='as.matrix.coef_diff_by_group_stan-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Use a function from the bayesplot universe</span>
 <span class='no'>dens</span> <span class='kw'>=</span> <span class='kw pkg'>bayesplot</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/bayesplot/topics/MCMC-distributions'>mcmc_dens</a></span>(<span class='fu'>as.matrix</span>(<span class='no'>cf</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='st'>"m"</span>))
 <span class='co'># use suppressMessages to avoid a message "another scale"</span>
 <span class='fu'>suppressMessages</span>(
-  <span class='no'>dens</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_x_continuous</a></span>(<span class='kw'>limits</span><span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>20</span>,<span class='fl'>10</span>)))
-<span class='co'># }</span></pre>
+  <span class='no'>dens</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>0</span>) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_x_continuous</a></span>(<span class='kw'>limits</span><span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>20</span>,<span class='fl'>10</span>)))</div><div class='img'><img src='as.matrix.coef_diff_by_group_stan-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -158,5 +191,8 @@ bayesplot or coda</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
