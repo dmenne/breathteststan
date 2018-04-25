@@ -20,6 +20,7 @@
 #' @param chains Number of chains for Stan
 #' @param iter Number of iterations for each Stan chain
 #' @param model Name of model; use \code{names(stanmodels)} for other models.
+#' @param seed Optional seed for rstan
 #'
 #'
 #' @return A list of classes "breathteststanfit" and "breathtestfit" with elements
@@ -82,7 +83,7 @@
 #' @export
 #'
 stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
-                    chains = 2, iter = 1000, model = "breath_test_1") {
+                    chains = 2, iter = 1000, model = "breath_test_1", seed = 4711) {
 
   # Avoid notes on CRAN
   value = pat_group = pat_group_i = NULL
@@ -127,6 +128,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   capture.output({fit = suppressWarnings(
     rstan::sampling(mod, data = data_list, init = init,
                     control = list(adapt_delta = 0.9),
+                    seed = seed,
                     iter =  iter, chains = chains)
   )})
 
