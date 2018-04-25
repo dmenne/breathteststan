@@ -4,13 +4,12 @@ context("Coeffients by group")
 test_that("Result with default parameters is tbl_df with required columns",{
   # This calls coef_by_group.breathtestfit, which include a post-hoc classic test
   # for contrasts.
-  skip_on_32bit()
   library(dplyr)
   library(breathtestcore)
   data("usz_13c", package = "breathtestcore")
   data = usz_13c %>%
-    dplyr::filter( patient_id %in%  c("norm_001", "norm_002", "norm_003",
-                                      "norm_004", "pat_001", "pat_002","pat_003")) %>%
+    dplyr::filter( patient_id %in%  c("norm_001", "norm_002", "norm_004", "norm_007",
+                                      "pat_001", "pat_002","pat_003")) %>%
     cleanup_data()
   comment(data) = "comment"
 
@@ -24,8 +23,8 @@ test_that("Result with default parameters is tbl_df with required columns",{
                  "conf.high", "diff_group"))
   expect_equal(comment(data), "comment")
   expect_identical(nrow(cf), 24L)
-  print(cf$diff_group)
-  expect_identical(unique(cf$diff_group), c("a", "b", "ab"))
+  expect_identical(unique(cf$diff_group), c("a", "b", "c"))
+  print(unique(data$group))
   print(unique(cf$group))
   expect_equal(unique(cf$group),
      c("liquid_normal", "solid_normal", "solid_patient"))
