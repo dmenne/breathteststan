@@ -10,3 +10,4 @@ check_rhub.cmd
 src/*.cc
 inst/doc
 cran-comments.md
+man/*.Rd

@@ -1,7 +1,7 @@
 Package: breathteststan
 Type: Package
 Title: Stan-Based Fit to Gastric Emptying Curves
-Version: 0.4.1
+Version: 0.4.1.9000
 Authors@R: c(
     person("Dieter", "Menne", , "dieter.menne@menne-biomed.de", role = c("aut", "cre")),
     person("Menne Biomed Consulting Tuebingen", role = c("cph")),
@@ -43,5 +43,6 @@ URL:
   https://github.com/dmenne/breathteststan
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 SystemRequirements: pandoc    
+Encoding: UTF-8
