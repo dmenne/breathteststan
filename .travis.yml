@@ -20,9 +20,9 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-5.0' ]        
+          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.9' ]        
           packages:
-            - llvm-5.0-dev
+            - llvm-3.9-dev
       env:
         - CXX_OLEVEL=2 CXX=clang++
 
