@@ -5,6 +5,4 @@
 #' @docType package
 #' @name breathteststan-package
 #' @aliases breathteststan
-#' @useDynLib breathteststan, .registration = TRUE
-#' @import rstantools
 
