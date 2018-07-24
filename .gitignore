@@ -11,4 +11,7 @@ src/stan_files/*.so
 *.bak
 *.rds
 check_rhub.cmd
+src/*.cc
+inst/doc
+cran-comments.md
 man/*.Rd
