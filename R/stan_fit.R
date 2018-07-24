@@ -78,7 +78,6 @@
 #' @importFrom purrr map_df
 #' @importFrom stats na.omit quantile
 #' @import rstan
-#' @useDynLib breathteststan, .registration = TRUE
 #'
 #' @export
 #'

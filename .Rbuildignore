@@ -1,13 +1,6 @@
 cleanup*
-^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^docs$
-^_pkgdown\.yml$
-^README\.Rmd$
-^templates$
-^cran-comments\.md$
-configure
-check_rhub.cmd
-^dev$
-
+.travis.yml
+\.cache
+\.rstudio
