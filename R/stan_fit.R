@@ -70,6 +70,8 @@
 #' @import rstan
 #' @import rstantools
 #' @import Rcpp
+#' @import dplyr
+#' @import methods
 #' @useDynLib breathteststan, .registration = TRUE
 #' @importFrom stats rnorm rlnorm
 #' @importFrom utils capture.output

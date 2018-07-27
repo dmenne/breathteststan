@@ -4,3 +4,7 @@ cleanup*
 .travis.yml
 \.cache
 \.rstudio
+_pkgdown.yml
+\check_rhub.cmd
+\docs
+\templates
