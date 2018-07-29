@@ -11,16 +11,6 @@ r_check_args: '--ignore-vignettes'
 r_github_packages:
   - jimhester/covr
 
-script:
-  - |
-    travis_wait 42 R CMD build .
-    travis_wait 59 R CMD check breathteststan*tar.gz
-
-after_script:
-  - tar -ztvf breathteststan_*.tar.gz
-  - echo ${NOT_CRAN}
-
 after_success:
-  - travis_wait 40 tar -C .. -xf $PKG_TARBALL
   - travis_wait 40 Rscript -e 'covr::coveralls("src/init.cpp")'
 
