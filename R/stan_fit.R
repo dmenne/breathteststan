@@ -71,6 +71,7 @@
 #' @import rstantools
 #' @import Rcpp
 #' @import dplyr
+#' @importFrom methods, new
 #' @useDynLib breathteststan, .registration = TRUE
 #' @importFrom stats rnorm rlnorm
 #' @importFrom utils capture.output

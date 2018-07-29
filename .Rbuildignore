@@ -5,6 +5,6 @@ cleanup*
 \.cache
 \.rstudio
 _pkgdown.yml
-\check_rhub.cmd
-\docs
-\templates
+check_rhub.cmd
+^.*\docs
+^.*\templates
