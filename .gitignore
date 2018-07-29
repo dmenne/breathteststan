@@ -13,5 +13,4 @@
 check_rhub.cmd
 inst/doc
 cran-comments.md
-man/*.Rd
 
