@@ -14,5 +14,5 @@ r_github_packages:
   - jimhester/covr
 
 after_success:
-  - travis_wait 59 Rscript -e 'covr::coveralls("src/init.cpp")'
+  - travis_wait 59 Rscript -e 'covr::coveralls(line_exclusions="src/init.cpp")'
 
