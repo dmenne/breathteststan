@@ -3,5 +3,5 @@
 .travis.yml
 _pkgdown.yml
 check_rhub.cmd
-^docs$
-^templates$
+^.*\templates
+^.*\docs
