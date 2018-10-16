@@ -8,6 +8,8 @@ author: "Dieter Menne"
 [![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)](https://CRAN.R-project.org/package=breathteststan)
 ![CRAN](http://www.r-pkg.org/badges/last-release/breathteststan)
 
+Travis build is currently broken because of transition problems with rstan 2.18
+
 
 Dieter Menne
 Menne Biomed Consulting Tübingen, Germany
