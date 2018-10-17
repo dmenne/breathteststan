@@ -17,7 +17,7 @@ r_github_packages:
 before_install:
   - mkdir -p ~/.R
   - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
-  - echo "CXX14 = g++"
+  - echo "CXX14 = g++" >> ~/.R/Makevars
   
 # https://docs.travis-ci.com/user/languages/cpp/#gcc-on-linux
 
