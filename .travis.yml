@@ -1,6 +1,6 @@
 language: r
 r:
-  - devel
+#  - devel
   - release
 sudo: FALSE
 cache: packages
@@ -25,7 +25,7 @@ matrix:
           packages:
             - g++-6
       env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 -std=c++1y"
 
 
 after_success:
