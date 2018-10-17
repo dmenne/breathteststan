@@ -31,7 +31,7 @@ matrix:
           packages:
             - g++-6
       env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 -std=c++1y"
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 
 after_success:
