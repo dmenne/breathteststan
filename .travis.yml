@@ -13,22 +13,19 @@ r_check_args: '--ignore-vignettes'
 r_github_packages:
   - jimhester/covr
 
-env:
-  matrix:
-    - CXX_OLEVEL=2 CXX=clang++
+# https://docs.travis-ci.com/user/languages/cpp/#gcc-on-linux
 
 matrix:
   include:
     - os: linux
-      compiler: clang
       addons:
         apt:
-          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-5.0' ]
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
-            - llvm-5.0-dev
+            - g++-6
       env:
-        - CXX_OLEVEL=2 CXX=clang++
-
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 
 after_success:
