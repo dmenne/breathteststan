@@ -13,26 +13,10 @@ r_check_args: '--ignore-vignettes'
 r_github_packages:
   - jimhester/covr
 
-
 before_install:
   - mkdir -p ~/.R
   - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
   - echo "CXX14 = g++" >> ~/.R/Makevars
-
-# https://docs.travis-ci.com/user/languages/cpp/#gcc-on-linux
-
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 -std=c++1y"
-
 
 after_success:
   - travis_wait 59 Rscript -e 'covr::coveralls(line_exclusions="src/init.cpp")'
