@@ -4,14 +4,7 @@ author: "Dieter Menne"
 ---
 
 
-[![GitLab-CI Build Status](https://gitlab.com/dmenne/breathteststan/badges/master/build.svg)](https://gitlab.com/dmenne/breathteststan/badges/master)
-[![Travis-CI Build Status](https://travis-ci.org/dmenne/breathteststan.svg?branch=master)](https://travis-ci.org/dmenne/breathteststan)
-
-[![Coverage Status](https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master)](https://coveralls.io/github/dmenne/breathteststan?branch=master)
-
-![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)
-
-![](http://www.r-pkg.org/badges/last-release/breathteststan)
+![](https://gitlab.com/dmenne/breathteststan/badges/master/build.svg)![](https://travis-ci.org/dmenne/breathteststan.svg?branch=master)![](https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master)(https://coveralls.io/github/dmenne/breathteststan?branch=master)![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)![](http://www.r-pkg.org/badges/last-release/breathteststan)
 
 
 Dieter Menne
