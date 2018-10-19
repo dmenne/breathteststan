@@ -3,12 +3,15 @@ title: "breathteststan: Bayesian fit to 13C Breath Test Time series for gastric 
 author: "Dieter Menne"
 ---
 
-[![Travis-CI Build Status](https://travis-ci.org/dmenne/breathteststan.svg?branch=master)](https://travis-ci.org/dmenne/breathteststan)
-[![Coverage Status](https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master)](https://coveralls.io/github/dmenne/breathteststan?branch=master)
-[![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)](https://CRAN.R-project.org/package=breathteststan)
-![CRAN](http://www.r-pkg.org/badges/last-release/breathteststan)
 
-Travis build is currently broken because of transition problems with rstan 2.18
+[![GitLab-CI Build Status](https://gitlab.com/dmenne/breathteststan/badges/master/build.svg)](https://gitlab.com/dmenne/breathteststan/badges/master)
+[![Travis-CI Build Status](https://travis-ci.org/dmenne/breathteststan.svg?branch=master)](https://travis-ci.org/dmenne/breathteststan)
+
+[![Coverage Status](https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master)](https://coveralls.io/github/dmenne/breathteststan?branch=master)
+
+![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)
+
+![](http://www.r-pkg.org/badges/last-release/breathteststan)
 
 
 Dieter Menne
