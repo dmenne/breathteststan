@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml
+.gitlab-ci.yml
 _pkgdown.yml
 check_rhub.cmd
 ^templates$
