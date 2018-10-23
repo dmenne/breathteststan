@@ -5,5 +5,5 @@ test:
     - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
     - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual --as-cran
 
-after_script:
-  - Rscript -e 'covr::coveralls(line_exclusions="src/init.cpp")'
+#after_script:
+#  - Rscript -e 'covr::coveralls(line_exclusions="src/init.cpp")'

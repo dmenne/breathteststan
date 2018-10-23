@@ -1,7 +1,10 @@
----
-title: "breathteststan: Bayesian fit to 13C Breath Test Time series for gastric emptying"
-author: "Dieter Menne"
----
+breathteststan: Bayesian fit to 13C Breath Test Time series for gastric emptying
+==================================================
+
+Dieter Menne  
+Menne Biomed Consulting Tübingen, Germany  
+http://www.menne-biomed.de  
+dieter.menne@menne-biomed.de   
 
 
 [![](https://gitlab.com/dmenne/breathteststan/badges/master/build.svg)](https://gitlab.com/dmenne/breathteststan)
