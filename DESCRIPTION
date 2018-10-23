@@ -19,7 +19,7 @@ ByteCompile: true
 Depends:
    R (>= 3.4.0),
    methods,
-   Rcpp
+   Rcpp (>= 0.12.18)
 Imports:
   tibble,
   purrr,
