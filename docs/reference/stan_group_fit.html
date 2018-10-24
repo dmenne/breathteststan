@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -36,6 +38,7 @@ This model is overly parsiomonious. Do not use it
 unless you check the results carefully and understand why
 fits can be very bad." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -62,7 +65,7 @@ fits can be very bad." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breathteststan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.5.9000</span>
       </span>
     </div>
 
@@ -113,8 +116,9 @@ fits can be very bad.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>stan_group_fit</span>(<span class='no'>data</span>, <span class='kw'>dose</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>sample_minutes</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>student_t_df</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"breath_test_group_1"</span>)</pre>
+    <pre class="usage"><span class='fu'>stan_group_fit</span>(<span class='no'>data</span>, <span class='kw'>dose</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>sample_minutes</span> <span class='kw'>=</span> <span class='fl'>15</span>,
+  <span class='kw'>student_t_df</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>chains</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"breath_test_group_1"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,16 +195,16 @@ with elements</p><ul>
 <span class='fu'>plot</span>(<span class='no'>fit</span>) <span class='co'># calls plot.breathtestfit</span></div><div class='img'><img src='stan_group_fit-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>coef</span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; # A tibble: 80 x 5
 #&gt;    patient_id group         parameter method                       value
 #&gt;    &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
-#&gt;  1 norm_001   liquid_normal beta      exp_beta                   1.50   
-#&gt;  2 norm_001   liquid_normal k         exp_beta                   0.00600
-#&gt;  3 norm_001   liquid_normal m         exp_beta                  49.7    
-#&gt;  4 norm_001   liquid_normal t50       bluck_coward              21.6    
-#&gt;  5 norm_001   liquid_normal t50       maes_ghoos               166.     
-#&gt;  6 norm_001   liquid_normal t50       maes_ghoos_scintigraphy   89.1    
-#&gt;  7 norm_001   liquid_normal tlag      bluck_coward             -47.8    
-#&gt;  8 norm_001   liquid_normal tlag      maes_ghoos                67.8    
-#&gt;  9 norm_001   solid_normal  beta      exp_beta                   1.50   
-#&gt; 10 norm_001   solid_normal  k         exp_beta                   0.00260
+#&gt;  1 norm_001   liquid_normal beta      exp_beta                   1.79   
+#&gt;  2 norm_001   liquid_normal k         exp_beta                   0.0108 
+#&gt;  3 norm_001   liquid_normal m         exp_beta                  36.9    
+#&gt;  4 norm_001   liquid_normal t50       bluck_coward              23.9    
+#&gt;  5 norm_001   liquid_normal t50       maes_ghoos               105.     
+#&gt;  6 norm_001   liquid_normal t50       maes_ghoos_scintigraphy   34.9    
+#&gt;  7 norm_001   liquid_normal tlag      bluck_coward             -10.3    
+#&gt;  8 norm_001   liquid_normal tlag      maes_ghoos                53.9    
+#&gt;  9 norm_001   solid_normal  beta      exp_beta                   1.86   
+#&gt; 10 norm_001   solid_normal  k         exp_beta                   0.00487
 #&gt; # ... with 70 more rows</div><div class='input'>
 </div></pre>
   </div>

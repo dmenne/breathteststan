@@ -8,8 +8,8 @@
 <title>Stan-Based Fit to Gastric Emptying Curves • breathteststan</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Stan-Based Fit to Gastric Emptying Curves">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Stan-Based Fit to Gastric Emptying Curves">
 <meta property="og:description" content="Stan-based curve-fitting function
   for use with package 'breathtestcore' by the same author.
   Stan functions are refactored here for easier testing.">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breathteststan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.5.9000</span>
       </span>
     </div>
 
@@ -65,15 +65,17 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    
-<hr>
-<p>title: “breathteststan: Bayesian fits to 13C Breath Test Time Series” author: “Dieter Menne” —</p>
-<p><a href="https://travis-ci.org/dmenne/breathteststan"><img src="https://travis-ci.org/dmenne/breathteststan.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://coveralls.io/github/dmenne/breathteststan?branch=master"><img src="https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master" alt="Coverage Status"></a> [<img src="https://cranlogs.r-pkg.org/badges/grand-total/breathteststan" alt="CRAN"><img src="http://www.r-pkg.org/badges/last-release/breathteststan" alt="CRAN"></p>
-<p>Menne Biomed Consulting Tübingen, Germany <a href="http://www.menne-biomed.de" class="uri">http://www.menne-biomed.de</a></p>
-<p><a href="mailto:dieter.menne@menne-biomed.de">dieter.menne@menne-biomed.de</a></p>
+    <div id="breathteststan-bayesian-fit-to-13c-breath-test-time-series-for-gastric-emptying" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#breathteststan-bayesian-fit-to-13c-breath-test-time-series-for-gastric-emptying" class="anchor"></a>breathteststan: Bayesian fit to 13C Breath Test Time series for gastric emptying</h1></div>
+<p>Dieter Menne<br>
+Menne Biomed Consulting Tübingen, Germany<br><a href="http://www.menne-biomed.de" class="uri">http://www.menne-biomed.de</a><br><a href="mailto:dieter.menne@menne-biomed.de" class="email">dieter.menne@menne-biomed.de</a></p>
+<p><a href="https://gitlab.com/dmenne/breathteststan"><img src="https://gitlab.com/dmenne/breathteststan/badges/master/build.svg"></a> <a href="https://travis-ci.org/dmenne/breathteststan"><img src="https://travis-ci.org/dmenne/breathteststan.svg?branch=master"></a> <a href="https://coveralls.io/repos/github/dmenne/breathteststan"><img src="https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master"></a> <a href="https://cran.r-project.org/web/packages/breathteststan"><img src="https://cranlogs.r-pkg.org/badges/grand-total/breathteststan"></a> <a href="https://cran.r-project.org/web/packages/breathteststan"><img src="http://www.r-pkg.org/badges/last-release/breathteststan"></a></p>
+<p>Dieter Menne Menne Biomed Consulting Tübingen, Germany <a href="http://www.menne-biomed.de" class="uri">http://www.menne-biomed.de</a></p>
+<p><a href="mailto:dieter.menne@menne-biomed.de" class="email">dieter.menne@menne-biomed.de</a></p>
 <p>Fit 13C time series data with Bayesian methods using <a href="http://mc-stan.org/">Stan</a>. This is an add-on to package <a href="https://github.com/dmenne/breathtestcore">breathtestcore</a>. The Stan functions have been moved to this package to avoid long compile and test times. To test some of the functions with sample data or your own data, try the <a href="https://apps.menne-biomed.de/breathtestshiny">online demo</a>.</p>
 <p><img src="tools/readme/README-01.png"></p>
-
+</div>
   </div>
 
   <div class="col-md-3" id="sidebar">
@@ -91,7 +93,7 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li>GPL (&gt;=3)</li>
 </ul>
 </div>
 <div class="developers">
