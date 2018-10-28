@@ -1,7 +1,7 @@
 image: dmenne/stanverse
 test:
   script:
-    - Rscript -e 'devtools::install_github("dmenne\breathtestcore")'
+    - Rscript -e 'devtools::install_github("dmenne/breathtestcore")'
     - R CMD build . --no-build-vignettes --no-manual
     - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
     - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual --as-cran
