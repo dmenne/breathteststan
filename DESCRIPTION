@@ -48,4 +48,4 @@ URL:
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
 SystemRequirements: GNU make, pandoc (>= 1.12.3), pandoc-citeproc
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
