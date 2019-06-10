@@ -1,6 +1,6 @@
 language: r
 r:
-#  - devel
+  - devel
   - release
 sudo: FALSE
 cache: packages
