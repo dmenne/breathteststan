@@ -90,7 +90,7 @@ coef_diff_by_group.breathteststangroupfit =
     rowwise() %>%
     do (
       {
-        data_frame(
+        tibble(
           group = .$group,
           m = ex("mu_m") + ex("m_group",.$group_i),
           k = ex("mu_k") + ex("k_group",.$group_i),

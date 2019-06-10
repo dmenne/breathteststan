@@ -131,7 +131,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
     rowwise() %>%
     do (
       {
-        data_frame(
+        tibble(
           patient_id = .$patient_id,
           group = .$group,
           m = ex("mu_m") + ex("m_group",.$group_i) + ex("m_pat", .$pat_i),
