@@ -30,7 +30,6 @@ matrix:
 before_install:
   - mkdir -p ~/.R/
   - echo "CXX14FLAGS=-O3 -march=native -mtune=native -fPIC" >> ~/.R/Makevars
-  - echo "g++  -std=gnu++14 -fPIC" >> ~/.R/Makevars
   - echo "CXX14=g++" >> ~/.R/Makevars
 
 script:
