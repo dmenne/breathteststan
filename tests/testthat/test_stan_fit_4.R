@@ -21,6 +21,6 @@ test_that("Multiple chains return valid results similar to nlme", {
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.005)
+  expect_lt(cf$rel_diff, 0.04)
 })
 

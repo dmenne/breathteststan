@@ -6,7 +6,6 @@ test_that("Multiple records per patient return multiple groups (CRAN version)", 
   data("usz_13c", package = "breathtestcore")
   library(dplyr)
 
-  set.seed(4711)
   data = usz_13c %>%
     dplyr::filter( patient_id %in%
                      c("norm_001", "norm_002", "norm_003")) %>%

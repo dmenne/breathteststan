@@ -21,6 +21,7 @@
 #' @param chains Number of chains for Stan
 #' @param iter Number of iterations for each Stan chain
 #' @param model Name of model; use \code{names(stanmodels)} for other models.
+#' @param seed Seed for random generator
 #'
 #'
 #' @return A list of classes "breathteststangroupfit", "breathteststanfit" and "breathtestfit"
@@ -54,7 +55,8 @@
 #' @export
 #'
 stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
-                    chains = 2, iter = 1000, model = "breath_test_group_1") {
+                    chains = 2, iter = 1000, model = "breath_test_group_1",
+                    seed = 4711) {
 
   if (length(unique(data$group)) < 2)
     stop("Use stan_fit if there is only one group")
@@ -111,7 +113,7 @@ stan_group_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 
   capture.output({fit = suppressWarnings(
     rstan::sampling(mod, data = data_list, init = init,
                     control = list(adapt_delta = 0.9),
-                    iter =  iter, chains = chains)
+                    iter =  iter, chains = chains, seed = seed)
   )})
 
 

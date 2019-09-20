@@ -12,7 +12,6 @@ test_that("Multiple records per patient return multiple groups (long version)", 
   iter = 500
   model = "breath_test_group_1"
   data("usz_13c", package = "breathtestcore")
-  set.seed(4711)
   data = usz_13c %>%
     dplyr::filter( patient_id %in%
                      c("norm_001", "norm_002", "norm_003",
@@ -29,6 +28,7 @@ test_that("Multiple records per patient return multiple groups (long version)", 
   cf = coef(fit)
   expect_equal(unique(cf$group), c("liquid_normal", "solid_normal", "solid_patient"))
   expect_gt(sigma(fit), 0.5)
+  expect_lt(sigma(fit), 0.9)
 
   cf = coef(fit) %>%
     left_join(coef(fit_nlme), by = c("patient_id", "parameter", "method", "group"))  %>%
