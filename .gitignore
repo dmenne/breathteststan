@@ -12,4 +12,7 @@
 check_rhub.cmd
 inst/doc
 cran-comments.md
+*.cc
+*.cpp
+*.h
 
