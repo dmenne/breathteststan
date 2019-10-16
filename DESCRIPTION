@@ -1,7 +1,7 @@
 Package: breathteststan
 Type: Package
 Title: Stan-Based Fit to Gastric Emptying Curves
-Version: 0.4.7
+Version: 0.4.7.9000
 Authors@R: c(
     person("Dieter", "Menne", , "dieter.menne@menne-biomed.de", role = c("aut", "cre")),
     person("Menne Biomed Consulting Tuebingen", role = c("cph")),
@@ -21,13 +21,13 @@ Depends:
    methods,
    Rcpp (>= 0.12.18)
 Imports:
-  tibble,
-  purrr,
-  dplyr,
-  rstan(>= 2.18.1),
-  rstantools(>= 1.5.0),
-  stringr,
-  tidyr
+    dplyr,
+    purrr,
+    rstan (>= 2.18.1),
+    rstantools (>= 2.0.0),
+    stringr,
+    tibble,
+    tidyr
 Suggests:
   ggplot2,
   shinystan,
@@ -47,5 +47,6 @@ URL:
   https://github.com/dmenne/breathteststan
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
-SystemRequirements: GNU make, pandoc (>= 1.12.3), pandoc-citeproc
+SystemRequirements: GNU make
 RoxygenNote: 6.1.1
+Biarch: true
