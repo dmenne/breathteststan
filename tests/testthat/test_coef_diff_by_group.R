@@ -27,3 +27,4 @@ test_that("Credible intervals are returned as coef_diff_by_group coefficients",{
           c("key","value1","value2","group1","group2","diff"))
 })
 
+

@@ -1,14 +1,13 @@
 context("Bayesian fit of multiple groups")
 
 test_that("Multiple records per patient return multiple groups (CRAN version)", {
-  skip_on_cran()
   skip_on_32bit()
   data("usz_13c", package = "breathtestcore")
   library(dplyr)
-
   data = usz_13c %>%
     dplyr::filter( patient_id %in%
-                     c("norm_001", "norm_002", "norm_003")) %>%
+                     c("norm_001", "norm_002", "norm_003",
+                       "pat_001", "pat_002", "pat_003")) %>%
     breathtestcore::cleanup_data()
   comment(data) = "comment"
   fit = stan_group_fit(data, iter = 300)
