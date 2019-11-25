@@ -48,5 +48,5 @@ URL:
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
 SystemRequirements: GNU make
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1
 Biarch: true

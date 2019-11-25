@@ -5,7 +5,7 @@ cache: packages
 
 latex: true
 
-r_github_packates:
+r_github_packages:
   - jimhester/covr
   - dmenne/breathtestcore
 
@@ -19,9 +19,9 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-5.0' ]
+          sources: [ 'ubuntu-toolchain-r-test', 'llvm-toolchain-precise-7.0' ]
           packages:
-            - llvm-5.0-dev
+            - llvm-7-dev
       env:
         - CXX_OLEVEL=2 CXX=clang++
 

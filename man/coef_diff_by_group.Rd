@@ -5,8 +5,12 @@
 \alias{coef_diff_by_group.breathteststangroupfit}
 \title{Tabulates breath test parameter differences of groups from Stan group fit}
 \usage{
-coef_diff_by_group.breathteststangroupfit(fit, mcp_group = NULL,
-  reference_group = NULL, ...)
+coef_diff_by_group.breathteststangroupfit(
+  fit,
+  mcp_group = NULL,
+  reference_group = NULL,
+  ...
+)
 }
 \arguments{
 \item{fit}{Object of class \code{breathteststangroupfit} from \code{\link[breathteststan]{stan_fit}}}

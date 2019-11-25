@@ -4,8 +4,16 @@
 \alias{stan_fit}
 \title{Bayesian Stan fit to 13C Breath Data}
 \usage{
-stan_fit(data, dose = 100, sample_minutes = 15, student_t_df = 10,
-  chains = 2, iter = 1000, model = "breath_test_1", seed = 4711)
+stan_fit(
+  data,
+  dose = 100,
+  sample_minutes = 15,
+  student_t_df = 10,
+  chains = 2,
+  iter = 1000,
+  model = "breath_test_1",
+  seed = 4711
+)
 }
 \arguments{
 \item{data}{Data frame or tibble as created by \code{\link[breathtestcore]{cleanup_data}},
