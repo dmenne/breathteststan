@@ -1,4 +1,4 @@
-image: jackinovik/docker-stan
+image: dmenne/stanverse
 test:
   script:
     - Rscript -e 'devtools::install_github("dmenne/breathtestcore")'
