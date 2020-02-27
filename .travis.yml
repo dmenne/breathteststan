@@ -1,6 +1,5 @@
 language: r
 r: release
-sudo: false
 latex: false
 
 cache:
