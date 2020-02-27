@@ -11,8 +11,3 @@ sigma.breathteststanfit = function(object, ...){
   mean(rstan::extract(object$stan_fit, permuted = TRUE, pars = c( "sigma"))$sigma)
 }
 
-
-#' @export
-sigma.breathteststangroupfit = function(object, ...){
-  mean(rstan::extract(object$stan_fit, permuted = TRUE, pars = c( "sigma"))$sigma)
-}
