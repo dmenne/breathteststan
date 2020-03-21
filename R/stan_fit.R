@@ -151,7 +151,6 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
     tidyr::gather(key, value, -pat_group_i) %>%
     na.omit() %>%
     ungroup()
-
   cf = coef_chain %>%
     group_by(pat_group_i, key) %>%
     summarize(
@@ -168,8 +167,10 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
       parameter = str_match(key, "k|m|beta|t50|tlag")[,1],
       method = str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
     ) %>%
-   select(-pat_group_i, -pat_group, -key) %>%
-   tidyr::gather(stat, value, estimate:q_975)
+   select(-pat_group_i, -pat_group, -key)
+  # Warning:
+  # attributes are not identical across measure variables; they will be dropped
+  cf = suppressWarnings(cf %>% tidyr::gather(stat, value, estimate:q_975))
 
   data = data %>% select(-pat_group, -pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit, coef_chain = coef_chain)
