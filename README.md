@@ -7,12 +7,12 @@ http://www.menne-biomed.de
 dieter.menne@menne-biomed.de   
 
 [![](https://travis-ci.org/dmenne/breathteststan.svg?branch=master)](https://travis-ci.org/dmenne/breathteststan)
-[![](https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master)](https://coveralls.io/repos/github/dmenne/breathteststan)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)](https://cran.r-project.org/web/packages/breathteststan)
-[![](http://www.r-pkg.org/badges/last-release/breathteststan)](https://cran.r-project.org/web/packages/breathteststan)
+[![Coverage Status](https://coveralls.io/repos/github/dmenne/breathteststan/badge.svg?branch=master)](https://coveralls.io/github/dmenne/breathteststan?branch=master)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)]( https://CRAN.R-project.org/package=breathteststan)
+[![](http://www.r-pkg.org/badges/last-release/breathteststan)](https://CRAN.R-project.org/package=breathteststan)
 
 Dieter Menne
-Menne Biomed Consulting Tübingen, Germany
+Menne Biomed Consulting
 http://www.menne-biomed.de
 
 dieter.menne@menne-biomed.de 
