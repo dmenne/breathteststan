@@ -1,5 +1,7 @@
 language: r
-r: release
+r:
+  - devel
+  - release
 latex: false
 
 cache:
