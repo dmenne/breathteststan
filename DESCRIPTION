@@ -43,6 +43,8 @@ LinkingTo:
     BH (>= 1.66.0-1), 
     Rcpp (>= 0.12.18), 
     RcppEigen (>= 0.3.3.4.0)
+Remotes:
+  dmenne/breathtestcore
 URL:
   https://github.com/dmenne/breathteststan
 BugReports: https://github.com/dmenne/breathteststan/issues
