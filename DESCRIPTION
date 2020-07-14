@@ -17,14 +17,14 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Depends:
-   R (>= 3.5.0),
+   R (>= 4.0),
    methods,
-   Rcpp (>= 0.12.18)
+   Rcpp (>= 1.0.5)
 Imports:
     dplyr,
     purrr,
-    rstan (>= 2.18.1),
-    rstantools (>= 2.0.0),
+    rstan (>= 2.21.1),
+    rstantools (>= 2.1.1),
     stringr,
     tibble,
     tidyr
@@ -36,19 +36,17 @@ Suggests:
   covr,
   knitr,
   rmarkdown,
-  breathtestcore(>= 0.4.1.0)
+  breathtestcore(>= 0.7.1.0)
 LinkingTo: 
-    StanHeaders (>= 2.18.0), 
-    rstan (>= 2.18.1), 
-    BH (>= 1.66.0-1), 
-    Rcpp (>= 0.12.18), 
-    RcppEigen (>= 0.3.3.4.0)
-Remotes:
-  dmenne/breathtestcore
+    StanHeaders, 
+    rstan, 
+    BH (>= 1.72),
+    Rcpp,
+    RcppEigen
 URL:
   https://github.com/dmenne/breathteststan
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
 SystemRequirements: GNU make
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Biarch: true
