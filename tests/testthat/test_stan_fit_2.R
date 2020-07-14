@@ -1,5 +1,3 @@
-context("Bayesian fit with Stan")
-
 test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   # with this seed, cf[10] does not fit with nls_list
   library(breathtestcore)

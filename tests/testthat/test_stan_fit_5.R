@@ -1,5 +1,3 @@
-context("Bayesian fit with Stan")
-
 test_that("Non-gaussian residuals with student_t_df <10 gives result close to nlme", {
   skip_on_cran()
   skip_on_32bit()

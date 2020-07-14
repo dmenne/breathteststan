@@ -1,6 +1,3 @@
-context("Coeffients by group")
-
-
 test_that("Result with default parameters is tbl_df with required columns",{
   # This calls coef_by_group.breathtestfit, which include a post-hoc classic test
   # for contrasts.

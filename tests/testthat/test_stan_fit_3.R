@@ -1,5 +1,3 @@
-context("Bayesian fit with Stan")
-
 test_that("A single record can be fitted", {
   skip_on_cran()
   library(breathtestcore)
