@@ -1,13 +1,11 @@
 test_that("Result with default parameters is tbl_df with required columns",{
   # This calls coef_by_group.breathtestfit, which include a post-hoc classic test
   # for contrasts.
-  library(dplyr)
-  library(breathtestcore)
   data("usz_13c", package = "breathtestcore")
   data = usz_13c %>%
     dplyr::filter( patient_id %in%  c("norm_001", "norm_002", "norm_004", "norm_007",
                                       "pat_001", "pat_002","pat_003")) %>%
-    cleanup_data()
+    breathtestcore::cleanup_data()
   comment(data) = "comment"
 
   fit = stan_fit(data, iter = 300, chains = 1)
