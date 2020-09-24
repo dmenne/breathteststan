@@ -20,7 +20,7 @@ test_that("Non-gaussian residuals with student_t_df <10 gives result close to nl
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.13)
+  expect_lt(cf$rel_diff, 0.15)
 })
 
 
