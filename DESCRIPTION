@@ -17,13 +17,13 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Depends:
-   R (>= 4.0),
+   R (>= 4.0.4),
    methods,
-   Rcpp (>= 1.0.5)
+   Rcpp (>= 1.0.6)
 Imports:
     dplyr,
     purrr,
-    rstan (>= 2.21.1),
+    rstan (>= 2.21.2),
     rstantools (>= 2.1.1),
     stringr,
     tibble,
