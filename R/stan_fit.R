@@ -76,7 +76,6 @@
 #' @importFrom stats rnorm rlnorm
 #' @importFrom utils capture.output
 #' @importFrom stringr str_extract str_match
-#' @importFrom tibble as_tibble
 #' @importFrom purrr map_df
 #' @importFrom stats na.omit quantile
 #'
