@@ -47,4 +47,3 @@ URL:
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
 RoxygenNote: 7.1.1
-SystemRequirements: GNU make
