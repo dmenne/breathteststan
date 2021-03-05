@@ -16,3 +16,4 @@ cran-comments.md
 R_Makevars
 
 rstan.Rcheck/
+*.log
