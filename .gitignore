@@ -17,3 +17,4 @@ R_Makevars
 
 rstan.Rcheck/
 *.log
+.Renviron

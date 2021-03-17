@@ -9,3 +9,5 @@ check_rhub.cmd
 ^templates$
 ^docs$
 ^\.github$
+.Renviron
+
