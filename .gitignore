@@ -18,3 +18,6 @@ R_Makevars
 rstan.Rcheck/
 *.log
 .Renviron
+*.gcno
+*.def
+

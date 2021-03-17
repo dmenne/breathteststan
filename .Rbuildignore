@@ -10,4 +10,5 @@ check_rhub.cmd
 ^docs$
 ^\.github$
 .Renviron
-
+*.gcno
+*.def
