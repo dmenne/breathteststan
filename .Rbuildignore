@@ -12,3 +12,4 @@ check_rhub.cmd
 .Renviron
 *.gcno
 *.def
+^codecov\.yml$
