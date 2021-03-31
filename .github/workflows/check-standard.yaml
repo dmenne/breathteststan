@@ -39,7 +39,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
 
       - uses: codecov/codecov-action@v1
-      
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -87,5 +87,6 @@ jobs:
 
 
       - name: Test coverage
+        if: runner.os != 'Windows'
         run: covr::codecov()
         shell: Rscript {0}
