@@ -7,7 +7,7 @@ Menne Biomed Consulting Tübingen, Germany
 
 <!-- badges: start -->
 
-[![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)](https://CRAN.R-project.org/package=breathteststan) [![](http://www.r-pkg.org/badges/last-release/breathteststan)](https://CRAN.R-project.org/package=breathteststan) [![R build status](https://github.com/dmenne/breathteststan/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/breathteststan/actions) [![Codecov test coverage](https://codecov.io/gh/dmenne/breathteststan/branch/master/graph/badge.svg)](https://codecov.io/gh/dmenne/breathteststan?branch=master)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/breathteststan)](https://CRAN.R-project.org/package=breathteststan) [![](http://www.r-pkg.org/badges/last-release/breathteststan)](https://CRAN.R-project.org/package=breathteststan) [![R build status](https://github.com/dmenne/breathteststan/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/breathteststan/actions) [![Codecov test coverage](https://codecov.io/gh/dmenne/breathteststan/branch/main/graph/badge.svg)](https://codecov.io/gh/dmenne/breathteststan?branch=master)
 
 <!-- badges: end -->
 
