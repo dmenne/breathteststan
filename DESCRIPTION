@@ -25,7 +25,8 @@ Imports:
     rstan (>= 2.21.2),
     rstantools (>= 2.1.1),
     stringr,
-    tidyr
+    tidyr,
+    RcppParallel (>= 5.0.1),
 Suggests:
   ggplot2,
   shinystan,
@@ -40,7 +41,8 @@ LinkingTo:
     rstan, 
     BH (>= 1.72),
     Rcpp,
-    RcppEigen
+    RcppEigen,
+    RcppParallel (>= 5.0.1)
 URL:
   https://github.com/dmenne/breathteststan
 BugReports: https://github.com/dmenne/breathteststan/issues
