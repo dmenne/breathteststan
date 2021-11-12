@@ -26,10 +26,11 @@ Imports:
     rstantools (>= 2.1.1),
     stringr,
     tidyr,
-    RcppParallel (>= 5.0.1),
+    RcppParallel (>= 5.0.1)
 Suggests:
   ggplot2,
   shinystan,
+  igraph,
   bayesplot,
   testthat,
   covr,
