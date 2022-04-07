@@ -23,20 +23,20 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   expect_is(fit$stan_fit, "stanfit" )
   expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
   expect_equal(names(fit$data), names(data))
-  expect_gt(sigma(fit), 0.9)
+  expect_gte(sigma(fit), 0.8)
   expect_identical(comment(fit), "comment")
 
   cf = fit$coef
   expect_identical(unique(cf$group), "A")
   expect_identical(unique(cf$parameter), c("beta", "k", "m", "t50", "tlag"))
   expect_identical(unique(cf$stat), c("estimate", "q_0275", "q_25", "q_75", "q_975"))
-  expect_equal(nrow(cf), 395)
+  expect_gte(nrow(cf), 395)
   expect_equal(ncol(cf), 6)
 
   cf = coef(fit) # This is the "mean" group only
   expect_identical(unique(cf$group), "A")
   expect_identical(unique(cf$parameter), c("beta", "k", "m", "t50", "tlag"))
-  expect_equal(nrow(cf), 79)
+  expect_gte(nrow(cf), 79)
   expect_equal(ncol(cf), 5)
 })
 

@@ -5,9 +5,9 @@
 .travis.yml
 .gitlab-ci.yml
 _pkgdown.yml
-check_rhub.cmd
 ^templates$
 ^docs$
 ^\.github$
 .Renviron
 ^codecov\.yml$
+^check_rhub.*
