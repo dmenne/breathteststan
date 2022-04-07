@@ -36,7 +36,7 @@ Suggests:
   knitr,
   rmarkdown,
   RcppParallel (>= 5.0.1),
-  breathtestcore(>= 0.8.3)
+  breathtestcore(>= 0.8.1)
 LinkingTo: 
     StanHeaders, 
     rstan, 
