@@ -34,22 +34,19 @@ Suggests:
   testthat,
   covr,
   knitr,
-  rmarkdown,
-  RcppParallel (>= 5.0.1),
-  breathtestcore(>= 0.8.1)
+  rmarkdown
 LinkingTo: 
     StanHeaders, 
     rstan, 
     BH (>= 1.72),
     Rcpp,
-    RcppEigen,
-    RcppParallel (>= 5.0.1)
+    RcppEigen
 URL:
   https://github.com/dmenne/breathteststan
+Remotes: dmenne/breathtestcore
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
 RoxygenNote: 7.1.2.9000
-Biarch: FALSE
 SystemRequirements: GNU make
 Config/testthat/edition: 3
 Config/testthat/parallel: true
