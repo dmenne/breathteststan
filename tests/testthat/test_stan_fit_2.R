@@ -18,9 +18,9 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   comment(data) = "comment"
   fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
                  chains = chains, iter = iter  )
-  expect_is(fit, "breathtestfit")
-  expect_is(fit, "breathteststanfit")
-  expect_is(fit$stan_fit, "stanfit" )
+  expect_s3_class(fit, "breathtestfit")
+  expect_s3_class(fit, "breathteststanfit")
+  expect_s3_class(fit$stan_fit, "stanfit" )
   expect_identical(names(fit), c("coef", "data", "stan_fit", "coef_chain"))
   expect_equal(names(fit$data), names(data))
   expect_gte(sigma(fit), 0.8)

@@ -9,6 +9,6 @@ test_that("A single record can be fitted", {
   data = cleanup_data(simulate_breathtest_data(n_records = 1, seed = 100)$data)
   fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
                  chains = chains, iter = iter  )
-  expect_is(fit, "breathtestfit")
+  expect_s3_class(fit, "breathtestfit")
 })
 
