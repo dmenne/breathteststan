@@ -25,7 +25,8 @@ Imports:
     rstan (>= 2.21.2),
     rstantools (>= 2.1.1),
     stringr,
-    tidyr
+    tidyr,
+    breathtestcore (>=0.8.4)
 Suggests:
   ggplot2,
   shinystan,
