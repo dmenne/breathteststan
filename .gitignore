@@ -6,6 +6,7 @@
 *.csv
 *.swp
 *.o
+*.so
 *.out
 *.dll
 
