@@ -47,7 +47,7 @@ URL:
 Remotes: dmenne/breathtestcore
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
-RoxygenNote: 7.1.2.9000
+RoxygenNote: 7.1.2
 SystemRequirements: GNU make
 Config/testthat/edition: 3
 Config/testthat/parallel: true
