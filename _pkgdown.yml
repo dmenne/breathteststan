@@ -1,6 +1,4 @@
+url: https://dmenne.github.io/breathteststan/
 template:
-  path: ./templates
-  default_assets: true
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
 

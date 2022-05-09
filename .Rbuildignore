@@ -11,3 +11,5 @@ _pkgdown.yml
 .Renviron
 ^codecov\.yml$
 ^check_rhub.*
+^_pkgdown\.yml$
+^pkgdown$

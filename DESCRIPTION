@@ -42,8 +42,8 @@ LinkingTo:
     BH (>= 1.72),
     Rcpp,
     RcppEigen
-URL:
-  https://github.com/dmenne/breathteststan
+URL:https://github.com/dmenne/breathteststan,
+    https://dmenne.github.io/breathteststan/
 Remotes: dmenne/breathtestcore
 BugReports: https://github.com/dmenne/breathteststan/issues
 NeedsCompilation: yes
