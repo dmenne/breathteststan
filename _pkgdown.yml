@@ -1,6 +1,0 @@
-template:
-  path: ./templates
-  default_assets: true
-  params:
-    bootswatch: cosmo
-
