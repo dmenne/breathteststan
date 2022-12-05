@@ -1,8 +1,8 @@
-pandoc: 2.7.3
-pkgdown: 2.0.3
+pandoc: 2.19.2
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-05-09T07:47Z
+last_built: 2022-12-05T10:15Z
 urls:
   reference: https://dmenne.github.io/breathteststan/reference
   article: https://dmenne.github.io/breathteststan/articles
