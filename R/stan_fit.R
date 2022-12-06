@@ -123,7 +123,7 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   mod = stanmodels[[model]]
   if (is.null(mod))
     stop("Stan model", model,  "not found")
-  options(mc.cores = min(chains, max(parallel::detectCores()/2, 1)))
+  options(mc.cores = parallelly::availableCores(omit = 1))
   capture.output({fit = suppressWarnings(
     rstan::sampling(mod, data = data_list, init = init,
                     control = list(adapt_delta = 0.9),
