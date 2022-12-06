@@ -46,13 +46,16 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
-          upload-snapshots: true
-          
+          args: 'c("--no-manual", "--as-cran")'
+          error-on: '"error"'
+          upload-snapshots: false
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::covr
           needs: coverage
 
       - name: Test coverage
+        if: ${{matrix.config.r == 'devel'}}
         run: covr::codecov(quiet = FALSE)
         shell: Rscript {0}
