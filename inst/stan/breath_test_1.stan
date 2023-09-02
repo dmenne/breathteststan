@@ -5,7 +5,7 @@ data{
   int<lower=0> n_record; // Number of records
   int<lower=1> student_t_df; // using Gaussian for student_t_df >= 10
   real<lower=0> dose;
-  int<lower=0> pat_group_i[n];
+  array[n] int<lower=0> pat_group_i;
   vector<lower=0>[n] minute;
   vector<lower=-30>[n] pdr;
 }
