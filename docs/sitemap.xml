@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/404.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/reference/as.matrix.coef_diff_by_group_stan.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/reference/coef_diff_by_group.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/reference/sigma.breathteststanfit.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/reference/stan_fit.html</loc>
+  </url>
+  <url>
+    <loc>https://dmenne.github.io/breathteststan/reference/stan_group_fit.html</loc>
+  </url>
+</urlset>
