@@ -22,4 +22,7 @@ rstan.Rcheck/
 *.gcno
 *.def
 
-docs
+docs/
+deps/
+
+
