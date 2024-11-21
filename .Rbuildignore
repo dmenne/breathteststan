@@ -13,3 +13,4 @@ _pkgdown.yml
 ^check_rhub.*
 ^_pkgdown\.yml$
 ^pkgdown$
+makevars
