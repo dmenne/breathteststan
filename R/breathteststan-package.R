@@ -5,5 +5,5 @@
 #' @docType package
 #' @name breathteststan-package
 #' @aliases breathteststan
-#' @iimport(methods)
+#' @import(methods)
 #' @importFrom(RcppParallel, RcppParallelLibs)

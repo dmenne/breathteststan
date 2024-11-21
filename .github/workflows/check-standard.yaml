@@ -30,6 +30,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Set temporary directory
+        run: echo "TMPDIR=~/tmp" >> $GITHUB_ENV
 
       - uses: r-lib/actions/setup-pandoc@v2
 
