@@ -30,9 +30,9 @@ jobs:
 #      TMPDIR: ~/tmp
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Make temporary directory
-        run: mkdir ~/tmp
+      - uses: actions/checkout@v4
+#      - name: Make temporary directory
+#        run: mkdir ~/tmp
 
       - uses: r-lib/actions/setup-pandoc@v2
 
