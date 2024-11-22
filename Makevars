@@ -1,0 +1,5 @@
+MAKEFLAGS = -j6
+#CXX14FLAGS = -O3
+CXX14FLAGS = -O3  -Wno-unused-variable -Wno-ignored-attributes -Wno-attributes -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-maybe-uninitialized -Wno-pedantic
+CXX17FLAGS = -O3  -Wno-unused-variable -Wno-ignored-attributes -Wno-attributes -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-maybe-uninitialized -Wno-pedantic
+
