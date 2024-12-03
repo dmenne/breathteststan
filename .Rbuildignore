@@ -14,3 +14,4 @@ _pkgdown.yml
 ^_pkgdown\.yml$
 ^pkgdown$
 Makevars
+^deps$

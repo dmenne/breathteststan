@@ -1,7 +1,7 @@
 #' @title Bayesian Stan fit to 13C Breath Data
 #' @description Fits exponential beta curves to 13C breath test series data using
 #' Bayesian Stan methods. See
-#' \url{https://menne-biomed.de/blog/breath-test-stan} for a comparision between
+#' \url{https://menne-biomed.de/blog/breath-test-stan/} for a comparison between
 #' single curve, mixed-model population and Bayesian methods.
 #'
 #' @param data Data frame or tibble as created by \code{\link[breathtestcore]{cleanup_data}},
@@ -78,7 +78,6 @@
 #' @importFrom stringr str_extract str_match
 #' @importFrom purrr map_df
 #' @importFrom stats na.omit quantile
-#' @import RcppParallel
 #'
 #' @export
 #'

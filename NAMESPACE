@@ -3,7 +3,6 @@
 S3method(sigma,breathteststanfit)
 export(stan_fit)
 import(Rcpp)
-import(RcppParallel)
 import(dplyr)
 import(methods)
 import(rstan)

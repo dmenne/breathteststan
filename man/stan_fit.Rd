@@ -56,7 +56,7 @@ A list of classes "breathteststanfit" and "breathtestfit" with elements
 \description{
 Fits exponential beta curves to 13C breath test series data using
 Bayesian Stan methods. See
-\url{https://menne-biomed.de/blog/breath-test-stan} for a comparision between
+\url{https://menne-biomed.de/blog/breath-test-stan/} for a comparison between
 single curve, mixed-model population and Bayesian methods.
 }
 \examples{

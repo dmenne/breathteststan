@@ -20,11 +20,10 @@ Depends:
    methods,
    Rcpp (>= 1.0.6)
 Imports:
-    breathtestcore (>= 0.8.4),
+    breathtestcore (>= 0.8.7),
     dplyr,
     purrr,
-    RcppParallel (>= 5.0.1),
-    rstan (>= 2.26.0),
+    rstan (>= 2.32.0),
     rstantools (>= 2.4.0),
     stringr,
     tidyr
@@ -40,12 +39,10 @@ Suggests:
   rmarkdown
 LinkingTo: 
     BH (>= 1.72),
-    Rcpp (>= 0.12.0),
-    RcppEigen (>= 0.3.3.3.0),
-    RcppParallel (>= 5.0.1),
-    rstan (>= 2.26.0),
+    Rcpp (>= 1.0.6),
+    RcppEigen (>= 0.3.4),
+    rstan (>= 2.32.0),
     StanHeaders (>= 2.26.0)
-Remotes: dmenne/breathtestcore
 URL: https://github.com/dmenne/breathteststan,
     https://dmenne.github.io/breathteststan/
 BugReports: https://github.com/dmenne/breathteststan/issues
