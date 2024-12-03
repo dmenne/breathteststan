@@ -128,14 +128,12 @@ When student_t_df &gt;= 10, the normal distribution is used.</p></dd>
 <span class="r-in"><span><span class="va">data</span> <span class="op">=</span> <span class="fu">breathtestcore</span><span class="fu">::</span><span class="fu"><a href="https://dmenne.github.io/breathtestcore/reference/cleanup_data.html" class="external-link">cleanup_data</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Use more than 80 iterations and 4 chains for serious fits</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">=</span> <span class="fu">stan_fit</span><span class="op">(</span><span class="va">data</span>, chains <span class="op">=</span> <span class="fl">1</span>, iter <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in stan_fit(data, chains = 1, iter = 80):</span> could not find function "stan_fit"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="co"># calls plot.breathtestfit</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': object 'fit' not found</span>
+<span class="r-plt img"><img src="stan_fit-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># Extract coefficients and compare these with those</span></span></span>
 <span class="r-in"><span><span class="co"># used to generate the data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">cf</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'fit' not found</span>
 <span class="r-in"><span><span class="va">cf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"m|k|beta"</span>, <span class="va">parameter</span> <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">method</span>, <span class="op">-</span><span class="va">group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -144,21 +142,35 @@ When student_t_df &gt;= 10, the normal distribution is used.</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">patient_id</span>, m_in <span class="op">=</span> <span class="va">m.y</span>, m_out <span class="op">=</span> <span class="va">m.x</span>,</span></span>
 <span class="r-in"><span>         beta_in <span class="op">=</span> <span class="va">beta.y</span>, beta_out <span class="op">=</span> <span class="va">beta.x</span>,</span></span>
 <span class="r-in"><span>         k_in <span class="op">=</span> <span class="va">k.y</span>, k_out <span class="op">=</span> <span class="va">k.x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'cf' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   patient_id  m_in m_out beta_in beta_out    k_in  k_out</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> rec_01        26  24.2    1.27     1.31 0.009<span style="text-decoration: underline;">99</span> 0.010<span style="text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> rec_02        43  42.3    1.90     1.92 0.011<span style="text-decoration: underline;">6</span>  0.011<span style="text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> rec_03        16  16.4    1.90     1.88 0.012<span style="text-decoration: underline;">9</span>  0.012<span style="text-decoration: underline;">6</span></span>
 <span class="r-in"><span><span class="co"># For a detailed analysis of the fit, use the shinystan library</span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/shinystan/" class="external-link">shinystan</a></span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: shiny</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> This is shinystan version 2.6.0</span>
 <span class="r-in"><span><span class="co"># launch_shinystan(fit$stan_fit)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span><span class="co"># The following plots are somewhat degenerate because</span></span></span>
 <span class="r-in"><span><span class="co"># of the few iterations in stan_fit</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstan/" class="external-link">rstan</a></span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://mc-stan.org/rstan/reference/stan_plot.html" class="external-link">stan_plot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">stan_fit</span>, pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"beta[1]"</span>,<span class="st">"beta[2]"</span>,<span class="st">"beta[3]"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'fit' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ci_level: 0.8 (80% intervals)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> outer_level: 0.95 (95% intervals)</span>
+<span class="r-plt img"><img src="stan_fit-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://mc-stan.org/rstan/reference/stan_plot.html" class="external-link">stan_plot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">stan_fit</span>, pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"k[1]"</span>,<span class="st">"k[2]"</span>,<span class="st">"k[3]"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'fit' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ci_level: 0.8 (80% intervals)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> outer_level: 0.95 (95% intervals)</span>
+<span class="r-plt img"><img src="stan_fit-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://mc-stan.org/rstan/reference/stan_plot.html" class="external-link">stan_plot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">stan_fit</span>, pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m[1]"</span>,<span class="st">"m[2]"</span>,<span class="st">"m[3]"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'fit' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ci_level: 0.8 (80% intervals)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> outer_level: 0.95 (95% intervals)</span>
+<span class="r-plt img"><img src="stan_fit-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
