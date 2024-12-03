@@ -30,10 +30,17 @@
   /* Clipboard --------------------------*/
 
   function changeTooltipMessage(element, msg) {
+<<<<<<< HEAD
     var tooltipOriginalTitle=element.getAttribute('data-original-title');
     element.setAttribute('data-original-title', msg);
     $(element).tooltip('show');
     element.setAttribute('data-original-title', tooltipOriginalTitle);
+=======
+    var tooltipOriginalTitle=element.getAttribute('data-bs-original-title');
+    element.setAttribute('data-bs-original-title', msg);
+    $(element).tooltip('show');
+    element.setAttribute('data-bs-original-title', tooltipOriginalTitle);
+>>>>>>> 57d44b02307cac535e1dbd474caa0be6d8dd9da3
   }
 
   if(ClipboardJS.isSupported()) {
@@ -60,7 +67,11 @@
         e.clearSelection();
       });
 
+<<<<<<< HEAD
       clipboard.on('error', function() {
+=======
+      clipboard.on('error', function(e) {
+>>>>>>> 57d44b02307cac535e1dbd474caa0be6d8dd9da3
         changeTooltipMessage(e.trigger,'Press Ctrl+C or Command+C to copy');
       });
 
@@ -153,4 +164,14 @@ async function searchFuse(query, callback) {
   });
 })(window.jQuery || window.$)
 
+<<<<<<< HEAD
 
+=======
+document.addEventListener('keydown', function(event) {
+  // Check if the pressed key is '/'
+  if (event.key === '/') {
+    event.preventDefault();  // Prevent any default action associated with the '/' key
+    document.getElementById('search-input').focus();  // Set focus to the search input
+  }
+});
+>>>>>>> 57d44b02307cac535e1dbd474caa0be6d8dd9da3

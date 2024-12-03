@@ -21,6 +21,7 @@ rstan.Rcheck/
 *.gcno
 *.def
 deps/
+src/
 docs/
-
+deps/
 
