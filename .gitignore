@@ -23,7 +23,6 @@ rstan.Rcheck/
 *.def
 
 src/
-docs/
 deps/
 
 
