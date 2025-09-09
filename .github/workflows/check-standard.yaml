@@ -27,16 +27,11 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-#      TMPDIR: ~/tmp
 
     steps:
       - uses: actions/checkout@v4
-#      - name: Make temporary directory
-#        run: mkdir ~/tmp
 
       - uses: r-lib/actions/setup-pandoc@v2
-
-#      - uses: docker://pandoc/core:3.5 # fails on windows
 
       - uses: r-lib/actions/setup-r@v2
         with:
