@@ -7,7 +7,8 @@
 #' from the Stan fit.
 #' @importFrom stats sigma
 #' @export
-sigma.breathteststanfit = function(object, ...){
-  mean(rstan::extract(object$stan_fit, permuted = TRUE, pars = c( "sigma"))$sigma)
+sigma.breathteststanfit = function(object, ...) {
+  mean(
+    rstan::extract(object$stan_fit, permuted = TRUE, pars = c("sigma"))$sigma
+  )
 }
-

@@ -81,16 +81,23 @@
 #'
 #' @export
 #'
-stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
-                    chains = 2, iter = 1000, model = "breath_test_1", seed = 4711) {
-
+stan_fit = function(
+  data,
+  dose = 100,
+  sample_minutes = 15,
+  student_t_df = 10,
+  chains = 2,
+  iter = 1000,
+  model = "breath_test_1",
+  seed = 4711
+) {
   # Avoid notes on CRAN
   value = pat_group = pat_group_i = NULL
-  stat = estimate = . = k = key =  m = q_975 = NULL
+  stat = estimate = . = k = key = m = q_975 = NULL
   cm = comment(data)
   data = breathtestcore::subsample_data(data, sample_minutes)
   # Integer index of records
-  data$pat_group_i =  as.integer(as.factor(data$pat_group))
+  data$pat_group_i = as.integer(as.factor(data$pat_group))
   n_record = max(data$pat_group_i)
 
   data_list = list(
@@ -100,49 +107,66 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
     student_t_df = student_t_df,
     pat_group_i = data$pat_group_i,
     minute = data$minute,
-    pdr = data$pdr)
+    pdr = data$pdr
+  )
 
   # Note: as.array is required to handle the case of n_record = 1
-  init = rep(list(list(
-    m_raw = as.array(rnorm(n_record,0,.1)),
-    mu_m = rnorm(1,40,2),
-    sigma_m = abs(rnorm(1,2,.1)),
+  init = rep(
+    list(list(
+      m_raw = as.array(rnorm(n_record, 0, 0.1)),
+      mu_m = rnorm(1, 40, 2),
+      sigma_m = abs(rnorm(1, 2, 0.1)),
 
-    k_raw = as.array(rnorm(n_record, 0,.1)),
-    mu_k = rlnorm(1, -6,.1),
-    sigma_k = abs(rnorm(1,0,.001)),
+      k_raw = as.array(rnorm(n_record, 0, 0.1)),
+      mu_k = rlnorm(1, -6, 0.1),
+      sigma_k = abs(rnorm(1, 0, 0.001)),
 
-    beta_raw = as.array(rnorm(n_record, 0, .1)),
-    mu_beta = rnorm(1, 2, 0.1),
-    sigma_beta = abs(rnorm(1,.1,.1)),
-    sigma = abs(rnorm(1,1,.1))
-  )),chains)
+      beta_raw = as.array(rnorm(n_record, 0, 0.1)),
+      mu_beta = rnorm(1, 2, 0.1),
+      sigma_beta = abs(rnorm(1, 0.1, 0.1)),
+      sigma = abs(rnorm(1, 1, 0.1))
+    )),
+    chains
+  )
 
-  if (!exists("stanmodels"))
+  if (!exists("stanmodels")) {
     stop("stanmodels not found")
+  }
   mod = stanmodels[[model]]
-  if (is.null(mod))
-    stop("Stan model", model,  "not found")
+  if (is.null(mod)) {
+    stop("Stan model", model, "not found")
+  }
   options(mc.cores = parallelly::availableCores(omit = 1))
-  capture.output({fit = suppressWarnings(
-    rstan::sampling(mod, data = data_list, init = init,
-                    control = list(adapt_delta = 0.9),
-                    seed = seed,
-                    iter =  iter, chains = chains)
-  )})
+  capture.output({
+    fit = suppressWarnings(
+      rstan::sampling(
+        mod,
+        data = data_list,
+        init = init,
+        control = list(adapt_delta = 0.9),
+        seed = seed,
+        iter = iter,
+        chains = chains
+      )
+    )
+  })
 
   # Extract required parameters
-  cf = data.frame(pat_group_i = rep(1:n_record, each = chains*iter/2),
-        m = as.vector(rstan::extract(fit, permuted = TRUE, pars = "m")$m),
-        beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = "beta")$beta),
-        k = as.vector(rstan::extract(fit, permuted = TRUE, pars = "k")$k))
+  cf = data.frame(
+    pat_group_i = rep(1:n_record, each = chains * iter / 2),
+    m = as.vector(rstan::extract(fit, permuted = TRUE, pars = "m")$m),
+    beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = "beta")$beta),
+    k = as.vector(rstan::extract(fit, permuted = TRUE, pars = "k")$k)
+  )
   # Compute derived quantities
   coef_chain = cf %>%
     mutate(
       t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.),
       t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.),
       tlag_maes_ghoos = breathtestcore::tlag_maes_ghoos(.),
-      t50_maes_ghoos_scintigraphy = breathtestcore::t50_maes_ghoos_scintigraphy(.),
+      t50_maes_ghoos_scintigraphy = breathtestcore::t50_maes_ghoos_scintigraphy(
+        .
+      ),
       t50_bluck_coward = breathtestcore::t50_bluck_coward(.),
       tlag_bluck_coward = breathtestcore::tlag_bluck_coward(.)
     ) %>%
@@ -160,13 +184,18 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
       q_975 = quantile(value, 0.975)
     ) %>%
     ungroup() %>%
-    left_join(unique(data[,c("pat_group_i", "pat_group", "patient_id", "group")]),
-                by = "pat_group_i") %>%
-    mutate(
-      parameter = str_match(key, "k|m|beta|t50|tlag")[,1],
-      method = str_match(key, "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta")[,1]
+    left_join(
+      unique(data[, c("pat_group_i", "pat_group", "patient_id", "group")]),
+      by = "pat_group_i"
     ) %>%
-   select(-pat_group_i, -pat_group, -key)
+    mutate(
+      parameter = str_match(key, "k|m|beta|t50|tlag")[, 1],
+      method = str_match(
+        key,
+        "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta"
+      )[, 1]
+    ) %>%
+    select(-pat_group_i, -pat_group, -key)
   # Warning:
   # attributes are not identical across measure variables; they will be dropped
   cf = suppressWarnings(cf %>% tidyr::gather(stat, value, estimate:q_975))
@@ -177,4 +206,3 @@ stan_fit = function(data, dose = 100, sample_minutes = 15, student_t_df = 10,
   class(ret) = c("breathteststanfit", "breathtestfit")
   ret
 }
-

@@ -9,8 +9,12 @@ test_that("Bad records are skipped when multiple in one file ", {
   filename = btcore_file("short_record.xml")
   xml_data = read_any_breathtest(filename)
   data = cleanup_data(xml_data)
-  fit = stan_fit(data, dose = dose, student_t_df = student_t_df,
-                 chains = chains, iter = iter  )
+  fit = stan_fit(
+    data,
+    dose = dose,
+    student_t_df = student_t_df,
+    chains = chains,
+    iter = iter
+  )
   expect_s3_class(fit, "breathtestfit")
 })
-

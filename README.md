@@ -2,7 +2,7 @@
 
 Dieter Menne\
 Menne Biomed Consulting Tübingen, Germany\
-<https://www.menne-biomed.de>\
+<https://menne-biomed.de>\
 [dieter.menne\@menne-biomed.de](mailto:dieter.menne@menne-biomed.de)
 
 <!-- badges: start -->
@@ -11,7 +11,7 @@ Menne Biomed Consulting Tübingen, Germany\
 
 <!-- badges: end -->
 
-Dieter Menne Menne Biomed Consulting <https://www.menne-biomed.de>
+Dieter Menne Menne Biomed Consulting <https://menne-biomed.de>
 
 [dieter.menne\@menne-biomed.de](mailto:dieter.menne@menne-biomed.de)
 
