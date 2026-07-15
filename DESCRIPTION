@@ -16,7 +16,7 @@ License: GPL (>=3)
 Encoding: UTF-8
 ByteCompile: true
 Depends:
-   R (>= 4.6.0),
+   R (>= 4.5.0),
    methods,
    Rcpp (>= 1.1.1)
 Imports:
