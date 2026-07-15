@@ -137,21 +137,20 @@ stan_fit = function(
     stop("Stan model", model, "not found")
   }
   options(mc.cores = parallelly::availableCores(omit = 1))
-  capture.output({
-    fit = suppressWarnings(
-      rstan::sampling(
-        mod,
-        data = data_list,
-        init = init,
-        control = list(adapt_delta = 0.9),
-        seed = seed,
-        iter = iter,
-        chains = chains,
-        open_progress = FALSE,
-        show_messages = FALSE
-      )
-    )
-  })
+  fit_q = purrr::quietly(rstan::sampling)(
+    mod,
+    data = data_list,
+    init = init,
+    control = list(adapt_delta = 0.9),
+    seed = seed,
+    iter = iter,
+    chains = chains,
+    open_progress = FALSE,
+    show_messages = FALSE
+  )
+  fit = fit_q$result
+  #print(fit_q$output)
+  #print(fit_q$warnings)
 
   # Extract required parameters
   cf = data.frame(
