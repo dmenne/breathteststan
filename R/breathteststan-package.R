@@ -6,3 +6,4 @@
 #' "_PACKAGE"
 #' @name breathteststan-package
 #' @aliases breathteststan
+#' @importFrom RcppParallel RcppParallelLibs

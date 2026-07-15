@@ -146,7 +146,8 @@ stan_fit = function(
         control = list(adapt_delta = 0.9),
         seed = seed,
         iter = iter,
-        chains = chains
+        chains = chains,
+        open_progress = FALSE
       )
     )
   })
