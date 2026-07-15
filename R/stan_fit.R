@@ -147,7 +147,8 @@ stan_fit = function(
         seed = seed,
         iter = iter,
         chains = chains,
-        open_progress = FALSE
+        open_progress = FALSE,
+        show_messages = FALSE
       )
     )
   })
