@@ -67,17 +67,6 @@
 #' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
 #' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
 #'
-#' @import Rcpp
-#' @import dplyr
-#' @import methods
-#' @import rstan
-#' @import rstantools
-#' @useDynLib breathteststan, .registration = TRUE
-#' @importFrom stats rnorm rlnorm
-#' @importFrom utils capture.output
-#' @importFrom stringr str_extract str_match
-#' @importFrom purrr map_df
-#' @importFrom stats na.omit quantile
 #'
 #' @export
 #'
@@ -103,7 +92,7 @@ stan_fit = function(
   data_list = list(
     n = nrow(data),
     n_record = n_record,
-    dose = 100,
+    dose = dose,
     student_t_df = student_t_df,
     pat_group_i = data$pat_group_i,
     minute = data$minute,
@@ -129,36 +118,48 @@ stan_fit = function(
     chains
   )
 
-  if (!exists("stanmodels")) {
-    stop("stanmodels not found")
+  file = paste0("inst/stan/", model, ".stan")
+  if (!file.exists(file)) {
+    stop("Stan model", model, " not found")
   }
-  mod = stanmodels[[model]]
-  if (is.null(mod)) {
-    stop("Stan model", model, "not found")
-  }
-  options(mc.cores = parallelly::availableCores(omit = 1))
-  capture.output({
-    fit = suppressWarnings(
-      rstan::sampling(
-        mod,
-        data = data_list,
-        init = init,
-        control = list(adapt_delta = 0.9),
-        seed = seed,
-        iter = iter,
-        chains = chains,
-        open_progress = FALSE
-      )
-    )
-  })
 
-  # Extract required parameters
-  cf = data.frame(
-    pat_group_i = rep(1:n_record, each = chains * iter / 2),
-    m = as.vector(rstan::extract(fit, permuted = TRUE, pars = "m")$m),
-    beta = as.vector(rstan::extract(fit, permuted = TRUE, pars = "beta")$beta),
-    k = as.vector(rstan::extract(fit, permuted = TRUE, pars = "k")$k)
+  mod = cmdstan_model(file)
+
+  fit = suppressMessages(
+    mod$sample(
+      data = data_list,
+      refresh = 0,
+      init = init,
+      seed = seed,
+      iter_warmup = iter / 2,
+      iter_sampling = iter / 2,
+      chains = chains,
+      parallel_chains = min(parallelly::availableCores(omit = 1), chains),
+      adapt_delta = 0.9,
+      max_treedepth = 12
+    )
   )
+  fit$draws(variables = c("m", "beta", "k")) |>
+    posterior::as_draws_df()
+
+  cf = fit$summary(c("m", "beta", "k"), "median") |>
+    separate_wider_regex(
+      cols = variable,
+      patterns = c(
+        parameter = "^[^\\[\\]]+",
+        "\\[",
+        index = "\\d+",
+        "\\]"
+      ),
+      too_few = "align_start" # Keeps scalar parameters safely intact if you include them
+    ) %>%
+    mutate(pat_group_i = as.integer(index)) |>
+    pivot_wider(
+      id_cols = pat_group_i,
+      names_from = parameter,
+      values_from = median
+    )
+
   # Compute derived quantities
   coef_chain = cf %>%
     mutate(
@@ -206,4 +207,39 @@ stan_fit = function(
   comment(ret) = cm
   class(ret) = c("breathteststanfit", "breathtestfit")
   ret
+}
+
+# @exportS3Method
+#plot.CmdStanFit = function(x, ...) {
+#  plot.breathtestfit(x, ...)
+#}
+
+# @exportS3Method
+sigma.breathteststanfit = function(object, ...) {
+  object$stan_fit$summary("sigma", "mean")$mean
+}
+
+
+if (FALSE) {
+  library(breathtestcore)
+  chains = 4
+  student_t_df = 10
+  dose = 100
+  iter = 500
+  sample_minutes = 15
+  model = "breath_test_1"
+  seed = 4711
+  data = cleanup_data(simulate_breathtest_data(seed = 100)$data)
+  comment(data) = "comment"
+
+  fit = stan_fit(
+    data,
+    dose = dose,
+    student_t_df = student_t_df,
+    chains = chains,
+    iter = iter
+  )
+  plot(fit)
+
+  sigma(fit)
 }

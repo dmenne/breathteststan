@@ -2,13 +2,6 @@ test_that("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   # with this seed, cf[10] does not fit with nls_list
   library(breathtestcore)
 
-  #  library(rstan)
-  #  library(dplyr)
-  #  library(rstan)
-  #  library(stringr)
-  #  library(testthat)
-  #  library(breathteststan)
-
   chains = 1
   student_t_df = 10
   dose = 100

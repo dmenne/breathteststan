@@ -28,9 +28,9 @@ parameters{
 
 
 transformed parameters{
-  vector<lower=0>[n_record] m;
-  vector<lower=0>[n_record] k;
-  vector<lower=0>[n_record] beta;
+  vector<lower=10>[n_record] m;
+  vector<lower=0.0001>[n_record] k;
+  vector<lower=1>[n_record] beta;
 
   // Re-parametrization
   m    = mu_m + sigma_m * m_raw;

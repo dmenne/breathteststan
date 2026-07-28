@@ -24,6 +24,11 @@ rstan.Rcheck/
 
 src/
 deps/
+*.exe
 
+src/stan/**
+!src/stan/**/*.*
+src/stan/**/*.exe
+src/stan/**/*.EXE
 
 
