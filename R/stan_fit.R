@@ -8,8 +8,10 @@
 #' with mandatory columns \code{patient_id, group, minute} and \code{pdr}.
 #' It is recommended to run all data through \code{\link[breathtestcore]{cleanup_data}} which
 #' will insert dummy columns for \code{patient_id} and \code{minute} if the
-#' data are distinct, and report an error if not. Since the Bayesian method
-#' is stabilized by priors, it is possible to fit single curves.
+#' data are distinct, and report an error if not. It is possible to fit single curves,
+#' but this does not make fully use of the stabilization of the estimated t50.
+#' Instead of fitting single curves, use a set of 20+ of the typical data in your
+#' clinic, and append the data set from the single patient as a mix-in.
 #' @param dose Dose of acetate or octanoate. Currently, only one common dose
 #' for all records is supported.
 #' @param sample_minutes If mean sampling interval is < sampleMinutes, data are subsampled
