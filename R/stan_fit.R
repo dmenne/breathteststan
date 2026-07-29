@@ -117,7 +117,7 @@ stan_fit = function(
     chains
   )
 
-  file = paste0("inst/breath_test_1.stan")
+  file = here("inst/breath_test_1.stan")
   if (!file.exists(file)) {
     stop("Stan model", model, " not found")
   }
@@ -208,16 +208,6 @@ stan_fit = function(
   ret
 }
 
-# @exportS3Method
-#plot.CmdStanFit = function(x, ...) {
-#  plot.breathtestfit(x, ...)
-#}
-
-#' @exportS3Method
-sigma.breathteststanfit = function(object, ...) {
-  object$stan_fit$summary("sigma", "mean")$mean
-}
-
 if (FALSE) {
   library(breathtestcore)
   chains = 4
@@ -225,7 +215,6 @@ if (FALSE) {
   dose = 100
   iter = 500
   sample_minutes = 15
-  model = "breath_test_1"
   seed = 4711
   data = cleanup_data(simulate_breathtest_data(seed = 100)$data)
   comment(data) = "comment"

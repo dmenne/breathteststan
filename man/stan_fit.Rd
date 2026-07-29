@@ -11,7 +11,6 @@ stan_fit(
   student_t_df = 10,
   chains = 2,
   iter = 1000,
-  model = "breath_test_1",
   seed = 4711
 )
 }
@@ -37,9 +36,9 @@ When student_t_df >= 10, the normal distribution is used.}
 
 \item{iter}{Number of iterations for each Stan chain}
 
-\item{model}{Name of model; use \code{names(stanmodels)} for other models.}
-
 \item{seed}{Optional seed for rstan}
+
+\item{model}{Name of model; use \code{names(stanmodels)} for other models.}
 }
 \value{
 A list of classes "breathteststanfit" and "breathtestfit" with elements

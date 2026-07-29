@@ -1,6 +1,5 @@
 test_that("Multiple chains return valid results similar to nlme", {
   skip_on_cran()
-  skip_on_32bit()
   library(breathtestcore)
   chains = 2
   student_t_df = 10

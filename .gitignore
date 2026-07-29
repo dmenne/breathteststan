@@ -26,6 +26,7 @@ src/
 deps/
 *.exe
 
+inst/breath_test_1
 
 src/stan/**
 !src/stan/**/*.*

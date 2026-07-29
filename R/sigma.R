@@ -7,6 +7,6 @@
 #' from the Stan fit.
 #' @importFrom stats sigma
 #' @exportS3Method
-sigma.CmdStanFit = function(object, ...) {
+sigma.breathteststanfit = function(object, ...) {
   object$stan_fit$summary("sigma", "mean")$mean
 }
