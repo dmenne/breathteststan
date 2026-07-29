@@ -26,6 +26,7 @@ src/
 deps/
 *.exe
 
+
 src/stan/**
 !src/stan/**/*.*
 src/stan/**/*.exe

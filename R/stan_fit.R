@@ -77,7 +77,6 @@ stan_fit = function(
   student_t_df = 10,
   chains = 2,
   iter = 1000,
-  model = "breath_test_1",
   seed = 4711
 ) {
   # Avoid notes on CRAN
@@ -118,7 +117,7 @@ stan_fit = function(
     chains
   )
 
-  file = paste0("inst/stan/", model, ".stan")
+  file = paste0("inst/breath_test_1.stan")
   if (!file.exists(file)) {
     stop("Stan model", model, " not found")
   }
@@ -151,7 +150,7 @@ stan_fit = function(
         index = "\\d+",
         "\\]"
       ),
-      too_few = "align_start" # Keeps scalar parameters safely intact if you include them
+      too_few = "align_start"
     ) %>%
     mutate(pat_group_i = as.integer(index)) |>
     pivot_wider(
@@ -214,11 +213,10 @@ stan_fit = function(
 #  plot.breathtestfit(x, ...)
 #}
 
-# @exportS3Method
+#' @exportS3Method
 sigma.breathteststanfit = function(object, ...) {
   object$stan_fit$summary("sigma", "mean")$mean
 }
-
 
 if (FALSE) {
   library(breathtestcore)

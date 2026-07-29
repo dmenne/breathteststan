@@ -10,7 +10,6 @@
 #' @import methods
 #' @import rstantools
 #' @import cmdstanr
-#' @useDynLib breathteststan, .registration = TRUE
 #' @importFrom instantiate stan_package_model
 #' @importFrom stats rnorm rlnorm
 #' @importFrom utils capture.output
