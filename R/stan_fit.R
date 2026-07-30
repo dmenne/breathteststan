@@ -94,8 +94,22 @@ stan_fit = function(
   seed = 4711
 ) {
   # Avoid notes on CRAN
-  value = pat_group = pat_group_i = NULL
-  stat = estimate = . = k = key = m = q_975 = NULL
+  utils::globalVariables(c(
+    "value",
+    "pat_group",
+    "pat_group_i",
+    "stat",
+    "estimate",
+    "k",
+    "key",
+    "m",
+    "q_0275",
+    "q_975",
+    "variable",
+    "index",
+    "parameter",
+    "median"
+  ))
   cm = comment(data)
   data = breathtestcore::subsample_data(data, sample_minutes)
   # Integer index of records
