@@ -38,8 +38,10 @@
 #' @seealso Base methods \code{coef, plot, print}; methods from package
 #'  \code{broom: tidy, augment}.
 #' @examples
+#' # This needs some time !!!
 #' library(breathtestcore)
-#' suppressPackageStartupMessages(library(dplyr))
+#' cmdstanr::check_cmdstan_toolchain(fix = TRUE, quiet = TRUE)
+#' library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 #' d = breathtestcore::simulate_breathtest_data(n_records = 3) # default 3 records
 #' data = breathtestcore::cleanup_data(d$data)
 #' # Use more than 80 iterations and 4 chains for serious fits
@@ -50,25 +52,35 @@
 #' options(digits = 2)
 #' cf = coef(fit)
 #' cf %>%
-#'   filter(grepl("m|k|beta", parameter )) %>%
+#'   filter(grepl("m|k|beta", parameter)) %>%
 #'   select(-method, -group) %>%
 #'   tidyr::spread(parameter, value) %>%
 #'   inner_join(d$record, by = "patient_id") %>%
-#'   select(patient_id, m_in = m.y, m_out = m.x,
-#'          beta_in = beta.y, beta_out = beta.x,
-#'          k_in = k.y, k_out = k.x)
+#'   select(
+#'     patient_id,
+#'     m_in = m.y,
+#'     m_out = m.x,
+#'     beta_in = beta.y,
+#'     beta_out = beta.x,
+#'     k_in = k.y,
+#'     k_out = k.x
+#'   )
 #' # For a detailed analysis of the fit, use the shinystan library
+#' # shinystan::launch_shinystan(fit$stan_fit)
 #' \donttest{
-#' library(shinystan)
-#' # launch_shinystan(fit$stan_fit)
-#' }
+#'
 #' # The following plots are somewhat degenerate because
 #' # of the few iterations in stan_fit
-#' suppressPackageStartupMessages(library(rstan))
-#' stan_plot(fit$stan_fit, pars = c("beta[1]","beta[2]","beta[3]"))
-#' stan_plot(fit$stan_fit, pars = c("k[1]","k[2]","k[3]"))
-#' stan_plot(fit$stan_fit, pars = c("m[1]","m[2]","m[3]"))
-#'
+#' library(bayesplot)
+#' color_scheme_set("viridisD")
+#' options(device.height = 2, device.width = 4)
+#' drws = fit$stan_fit$draws(variables = c("beta[1]", "beta[2]", "beta[3]"))
+#' mcmc_dens(drws)
+#' mcmc_hist(fit$stan_fit$draws(variables = c("beta[1]", "beta[2]", "beta[3]")))
+#' mcmc_intervals(fit$stan_fit$draws(variables = c("beta[1]", "beta[2]", "beta[3]")))
+#' mcmc_trace(fit$stan_fit$draws(variables = c("beta[1]", "beta[2]", "beta[3]")))
+#' mcmc_areas(fit$stan_fit$draws(variables = c("beta[1]", "beta[2]", "beta[3]")))
+#' }
 #'
 #' @export
 #'
@@ -125,23 +137,24 @@ stan_fit = function(
   }
 
   mod = cmdstan_model(file)
-
-  fit = suppressMessages(
-    mod$sample(
-      data = data_list,
-      refresh = 0,
-      init = init,
-      seed = seed,
-      iter_warmup = iter / 2,
-      iter_sampling = iter / 2,
-      chains = chains,
-      parallel_chains = min(parallelly::availableCores(omit = 1), chains),
-      adapt_delta = 0.9,
-      max_treedepth = 12
+  capture.output({
+    suppressMessages(
+      fit <- mod$sample(
+        data = data_list,
+        refresh = 0,
+        init = init,
+        seed = seed,
+        iter_warmup = iter / 2,
+        iter_sampling = iter / 2,
+        chains = chains,
+        parallel_chains = min(parallelly::availableCores(omit = 1), chains),
+        adapt_delta = 0.9,
+        max_treedepth = 11
+      )
     )
-  )
+  })
   fit$draws(variables = c("m", "beta", "k")) |>
-    posterior::as_draws_df()
+    as_draws_df()
 
   cf = fit$summary(c("m", "beta", "k"), "median") |>
     separate_wider_regex(
