@@ -1,6 +1,7 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 # https://github.com/stan-dev/cmdstanr/blob/master/.github/workflows/R-CMD-check.yaml
+# https://discourse.mc-stan.org/t/trouble-installing-cmstanr-in-a-github-actions-workflow/23004
 on:
   push:
     branches: [main, master]
@@ -59,6 +60,7 @@ jobs:
 
       - name: Install cmdstan
         run: |
+          install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
           cmdstanr::check_cmdstan_toolchain()
           cmdstanr::install_cmdstan(cores = 2)
         shell: Rscript {0}
