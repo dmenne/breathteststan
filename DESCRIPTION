@@ -40,8 +40,6 @@ Suggests:
   knitr,
   parallelly,
   rmarkdown
-Remotes:  
-  stan-dev/cmdstanr
 URL: https://github.com/dmenne/breathteststan,
     https://dmenne.github.io/breathteststan/
 BugReports: https://github.com/dmenne/breathteststan/issues
