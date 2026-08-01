@@ -60,7 +60,7 @@ jobs:
 
       - name: Install cmdstan
         run: |
-          install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+          install.packages("cmdstanr", repos = c('https://stan-dev.r-universe.dev', getOption("repos")))
           cmdstanr::check_cmdstan_toolchain()
           cmdstanr::install_cmdstan(cores = 2)
         shell: Rscript {0}

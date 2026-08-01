@@ -21,7 +21,6 @@
 #' When student_t_df >= 10, the normal distribution is used.
 #' @param chains Number of chains for Stan
 #' @param iter Number of iterations for each Stan chain
-#' @param model Name of model; use \code{names(stanmodels)} for other models.
 #' @param seed Optional seed for rstan
 #'
 #'
@@ -40,7 +39,7 @@
 #' @examples
 #' # This needs some time !!!
 #' library(breathtestcore)
-#' cmdstanr::check_cmdstan_toolchain(fix = TRUE, quiet = TRUE)
+#' cmdstanr::check_cmdstan_toolchain(quiet = TRUE)
 #' library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 #' d = breathtestcore::simulate_breathtest_data(n_records = 3) # default 3 records
 #' data = breathtestcore::cleanup_data(d$data)
@@ -93,23 +92,6 @@ stan_fit = function(
   iter = 1000,
   seed = 4711
 ) {
-  # Avoid notes on CRAN
-  utils::globalVariables(c(
-    "value",
-    "pat_group",
-    "pat_group_i",
-    "stat",
-    "estimate",
-    "k",
-    "key",
-    "m",
-    "q_0275",
-    "q_975",
-    "variable",
-    "index",
-    "parameter",
-    "median"
-  ))
   cm = comment(data)
   data = breathtestcore::subsample_data(data, sample_minutes)
   # Integer index of records
@@ -145,12 +127,12 @@ stan_fit = function(
     chains
   )
 
-  file = here("inst/breath_test_1.stan")
-  if (!file.exists(file)) {
-    stop("Stan model", model, " not found")
-  }
+  mod = instantiate::stan_package_model(
+    name = "breath_test_1",
+    package = "breathteststan"
+  )
+  mod$compile()
 
-  mod = cmdstan_model(file)
   capture.output({
     suppressMessages(
       fit <- mod$sample(
@@ -167,8 +149,6 @@ stan_fit = function(
       )
     )
   })
-  fit$draws(variables = c("m", "beta", "k")) |>
-    as_draws_df()
 
   cf = fit$summary(c("m", "beta", "k"), "median") |>
     separate_wider_regex(
@@ -181,7 +161,7 @@ stan_fit = function(
       ),
       too_few = "align_start"
     ) %>%
-    mutate(pat_group_i = as.integer(index)) |>
+    mutate(pat_group_i = as.integer(.data$index)) |>
     pivot_wider(
       id_cols = pat_group_i,
       names_from = parameter,
@@ -191,27 +171,31 @@ stan_fit = function(
   # Compute derived quantities
   coef_chain = cf %>%
     mutate(
-      t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.),
-      t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.),
-      tlag_maes_ghoos = breathtestcore::tlag_maes_ghoos(.),
+      t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.data),
+      t50_maes_ghoos = breathtestcore::t50_maes_ghoos(.data),
+      tlag_maes_ghoos = breathtestcore::tlag_maes_ghoos(.data),
       t50_maes_ghoos_scintigraphy = breathtestcore::t50_maes_ghoos_scintigraphy(
-        .
+        .data
       ),
-      t50_bluck_coward = breathtestcore::t50_bluck_coward(.),
-      tlag_bluck_coward = breathtestcore::tlag_bluck_coward(.)
+      t50_bluck_coward = breathtestcore::t50_bluck_coward(.data),
+      tlag_bluck_coward = breathtestcore::tlag_bluck_coward(.data)
     ) %>%
-    rename(m_exp_beta = m, k_exp_beta = k, beta_exp_beta = beta) %>%
-    tidyr::gather(key, value, -pat_group_i) %>%
+    rename(
+      m_exp_beta = .data$m,
+      k_exp_beta = .data$k,
+      beta_exp_beta = .data$beta
+    ) %>%
+    tidyr::gather(.data$key, .data$value, -.data$pat_group_i) %>%
     na.omit() %>%
     ungroup()
   cf = coef_chain %>%
-    group_by(pat_group_i, key) %>%
+    group_by(.data$pat_group_i, .data$key) %>%
     summarize(
-      estimate = mean(value),
-      q_0275 = quantile(value, 0.0275),
-      q_25 = quantile(value, 0.25),
-      q_75 = quantile(value, 0.75),
-      q_975 = quantile(value, 0.975)
+      estimate = mean(.data$value),
+      q_0275 = quantile(.data$value, 0.0275),
+      q_25 = quantile(.data$value, 0.25),
+      q_75 = quantile(.data$value, 0.75),
+      q_975 = quantile(.data$value, 0.975)
     ) %>%
     ungroup() %>%
     left_join(
@@ -219,26 +203,31 @@ stan_fit = function(
       by = "pat_group_i"
     ) %>%
     mutate(
-      parameter = str_match(key, "k|m|beta|t50|tlag")[, 1],
+      parameter = str_match(.data$key, "k|m|beta|t50|tlag")[, 1],
       method = str_match(
-        key,
+        .data$key,
         "maes_ghoos_scintigraphy|maes_ghoos|bluck_coward|exp_beta"
       )[, 1]
     ) %>%
-    select(-pat_group_i, -pat_group, -key)
+    select(-.data$pat_group_i, -.data$pat_group, -.data$key)
   # Warning:
   # attributes are not identical across measure variables; they will be dropped
-  cf = suppressWarnings(cf %>% tidyr::gather(stat, value, estimate:q_975))
+  cf = suppressWarnings(
+    cf %>% tidyr::gather(.data$stat, .data$value, .data$estimate:data$q_975)
+  )
 
-  data = data %>% select(-pat_group, -pat_group_i) # only used locally
+  data = data %>% select(-.data$pat_group, -.data$pat_group_i) # only used locally
   ret = list(coef = cf, data = data, stan_fit = fit, coef_chain = coef_chain)
   comment(ret) = cm
   class(ret) = c("breathteststanfit", "breathtestfit")
   ret
 }
 
+
 if (FALSE) {
   library(breathtestcore)
+  library(breathteststan)
+  cmdstanr::set_cmdstan_path(Sys.getenv("CMDSTAN"))
   chains = 4
   student_t_df = 10
   dose = 100

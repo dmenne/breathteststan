@@ -39,8 +39,6 @@ When student_t_df >= 10, the normal distribution is used.}
 \item{iter}{Number of iterations for each Stan chain}
 
 \item{seed}{Optional seed for rstan}
-
-\item{model}{Name of model; use \code{names(stanmodels)} for other models.}
 }
 \value{
 A list of classes "breathteststanfit" and "breathtestfit" with elements
@@ -63,7 +61,7 @@ single curve, mixed-model population and Bayesian methods.
 \examples{
 # This needs some time !!!
 library(breathtestcore)
-cmdstanr::check_cmdstan_toolchain(fix = TRUE, quiet = TRUE)
+cmdstanr::check_cmdstan_toolchain(quiet = TRUE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 d = breathtestcore::simulate_breathtest_data(n_records = 3) # default 3 records
 data = breathtestcore::cleanup_data(d$data)
