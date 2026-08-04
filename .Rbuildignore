@@ -16,3 +16,5 @@ _pkgdown.yml
 Makevars
 ^deps$
 .vscode
+old_tests/
+inst/*.exe

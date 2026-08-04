@@ -22,15 +22,14 @@ rstan.Rcheck/
 *.gcno
 *.def
 
-src/
-deps/
-*.exe
-
-inst/breath_test_1
+inst/*.exe
 
 src/stan/**
 !src/stan/**/*.*
 src/stan/**/*.exe
 src/stan/**/*.EXE
+
+old_tests/
+
 
 

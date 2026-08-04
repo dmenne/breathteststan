@@ -26,16 +26,16 @@ Imports:
     cmdstanr (>= 0.9.0),
     here,
     posterior,
+    rlang,
     rstantools (>= 2.6.0),
     stringr,
     tidyr
 Suggests:
   ggplot2,
   shinystan,
+  testit,
   igraph,
   bayesplot,
-  testthat,
-  covr,
   knitr,
   parallelly,
   rmarkdown

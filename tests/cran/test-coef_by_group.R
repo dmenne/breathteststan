@@ -1,8 +1,10 @@
-test_that("Result with default parameters is tbl_df with required columns", {
+library(testit)
+
+assert("Result with default parameters is tbl_df with required columns", {
   # This calls coef_by_group.breathtestfit, which include a post-hoc classic test
   # for contrasts.
   data("usz_13c", package = "breathtestcore")
-  data = usz_13c %>%
+  data = usz_13c |>
     dplyr::filter(
       patient_id %in%
         c(
@@ -14,17 +16,17 @@ test_that("Result with default parameters is tbl_df with required columns", {
           "pat_002",
           "pat_003"
         )
-    ) %>%
-    breathtestcore::cleanup_data()
+    ) |>
+    cleanup_data()
   comment(data) = "comment"
-
-  fit = stan_fit(data, iter = 300, chains = 1)
+  fit = stan_fit(data, iter = 500, chains = 1)
   class(fit) = class(fit)[-1] # Remove class breathteststanfit
-  cf = breathtestcore::coef_by_group(fit) # S3 method
-  expect_s3_class(cf, "tbl_df")
-  expect_s3_class(cf, "coef_by_group")
-  expect_identical(ncol(cf), 7L)
-  expect_equal(
+  cf = coef_by_group(fit) # S3 method
+  #https://yihui.org/en/2026/05/testthat-to-testit/
+  (inherits(cf, "tbl_df"))
+  (inherits(cf, "coef_by_group"))
+  (identical(ncol(cf), 7L))
+  (all.equal(
     names(cf),
     c(
       "parameter",
@@ -35,12 +37,12 @@ test_that("Result with default parameters is tbl_df with required columns", {
       "conf.high",
       "diff_group"
     )
-  )
-  expect_equal(comment(data), "comment")
-  expect_identical(nrow(cf), 24L)
-  expect_identical(sort(unique(cf$diff_group)), c("a", "b", "c"))
-  expect_equal(
+  ))
+  (identical(comment(data), "comment"))
+  (identical(nrow(cf), 24L))
+  (identical(sort(unique(cf$diff_group)), c("a", "b", "c")))
+  (identical(
     unique(cf$group),
     c("liquid_normal", "solid_normal", "solid_patient")
-  )
+  ))
 })
