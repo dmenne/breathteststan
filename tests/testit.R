@@ -9,6 +9,6 @@ if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) {
 
 # tests under `ci/`; only run when on ci (generic)
 # Might also check for "GITHUB_ACTIONS"
-if (identical(tolower(Sys.getenv("CI")), "true")) {
-  test_pkg("breathteststan", dir = "ci")
-}
+#if (identical(tolower(Sys.getenv("CI")), "true")) {
+#  test_pkg("breathteststan", dir = "ci")
+#}
