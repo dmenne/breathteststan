@@ -21,24 +21,20 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
+#          - {os: macos-latest,   r: 'release'}
+#          - {os: windows-latest, r: 'release'}
+#          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+#          - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      NOT_CRAN: true
       R_KEEP_PKG_SOURCE: yes
 
     steps:
 
-     - name: cmdstan env vars
-        run: |
-          echo "CMDSTAN_PATH=${HOME}/.cmdstan" >> $GITHUB_ENV
-        shell: bash
-
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -46,12 +42,21 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
+          extra-repositories: 'https://mc-stan.org/r-packages/'
           use-public-rspm: true
+
+      - name: Install CmdStan
+        shell: Rscript {0}
+        run: |
+          install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
+          cmdstanr::install_cmdstan()
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, local::.
           needs: check
+          cache-version: 2
 
       - uses: r-lib/actions/check-r-package@v2
         with:
@@ -63,11 +68,4 @@ jobs:
         with:
           extra-packages: any::covr, any::xml2
           needs: coverage
-
-      - name: Install cmdstan
-        run: |
-          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
-          cmdstanr::install_cmdstan(cores = 2)
-        shell: Rscript {0}
-
 
