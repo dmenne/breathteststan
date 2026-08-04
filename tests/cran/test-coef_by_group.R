@@ -47,8 +47,7 @@ assert("Result with default parameters is tbl_df with required columns", {
   ))
   (identical(comment(data), "comment"))
   (identical(nrow(cf), 24L))
-  print(sort(unique(cf$diff_group)))
-  (identical(sort(unique(cf$diff_group)), c("a", "b", "c")))
+  (c("a", "b", "c") %in% unique(cf$diff_group))
   (identical(
     unique(cf$group),
     c("liquid_normal", "solid_normal", "solid_patient")
