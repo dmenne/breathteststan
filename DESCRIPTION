@@ -42,6 +42,7 @@ Suggests:
 URL: https://github.com/dmenne/breathteststan,
     https://dmenne.github.io/breathteststan/
 BugReports: https://github.com/dmenne/breathteststan/issues
+Remotes: dmenne/breathtestcore
 NeedsCompilation: yes
 SystemRequirements: GNU make
 Config/testthat/edition: 3
