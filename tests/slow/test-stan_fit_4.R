@@ -1,6 +1,6 @@
-test_that("Multiple chains return valid results similar to nlme", {
-  skip_on_cran()
+assert("Multiple chains return valid results similar to nlme", {
   library(breathtestcore)
+  library(breathteststan)
   chains = 2
   student_t_df = 10
   dose = 100
@@ -14,17 +14,21 @@ test_that("Multiple chains return valid results similar to nlme", {
     chains = chains,
     iter = iter
   )
+  (inherits(fit, "breathtestfit"))
+  (inherits(fit, "breathteststanfit"))
+  (inherits(fit$stan_fit, "CmdStanMCMC"))
+  (inherits(fit$stan_fit, "CmdStanFit"))
   fit_nlme = nlme_fit(data, dose = dose)
-  cf = coef(fit) %>%
+  cf = coef(fit) |>
     left_join(
       coef(fit_nlme),
       by = c("patient_id", "parameter", "method", "group")
-    ) %>%
-    filter(method == "exp_beta") %>%
-    mutate(rel_diff = 2 * abs(value.x - value.y) / (value.x + value.y)) %>%
-    select(parameter, rel_diff) %>%
+    ) |>
+    filter(method == "exp_beta") |>
+    mutate(rel_diff = 2 * abs(value.x - value.y) / (value.x + value.y)) |>
+    select(parameter, rel_diff) |>
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.04)
+  (cf$rel_diff < 0.006)
 })

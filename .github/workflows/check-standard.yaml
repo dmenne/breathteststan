@@ -60,9 +60,7 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
-          args: 'c("--no-manual", "--as-cran")'
-          error-on: '"error"'
-          upload-snapshots: false
+          upload-snapshots: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

@@ -1,6 +1,6 @@
-test_that("Non-gaussian residuals with student_t_df <10 gives result close to nlme", {
-  skip_on_cran()
+assert("Non-gaussian residuals with student_t_df <10 gives result close to nlme", {
   library(breathtestcore)
+  library(breathteststan)
   chains = 1
   student_t_df = 5
   dose = 100
@@ -21,16 +21,16 @@ test_that("Non-gaussian residuals with student_t_df <10 gives result close to nl
     iter = iter
   )
   fit_nlme = nlme_fit(data, dose = dose)
-  cf = coef(fit) %>%
+  cf = coef(fit) |>
     left_join(
       coef(fit_nlme),
       by = c("patient_id", "parameter", "method", "group")
-    ) %>%
-    filter(method == "exp_beta") %>%
-    mutate(rel_diff = 2 * abs(value.x - value.y) / (value.x + value.y)) %>%
-    select(parameter, rel_diff) %>%
+    ) |>
+    filter(method == "exp_beta") |>
+    mutate(rel_diff = 2 * abs(value.x - value.y) / (value.x + value.y)) |>
+    select(parameter, rel_diff) |>
     summarize(
       rel_diff = mean(rel_diff)
     )
-  expect_lt(cf$rel_diff, 0.15)
+  (cf$rel_diff < 0.1) # around 0.05312001
 })

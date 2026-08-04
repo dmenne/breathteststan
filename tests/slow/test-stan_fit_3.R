@@ -1,10 +1,12 @@
-test_that("A single record can be fitted", {
-  skip_on_cran()
+library(testit)
+
+assert("A single record can be fitted", {
   library(breathtestcore)
+  library(breathteststan)
   chains = 1
   student_t_df = 10
   dose = 100
-  iter = 100
+  iter = 300
   sample_minutes = 15
   data = cleanup_data(simulate_breathtest_data(n_records = 1, seed = 100)$data)
   fit = stan_fit(
@@ -14,5 +16,8 @@ test_that("A single record can be fitted", {
     chains = chains,
     iter = iter
   )
-  expect_s3_class(fit, "breathtestfit")
+  (inherits(fit, "breathtestfit"))
+  (inherits(fit, "breathteststanfit"))
+  (inherits(fit$stan_fit, "CmdStanMCMC"))
+  (inherits(fit$stan_fit, "CmdStanFit"))
 })

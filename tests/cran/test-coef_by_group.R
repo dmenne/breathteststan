@@ -1,4 +1,6 @@
 library(testit)
+library(breathtestcore)
+library(breathteststan)
 
 assert("Result with default parameters is tbl_df with required columns", {
   # This calls coef_by_group.breathtestfit, which include a post-hoc classic test
@@ -20,7 +22,12 @@ assert("Result with default parameters is tbl_df with required columns", {
     cleanup_data()
   comment(data) = "comment"
   fit = stan_fit(data, iter = 500, chains = 1)
-  class(fit) = class(fit)[-1] # Remove class breathteststanfit
+  (inherits(fit, "breathtestfit"))
+  (inherits(fit, "breathteststanfit"))
+  (inherits(fit$stan_fit, "CmdStanMCMC"))
+  (inherits(fit$stan_fit, "CmdStanFit"))
+
+  #  class(fit) = class(fit)[-1] # Remove class breathteststanfit
   cf = coef_by_group(fit) # S3 method
   #https://yihui.org/en/2026/05/testthat-to-testit/
   (inherits(cf, "tbl_df"))
@@ -40,6 +47,7 @@ assert("Result with default parameters is tbl_df with required columns", {
   ))
   (identical(comment(data), "comment"))
   (identical(nrow(cf), 24L))
+  print(sort(unique(cf$diff_group)))
   (identical(sort(unique(cf$diff_group)), c("a", "b", "c")))
   (identical(
     unique(cf$group),

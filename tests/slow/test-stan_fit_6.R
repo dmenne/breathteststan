@@ -1,10 +1,10 @@
-test_that("Bad records are skipped when multiple in one file ", {
-  skip_on_cran()
+assert("Bad records are skipped when multiple in one file ", {
   library(breathtestcore)
+  library(breathteststan)
   chains = 1
   student_t_df = 10
   dose = 100
-  iter = 100
+  iter = 300
   # This file has two bad records
   filename = btcore_file("short_record.xml")
   xml_data = read_any_breathtest(filename)
@@ -16,5 +16,8 @@ test_that("Bad records are skipped when multiple in one file ", {
     chains = chains,
     iter = iter
   )
-  expect_s3_class(fit, "breathtestfit")
+  (inherits(fit, "breathtestfit"))
+  (inherits(fit, "breathteststanfit"))
+  (inherits(fit$stan_fit, "CmdStanMCMC"))
+  (inherits(fit$stan_fit, "CmdStanFit"))
 })
