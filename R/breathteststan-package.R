@@ -20,4 +20,4 @@
 #' @importFrom posterior as_draws_df
 #' @importFrom tidyr separate_wider_regex pivot_wider
 # usethis namespace: end
-NULL
+"_PACKAGE"
