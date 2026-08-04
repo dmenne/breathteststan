@@ -21,7 +21,7 @@ assert("Result with default parameters is tbl_df with required columns", {
     ) |>
     cleanup_data()
   comment(data) = "comment"
-  fit = stan_fit(data, iter = 500, chains = 1)
+  fit = stan_fit(data, iter = 1000, chains = 2)
   (inherits(fit, "breathtestfit"))
   (inherits(fit, "breathteststanfit"))
   (inherits(fit$stan_fit, "CmdStanMCMC"))
@@ -47,6 +47,7 @@ assert("Result with default parameters is tbl_df with required columns", {
   ))
   (identical(comment(data), "comment"))
   (identical(nrow(cf), 24L))
+  print(unique(cf$diff_group))
   (c("a", "b", "c") %in% unique(cf$diff_group))
   (identical(
     unique(cf$group),

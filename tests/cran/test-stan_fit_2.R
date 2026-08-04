@@ -5,10 +5,10 @@ assert("Data that cannot be fitted with nls_list/nlme work with stan_fit", {
   library(breathtestcore) # Debug
   library(breathteststan)
 
-  chains = 1
+  chains = 2
   student_t_df = 10
   dose = 100
-  iter = 400
+  iter = 1000
   sample_minutes = 15
   data = cleanup_data(simulate_breathtest_data(seed = 100)$data)
   comment(data) = "comment"
