@@ -30,7 +30,7 @@
 #'    columns \code{patient_id, group, parameter, method} and \code{value}.
 #'    Has an attribute AIC.}
 #'    \item {\code{data}  The effectively analyzed data. If density of points
-#'    is too high, e.g. with BreathId devices, data are subsampled before fitting.}
+#'    is too high, e.g. with BreathID® devices, data are subsampled before fitting.}
 #'    \item {\code{stan_fit} The Stan fit for use with \code{shinystan::launch_shiny}
 #'    or extraction of chains. }
 #' }

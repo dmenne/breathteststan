@@ -17,4 +17,9 @@ Dieter Menne Menne Biomed Consulting <https://menne-biomed.de>
 
 Fit 13C time series data with Bayesian methods using [Stan](https://mc-stan.org/). This is an add-on to package [breathtestcore](https://github.com/dmenne/breathtestcore). The Stan functions have been moved to this package to avoid long compile and test times.
 
-![breathtestshiny](docs/reference/figures/breathtestshiny.png) ![README](docs/reference/figures/README-01.png)
+Package [breathtestshiny](https://github.com/dmenne/breathtestshiny) is a GUI wrapper for the `breathtestcore` and `breathtestshiny`. It is not on CRAN, but a [Docker image](https://dmenne.github.io/breathtestshiny/) is available for easy installation.
+
+![breathtestshiny-logo](man/figures/BreathTestShinyLogo.png) 
+
+
+![breathtestshiny](man/figures/breathtestshiny.png) ![README](man/figures/README-01.png)

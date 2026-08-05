@@ -10,27 +10,11 @@
 *.out
 *.dll
 
-check_rhub.cmd
-inst/doc
 cran-comments.md
 
-R_Makevars
-
-rstan.Rcheck/
 *.log
 .Renviron
-*.gcno
-*.def
 
 inst/*.exe
-
-src/stan/**
-!src/stan/**/*.*
-src/stan/**/*.exe
-src/stan/**/*.EXE
-
-old_tests/
-
-
 
 docs
