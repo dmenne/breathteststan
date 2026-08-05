@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/dmenne/breathteststan/blob/HEAD/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/dmenne/breathteststan/blob/main/DESCRIPTION)
 
 Menne D (2026). *breathteststan: Stan-Based Fit to Gastric Emptying
 Curves*. R package version 0.9.0,

@@ -88,6 +88,7 @@ Base methods `coef, plot, print`; methods from package
 # This needs some time !!!
 library(breathtestcore)
 cmdstanr::check_cmdstan_toolchain(fix = TRUE, quiet = TRUE)
+#> Warning: The 'fix' argument is deprecated as of CmdStanR 1.0.0 and will be removed in a future release.
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 d = simulate_breathtest_data(n_records = 3) # default 3 records
 data = cleanup_data(d$data)
@@ -116,9 +117,9 @@ cf |>
 #> # A tibble: 3 × 7
 #>   patient_id  m_in m_out beta_in beta_out    k_in  k_out
 #>   <chr>      <dbl> <dbl>   <dbl>    <dbl>   <dbl>  <dbl>
-#> 1 rec_01        26  23.8    1.27     1.33 0.00999 0.0113
-#> 2 rec_02        43  42.4    1.90     1.91 0.0116  0.0117
-#> 3 rec_03        16  16.3    1.90     1.82 0.0129  0.0121
+#> 1 rec_01        26  23.6    1.27     1.34 0.00999 0.0115
+#> 2 rec_02        43  42.6    1.90     1.91 0.0116  0.0118
+#> 3 rec_03        16  16.6    1.90     1.79 0.0129  0.0118
 # For a detailed analysis of the fit, use the shinystan library
 # shinystan::launch_shinystan(fit$stan_fit)
 # \donttest{

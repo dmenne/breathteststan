@@ -1,8 +1,8 @@
 # breathteststan: Bayesian fit to 13C Breath Test Time series for gastric emptying
 
-Dieter Menne\
-Menne Biomed Consulting Tübingen, Germany\
-<https://menne-biomed.de>\
+Dieter Menne  
+Menne Biomed Consulting Tübingen, Germany  
+<https://menne-biomed.de>  
 <dieter.menne@menne-biomed.de>
 
 Dieter Menne Menne Biomed Consulting <https://menne-biomed.de>
